@@ -1,5 +1,5 @@
 <?php
-define("HOST", "http://dash-tombo.bgskr-project.my.id/");
+define("HOST", "dash-tombo.bgskr-project.my.id");
 define("USER", "dash_tombo");
 define("PASSWORD", "1sampaitombo");
 define("DATABASE", "dash_tombo");
