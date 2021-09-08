@@ -5,7 +5,7 @@
     session_start();
 
     if (cek_login($mysqli) == false) {
-        echo "<script type='text/javascript'>document.location.href = 'logout';</script>";
+        echo "<script type='text/javascript'>document.location.href = 'logout.php';</script>";
         exit();
     }
 
