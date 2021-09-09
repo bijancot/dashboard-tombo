@@ -340,7 +340,11 @@
                              <div class="nav-item">
                                  <a href="profile.php"><i class="ik ik-user-check"></i><span>Profile</span></a>
                              </div>
-                             <div class="nav-lavel.php">Freelance</div>
+                             <div class="nav-item">
+                                 <a href="my-referral.php"><i class="ik ik-link"></i><span>My Referral</span></a>
+                             </div>
+                             
+                             <div class="nav-lavel">Freelance</div>
 
                              <div class="nav-item">
                                  <a href="register.php"><i class="ik ik-users"></i><span>Register Member</span></a>
