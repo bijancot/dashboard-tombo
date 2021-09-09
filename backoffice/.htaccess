@@ -1,5 +1,3 @@
-DirectoryIndex my-referral.php
-
 RewriteEngine On
 
 RewriteCond %{HTTPS} !on
