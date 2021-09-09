@@ -233,11 +233,11 @@ $qr_code = $row['qr_code'];
         }
 
         .header-4-3 .navbar {
-          padding: 3rem 6rem;
+          padding: 1rem 8rem;
         }
 
         .header-4-3 .hero {
-          padding: 3rem 6rem 7rem 5rem;
+          padding: 7rem 3rem;
         }
 
         .header-4-3 .left-column {
@@ -255,10 +255,10 @@ $qr_code = $row['qr_code'];
         }
       }
     </style>
-    <div class="header-4-3 container-xxl mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
-      <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="header-4-3 mx-auto p-0 position-relative" style="font-family: 'Poppins', sans-serif">
+      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #bb9661;">
         <a href="#">
-          <img style="margin-right: 0.75rem; width: 70px" src="https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png" alt="" />
+          <img style=" width: 70px;" src="https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png" alt="" />
         </a>
 
         <?php
@@ -291,7 +291,7 @@ $qr_code = $row['qr_code'];
         </div>
       </nav>
 
-      <div>
+      <div class="container-xxl p-0">
         <div class="mx-auto d-flex flex-lg-row flex-column hero">
           <!-- Left Column -->
           <div class="
