@@ -1,9 +1,10 @@
-DirectoryIndex my-referral.php
-
 RewriteEngine On
 
 RewriteCond %{HTTPS} !on
 RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,QSA]
+
+#Alternate default index pages
+DirectoryIndex my-referral.php
 
 <IfModule mod_rewrite.c>
 RewriteEngine on
