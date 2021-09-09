@@ -62,6 +62,10 @@
     $sum = $bonus_sponsor_total + $bonus_titik_total - $wd_total;
     $sum_register = $point_total - $total_ref;
 
+    //notifikasi
+    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='USER' AND is_seen_notifikasi = 0");    
+    $get_rows_paket_user = mysqli_num_rows($get_all_data_register_paket_user);
+
     date_default_timezone_set('Asia/Jakarta')
 
     ?>
@@ -274,22 +278,27 @@
                          <li class="nav-item dropdown no-caret mr-3 dropdown-notifications list-notif-daftar">
                              <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                  <i class="fas fa-bell"></i>&nbsp;
-                                 <span class="badge badge-warning bg-primary">10</span>
+                                 <span class="badge badge-warning bg-primary"><?php echo $get_rows_paket_user?></span>
                              </a>
                              <div class="dropdown-menu dropdown-menu-right border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownAlerts">
                                  <h6 class="dropdown-header dropdown-notifications-header text-center ">
                                      <i class="fas fa-bell mr-2 "></i>
                                      Pemberitahuan
                                  </h6>
+                                 <?php 
+                                    if($get_rows_paket_user == 0){
+                                 ?>
                                  <a class="dropdown-item dropdown-notifications-item badge">
                                     <p> Tidak Ada Pemberitahuan</p>
                                  </a>
+                                 <?php }else{?>
                                  <a class="dropdown-item notification-dropdown badge text-left" href="#!">
                                      <div class="dropdown-notifications-item-content">
-                                         <p class="dropdown-item-content-text notification-dropdown lg">Pengguna Baru</h3>
-                                         <div class="dropdown-item-content-details notification-dropdown">Terdapat 1 Pengguna Baru</div>
+                                         <p class="dropdown-item-content-text notification-dropdown lg">User Baru</h3>
+                                         <div class="dropdown-item-content-details notification-dropdown">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>
                                      </div>
                                  </a>
+                                 <?php }?>
                                  <a class="dropdown-item dropdown-notifications-footer text-center" href="#!">Lihat Semua</a>
                              </div>
                          </li>
