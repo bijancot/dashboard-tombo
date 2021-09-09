@@ -237,7 +237,7 @@ $qr_code = $row['qr_code'];
         }
 
         .header-4-3 .hero {
-          padding: 7rem 3rem;
+          padding: 9rem 3rem;
         }
 
         .header-4-3 .left-column {
