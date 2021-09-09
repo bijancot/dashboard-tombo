@@ -320,7 +320,7 @@
          <div class="page-wrap">
              <div class="app-sidebar colored">
                  <div class="sidebar-header">
-                     <a class="header-brand" href="index.php">
+                     <a class="header-brand" href="dashboard.php">
                          <span class="text"><img src="https://lifeforwin.co.id/assets/images/logo.png" width="70%" class="header-brand-img" alt="<?php include "$username"; ?>"></span>
                      </a>
                      <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
@@ -344,13 +344,13 @@
                              <?php echo "$menu"; ?>
 
                              <div class="nav-item active">
-                                 <a href="index.php"><i class="ik ik-monitor"></i><span>Dashboard</span></a>
+                                 <a href="dashboard.php"><i class="ik ik-monitor"></i><span>Dashboard</span></a>
                              </div>
                              <div class="nav-item">
                                  <a href="profile.php"><i class="ik ik-user-check"></i><span>Profile</span></a>
                              </div>
                              <div class="nav-item">
-                                 <a href="my-referral.php"><i class="ik ik-link"></i><span>My Referral</span></a>
+                                 <a href="index.php"><i class="ik ik-link"></i><span>My Referral</span></a>
                              </div>
                              
                              <div class="nav-lavel">Freelance</div>

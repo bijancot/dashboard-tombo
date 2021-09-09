@@ -5,7 +5,7 @@ include('fungsi.php');
 session_start(); // Menciptakan session
 
 if(cek_login($mysqli) == true){
-	header('location: dashboard');
+	header('location: index');
 	exit();	
 }
 
@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $res = mysqli_query($koneksi,$dbq1);
 
 			// Berhasil login
-			header('location: dashboard.php');
+			header('location: index.php');
 			exit();
 		}else{
 			// Gagal login
@@ -79,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
                         <div class="authentication-form mx-auto">
                             <div class="logo-centered">
-                                <a href="dashboard.php"><img src="logo.png" alt="" width="50%"></a>
+                                <a href="index.html"><img src="logo.png" alt="" width="50%"></a>
                             </div>
                             <h3>Selamat Datang di Backoffice</h3>
                             <p><b>TomboatiTour.com</b></p>

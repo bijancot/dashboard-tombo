@@ -5,7 +5,7 @@ include('fungsi.php');
 session_start();
 
 if(cek_login($mysqli) == false){ // Jika user tidak login
-	header('location: login.php'); // Alihkan ke halaman login (login.php)
+	header('location: index.php'); // Alihkan ke halaman login (login.php)
 	exit();	
 }
 
@@ -29,5 +29,5 @@ $resupdate=mysqli_query($koneksi,$savehistorylogin);
 session_start();
 session_destroy();
 
-header('location:login.php');
+header('location:index.php');
 ?>
