@@ -299,8 +299,8 @@
                          <div class="dropdown">
                              <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar" src="<?php echo $row['photo']; ?>" alt=""></a>
                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                 <a class="dropdown-item" href="profile"><i class="ik ik-user dropdown-icon"></i> Profile</a>
-                                 <a class="dropdown-item" href="logout"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                                 <a class="dropdown-item" href="profile.php"><i class="ik ik-user dropdown-icon"></i> Profile</a>
+                                 <a class="dropdown-item" href="logout.php"><i class="ik ik-power dropdown-icon"></i> Logout</a>
                              </div>
                          </div>
 
@@ -311,7 +311,7 @@
          <div class="page-wrap">
              <div class="app-sidebar colored">
                  <div class="sidebar-header">
-                     <a class="header-brand" href="index">
+                     <a class="header-brand" href="index.php">
                          <span class="text"><img src="https://lifeforwin.co.id/assets/images/logo.png" width="70%" class="header-brand-img" alt="<?php include "$username"; ?>"></span>
                      </a>
                      <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
@@ -325,7 +325,7 @@
                             if ($username == 'company') {
                                 $menu = '
                                 <div class="nav-item active">
-                                    <a href="../dashboard/index"><i class="ik ik-bar-chart-2"></i><span>Admin Area</span></a>
+                                    <a href="../dashboard/index.php"><i class="ik ik-bar-chart-2"></i><span>Admin Area</span></a>
                                 </div>
 ';
                             }
@@ -335,18 +335,18 @@
                              <?php echo "$menu"; ?>
 
                              <div class="nav-item active">
-                                 <a href="index"><i class="ik ik-monitor"></i><span>Dashboard</span></a>
+                                 <a href="index.php"><i class="ik ik-monitor"></i><span>Dashboard</span></a>
                              </div>
                              <div class="nav-item">
-                                 <a href="profile"><i class="ik ik-user-check"></i><span>Profile</span></a>
+                                 <a href="profile.php"><i class="ik ik-user-check"></i><span>Profile</span></a>
                              </div>
-                             <div class="nav-lavel">Freelance</div>
+                             <div class="nav-lavel.php">Freelance</div>
 
                              <div class="nav-item">
-                                 <a href="register"><i class="ik ik-users"></i><span>Register Member</span></a>
+                                 <a href="register.php"><i class="ik ik-users"></i><span>Register Member</span></a>
                              </div>
                              <div class="nav-item">
-                                 <a href="direct-member"><i class="ik ik-users"></i><span>Referensi Jamaah</span></a>
+                                 <a href="direct-member.php"><i class="ik ik-users"></i><span>Referensi Jamaah</span></a>
                              </div>
 
 
@@ -354,16 +354,16 @@
                              <div class="nav-item has-sub">
                                  <a href="#"><i class="ik ik-box"></i><span>Fee & Free</span></a>
                                  <div class="submenu-content">
-                                     <a href="fee-awal" class="menu-item">Fee Awal</a>
-                                     <a href="fee-akhir" class="menu-item">Fee Akhir</a>
+                                     <a href="fee-awal.php" class="menu-item">Fee Awal</a>
+                                     <a href="fee-akhir.php" class="menu-item">Fee Akhir</a>
                                  </div>
                              </div>
 
                              <div class="nav-item has-sub">
                                  <a href="javascript:void(0)"><i class="ik ik-users"></i><span>Hadiah</span></a>
                                  <div class="submenu-content">
-                                     <a href="hadiah-point" class="menu-item">Hadiah Poin</a>
-                                     <a href="g2" class="menu-item">Hadiah Wisata</a>
+                                     <a href="hadiah-point.php" class="menu-item">Hadiah Poin</a>
+                                     <a href="g2.php" class="menu-item">Hadiah Wisata</a>
                                  </div>
                              </div>
 
@@ -372,30 +372,30 @@
                              <div class="nav-item has-sub">
                                  <a href="#"><i class="">Rp.</i><span>Topup</span></a>
                                  <div class="submenu-content">
-                                     <a href="upgrade-process" class="menu-item">Topup</a>
-                                     <a href="topup-history" class="menu-item">History</a>
+                                     <a href="upgrade-process.php" class="menu-item">Topup</a>
+                                     <a href="topup-history.php" class="menu-item">History</a>
                                  </div>
                              </div>
 
                              <div class="nav-item has-sub">
                                  <a href="#"><i class="">Rp.</i><span>Hak Register</span></a>
                                  <div class="submenu-content">
-                                     <a href="point-add" class="menu-item">Order</a>
-                                     <a href="point-history" class="menu-item">History</a>
+                                     <a href="point-add.php" class="menu-item">Order</a>
+                                     <a href="point-history.php" class="menu-item">History</a>
                                  </div>
                              </div>
 
                              <div class="nav-item has-sub">
                                  <a href="#"><i class="">Rp.</i><span>Withdrawal</span></a>
                                  <div class="submenu-content">
-                                     <a href="wd-request" class="menu-item">WD Request</a>
-                                     <a href="wd-history" class="menu-item">History</a>
+                                     <a href="wd-request.php" class="menu-item">WD Request</a>
+                                     <a href="wd-history.php" class="menu-item">History</a>
                                  </div>
                              </div>
 
                              <div class="nav-lavel">Security</div>
                              <div class="nav-item">
-                                 <a href="logout"><i class="ik ik-lock"></i><span>Logout</span></a>
+                                 <a href="logout.php"><i class="ik ik-lock"></i><span>Logout</span></a>
                              </div>
 
                          </nav>
