@@ -1,194 +1,239 @@
 <?php
+require_once "config.php";
+require_once "config2.php";
+
+if (function_exists($_GET['function'])) {
+    $_GET['function']();
+}
 
 header("Content-Type: application/json");
 header("Acess-Control-Allow-Origin: *");
 header("Acess-Control-Allow-Methods: POST");
 header("Acess-Control-Allow-Headers: Acess-Control-Allow-Headers,Content-Type,Acess-Control-Allow-Methods, Authorization");
 
-// include 'config.php'; // include database connection file
-require_once "config.php";
-if (function_exists($_GET['function'])) {
-    $_GET['function']();
-}
-function register_post()
+function registerMitra_post()
 {
-    global $connect;
-    $data = json_decode(file_get_contents("php://input"), true); // collect input parameters and convert into readable format
-    $ktp = isset($_POST['nomorKTP']) ? $_POST['nomorKTP'] : '';
-    $name = isset($_POST['nama']) ? $_POST['nama'] : '';
-    $hphone = isset($_POST['nomorHP']) ? $_POST['nomorHP'] : '';
-    $email = isset($_POST['email']) ? $_POST['email'] : '';
-    $passw = isset($_POST['password']) ? $_POST['password'] : '';
+    global $connect, $connect2;
 
-    $fileName  =  $_FILES['sendimage']['name'];
-    $tempPath  =  $_FILES['sendimage']['tmp_name'];
-    $fileSize  =  $_FILES['sendimage']['size'];
+    $data = json_decode(file_get_contents("php://input"), true);
+    $fotoktp  =  $_FILES['fotoktp']['name'];
+    $tempPath  =  $_FILES['fotoktp']['tmp_name'];
+    $fileSize  =  $_FILES['fotoktp']['size'];
 
-    if (empty($fileName)) {
-        $errorMSG = json_encode(array("message" => "Silahkan memilih gambar", "status" => false));
+    if (empty($fotoktp)) {
+        $errorMSG = json_encode(array("message" => "File KTP Kosong", "status" => false));
         echo $errorMSG;
     } else {
         $upload_path = '../upload/users/'; // set upload folder path 
 
-        $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $fileExt = strtolower(pathinfo($fotoktp, PATHINFO_EXTENSION));
         $valid_extensions = array('jpeg', 'jpg', 'png');
 
-        // allow valid image file formats
         if (in_array($fileExt, $valid_extensions)) {
-            if ($fileSize < 1000000) {
-                move_uploaded_file($tempPath, $upload_path . $fileName);
-            } else {
-                $errorMSG = json_encode(array("message" => "Maaf, file anda terlalu besar. Silahkan upload ulang dengan ukuran maksimal 1 mb", "status" => false));
-                echo $errorMSG;
-            }
-        } else {
-            $errorMSG = json_encode(array("message" => "Maaf, Foto/Gambar harus berformat JPG, JPEG dan PNG", "status" => false));
-            echo $errorMSG;
-        }
-    }
+            if (!file_exists($upload_path . $fotoktp)) {
 
-    $fotoProfil  =  $_FILES['sendimage']['name'];
-    $tempPath  =  $_FILES['sendimage']['tmp_name'];
-    $fileSize  =  $_FILES['sendimage']['size'];
-
-    if (empty($fotoProfil)) {
-        $errorMSG = json_encode(array("message" => "Silahkan memilih gambar", "status" => false));
-        echo $errorMSG;
-    } else {
-        $upload_path = '../upload/users/'; // set upload folder path 
-
-        $fileExt = strtolower(pathinfo($fotoProfil, PATHINFO_EXTENSION));
-        $valid_extensions = array('jpeg', 'jpg', 'png');
-
-        // allow valid image file formats
-        if (in_array($fileExt, $valid_extensions)) {
-            if ($fileSize < 1000000) {
-                move_uploaded_file($tempPath, $upload_path . $fotoProfil);
-            } else {
-                $errorMSG = json_encode(array("message" => "Maaf, file anda terlalu besar.Silahkan upload ulang dengan ukuran maksimal 1 mb", "status" => false));
-                echo $errorMSG;
-            }
-        } else {
-            $errorMSG = json_encode(array("message" => "Maaf, Foto/Gambar harus berformat JPG, JPEG dan PNG", "status" => false));
-            echo $errorMSG;
-        }
-    }
-
-    if (!isset($errorMSG)) {
-        !mysqli_query($connect, "INSERT into mebers (ktp, name, hphone, email, passw, fotoktp, photo) values ('$ktp', '$name', '$hphone', '$email', '$passw', '$fileName', '$fotoProfil')");
-
-        echo json_encode(array("message" => "Sukses Register", "status" => true));
-    }
-}
-
-function cek_nomor($hphone)
-{
-    global $connect;
-    $query = "SELECT * FROM mebers WHERE hphone = '$hphone'";
-    if ($result = mysqli_query($connect, $query)) return mysqli_num_rows($result);
-}
-
-
-function register_user($hphone, $sponsor)
-{
-    global $connect;
-    $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-
-    $hphone = $data['nomorHP'];
-    $sponsor = $data['referal'];
-    $query = "INSERT INTO mebers (hphone, sponsor) VALUES('$hphone', '$sponsor') ON DUPLICATE KEY UPDATE hphone = '$hphone'";
-
-    $user_new = mysqli_query($connect, $query);
-    if ($user_new) {
-        $usr = "SELECT * FROM mebers WHERE hphone = '$hphone'";
-        $result = mysqli_query($connect, $usr);
-        $user = mysqli_fetch_assoc($result);
-        return $user;
-    } else {
-        return NULL;
-    }
-}
-
-
-function registerNonMitra_post()
-{
-    $response = array("error" => FALSE);
-    json_decode(file_get_contents("php://input"), true); // collect input parameters and convert into readable format
-    $hphone = isset($_POST['nomorHP']) ? $_POST['nomorHP'] : '';
-    $sponsor = isset($_POST['referal']) ? $_POST['referal'] : '';
-    
-    if (cek_nomor($hphone) >= 0) {
-        //mendaftarkan user baru
-        $mebers = register_user($hphone, $sponsor);
-        if ($mebers) {
-            // simpan user berhasil
-            $response["error"] = FALSE;
-            $response["mebers"]["nomorHP"] = $mebers["hphone"];
-            $response["mebers"]["referal"] = $mebers["sponsor"];
-            echo json_encode($response);
-
-        } else {
-            // gagal menyimpan user
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Terjadi kesalahan saat melakukan registrasi";
-            echo json_encode($response);
-        }
-    } else {
-        // user telah ada
-        $response["error"] = TRUE;
-        $response["error_msg"] = "Nomor Handphone sudah terdaftar ";
-        echo json_encode($response);
-    }
-
-    // if (!isset($response)) {!mysqli_query($connect, "INSERT into mebers ( hphone, sponsor) values ('$hphone', '$sponsor')");
-
-    //     echo json_encode(array("message" => "Sukses Register", "status" => true));
-    // }
-}
-
-function coba()
-{
-    $response = array("error" => FALSE);
-    $response = json_decode(file_get_contents("php://input"), true);
-    global $connect;
-    $json = file_get_contents('php://input');
-    $data = json_decode($json, true);
-
-    $hphone = $data['nomorHP'];
-    $sponsor = $data['referal'];
-
-   
-        if ($hphone == '') {
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Nomor Handphone Kosong ";
-            echo json_encode($response);
-           
-        } else {
-            $response = '';
-        }
-        if ($sponsor == '') {
-            $response["error"] = TRUE;
-            $response["error_msg"] = "Referal Kosong ";
-            echo json_encode($response);
-            
-        } else {
-            $response = '';
-        }
-
-        if ($hphone != '' && $sponsor != '') {
-            $sel = mysqli_query($connect, "SELECT * FROM `mebers` WHERE hphone = '$hphone'");
-            if (mysqli_num_rows($sel) > 0) {
-                $response["error"] = TRUE;
-                $response["error_msg"] = "Nomor Handphone sudah terdaftar ";
-                echo json_encode($response);
-            } else {
-                $ins = mysqli_query($connect, "INSERT INTO `mebers` (hphone,sponsor) VALUES ('$hphone','$sponsor')");
-                if ($ins) {
-                    $response["error"] = TRUE;
-                    $response["error_msg"] = "Sukses ";
-                    echo json_encode($response);
+                if ($fileSize < 2000000) {
+                    move_uploaded_file($tempPath, $upload_path . $fotoktp);
+                } else {
+                    $errorMSG = json_encode(array("message" => "File KTP maksimal 2MB", "status" => false));
+                    echo $errorMSG;
                 }
+            } else {
+                $errorMSG = json_encode(array("message" => "File KTP tidak bisa diunggah", "status" => false));
+                echo $errorMSG;
             }
+        } else {
+            $errorMSG = json_encode(array("message" => "Hanya file JPG, JPEG & PNG", "status" => false));
+            echo $errorMSG;
         }
     }
+
+    $fotoprofil  =  $_FILES['fotoprofil']['name'];
+    $tempPath  =  $_FILES['fotoprofil']['tmp_name'];
+    $fileSize  =  $_FILES['fotoprofil']['size'];
+
+    if (empty($fotoprofil)) {
+        $errorMSG = json_encode(array("message" => "File Foto Profil Kosong", "status" => false));
+        echo $errorMSG;
+    } else {
+        $upload_path = '../upload/users/'; // set upload folder path 
+
+        $fileExt = strtolower(pathinfo($fotoprofil, PATHINFO_EXTENSION));
+        $valid_extensions = array('jpeg', 'jpg', 'png');
+
+        if (in_array($fileExt, $valid_extensions)) {
+            if (!file_exists($upload_path . $fotoprofil)) {
+
+                if ($fileSize < 2000000) {
+                    move_uploaded_file($tempPath, $upload_path . $fotoprofil);
+                } else {
+                    $errorMSG = json_encode(array("message" => "File Foto Profil maksimal 2MB", "status" => false));
+                    echo $errorMSG;
+                }
+            } else {
+                $errorMSG = json_encode(array("message" => "File Foto Profil tidak bisa diunggah", "status" => false));
+                echo $errorMSG;
+            }
+        } else {
+            $errorMSG = json_encode(array("message" => "Format Foto Profil  JPG, JPEG & PNG", "status" => false));
+            echo $errorMSG;
+        }
+    }
+
+    $buktiBayar  =  $_FILES['buktibayar']['name'];
+    $tempPath  =  $_FILES['buktibayar']['tmp_name'];
+    $fileSize  =  $_FILES['buktibayar']['size'];
+
+    if (empty($buktiBayar)) {
+        $errorMSG = json_encode(array("message" => "File Bukti Bayar Kosong", "status" => false));
+        echo $errorMSG;
+    } else {
+        $upload_path = '../upload/users/'; // set upload folder path 
+
+        $fileExt = strtolower(pathinfo($buktiBayar, PATHINFO_EXTENSION));
+        $valid_extensions = array('jpeg', 'jpg', 'png');
+
+        if (in_array($fileExt, $valid_extensions)) {
+            if (!file_exists($upload_path . $buktiBayar)) {
+
+                if ($fileSize < 2000000) {
+                    move_uploaded_file($tempPath, $upload_path . $buktiBayar);
+                } else {
+                    $errorMSG = json_encode(array("message" => "File Bukti Bayar maksimal 2MB", "status" => false));
+                    echo $errorMSG;
+                }
+            } else {
+                $errorMSG = json_encode(array("message" => "File Bukti Bayar tidak bisa diunggah", "status" => false));
+                echo $errorMSG;
+            }
+        } else {
+            $errorMSG = json_encode(array("message" => "Format file Bukti Bayar  JPG, JPEG & PNG", "status" => false));
+            echo $errorMSG;
+        }
+    }
+
+    $ktp =  $_POST['ktp'];
+    $email =  $_POST['email'];
+    $password =  $_POST['password'];
+    $name =  $_POST['name'];
+    $nomorHP =  $_POST['nomorHP'];
+    // $address =  $_POST['address'];
+    // $username =  $_POST['username'];
+    // $kecamatan =  $_POST['kecamatan'];
+    // $kota =  $_POST['kota'];
+    // $provinsi =  $_POST['provinsi'];
+    // $kode_pos = $_POST['kode_pos'];
+    // $country =  $_POST['country'];
+    // $bank =  $_POST['bank'];
+    // $rekening =  $_POST['rekening'];
+    // $atasnama = $_POST['atasnama'];
+    // $cabang     = $_POST['token'];
+    $referral       = $_POST['referral'];
+    $user_token     = $_POST['token'];
+    $createdAt      = date('Y-m-d H:i:s');
+
+    $data = [];
+    $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
+    $get_rows = mysqli_num_rows($get_all_data_register);
+    if ($get_rows == null) {
+        //db dashboard tombo
+        mysqli_query($connect, "INSERT INTO mebers(paket, ktp , email, passw, name, sponsor, hphone, fotoktp, photo, bukti_bayar) VALUES('MITRA','$ktp', '$email' ,'$password', '$name', $referral, '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar')");
+
+        //db tomboati
+        mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, PASSWORD, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, CREATED_AT) VALUES('$ktp', '$email', '$password', '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar','$createdAt')");
+
+        mysqli_query($connect, "UPDATE mebers SET usertoken=" . $user_token . " WHERE hphone=" . $nomorHP . "");
+
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . $user_token . " WHERE NOMORHP=" . $nomorHP . "");
+
+        $get_data_register_by_phone = mysqli_query($connect, "SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
+        $get_rows = mysqli_num_rows($get_data_register_by_phone);
+
+        while ($row = mysqli_fetch_object($get_data_register_by_phone)) {
+            $data[] = $row;
+        }
+
+        $response = array(
+            'error'     => false,
+            'message'   => 'Sukses Register',
+            'data'      => $data
+        );
+    } else {
+        $response = array(
+            'error'     => true,
+            'message'   => 'Gagal Register'
+        );
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function login_post()
+{
+    global $connect, $connect2;
+    $response       = [];
+    $email          = $_POST['email'];
+    $password       = $_POST['password'];
+    $user_token     = $_POST['token'];
+
+
+    $data = [];
+
+    $get_all_data_register = $connect2->query("SELECT * FROM USER_REGISTER JOIN CHAT_ROOM ON CHAT_ROOM.IDUSERREGISTER = USER_REGISTER.IDUSERREGISTER WHERE EMAIL ='" . $email . "' AND PASSWORD='" . $password . "'");
+    $get_rows = mysqli_num_rows($get_all_data_register);
+
+
+    if ($get_rows >= 0) {
+        mysqli_query($connect, "UPDATE mebers SET usertoken=" . $user_token . " WHERE email=" . $email . "");
+
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . $user_token . " WHERE EMAIL=" . $email . "");
+
+        $get_data_by_email = mysqli_query($connect2, "SELECT * FROM USER_REGISTER  WHERE EMAIL ='" . $email . "' AND PASSWORD='" . $password . "'");
+        $get_rows = mysqli_num_rows($get_data_by_email);
+
+        while ($row = mysqli_fetch_object($get_data_by_email)) {
+            $data[] = $row;
+        }
+        $response = array(
+            'error'     => false,
+            'message'   => 'Sukses Login',
+            'data'      => $data
+        );
+    } else {
+        $response = array(
+            'error'     => true,
+            'message'   => 'Gagal Login'
+        );
+    }
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function logout_post()
+{
+    global $connect, $connect2;
+    $response       = [];
+    $email          = $_POST['email'];
+
+    $get_data_by_email = $connect2->query("SELECT * FROM USER_REGISTER  WHERE EMAIL ='" . $email . "'");
+    $get_rows = mysqli_num_rows($get_data_by_email);
+
+    if ($get_rows >= 0) {
+        mysqli_query($connect, "UPDATE mebers SET usertoken=" . null . " WHERE email=" . $email . "");
+
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . null . " WHERE EMAIL=" . $email . "");
+
+        $response = array(
+            'error'     => false,
+            'message'   => 'Sukses Logout'
+        );
+    } else {
+        $response = array(
+            'error'     => true,
+            'message'   => 'Gagal Logout'
+        );
+    }
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
