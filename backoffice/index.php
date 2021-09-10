@@ -371,7 +371,7 @@ $qr_code = $row['qr_code'];
               // jika sudah login akan diarahkan referral
             } else {
               //isi qrcode jika di scan
-              $codeContents = 'https://dash-tombo.bgskr-project.my.id/'.$username;
+              $codeContents = 'https://dash-tombo.bgskr-project.my.id/referral/'.$username;
 
               // jika belum punya qr code
               if ($qr_code == "") {
