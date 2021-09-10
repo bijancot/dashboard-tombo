@@ -39,7 +39,7 @@ function registerMitra_post()
                     echo $errorMSG;
                 }
             } else {
-                $errorMSG = json_encode(array("message" => "File KTP tidak bisa diunggah", "status" => false));
+                $errorMSG = json_encode(array("message" => "File KTP tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
                 echo $errorMSG;
             }
         } else {
@@ -71,7 +71,7 @@ function registerMitra_post()
                     echo $errorMSG;
                 }
             } else {
-                $errorMSG = json_encode(array("message" => "File Foto Profil tidak bisa diunggah", "status" => false));
+                $errorMSG = json_encode(array("message" => "File Foto Profil tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
                 echo $errorMSG;
             }
         } else {
@@ -103,7 +103,7 @@ function registerMitra_post()
                     echo $errorMSG;
                 }
             } else {
-                $errorMSG = json_encode(array("message" => "File Bukti Bayar tidak bisa diunggah", "status" => false));
+                $errorMSG = json_encode(array("message" => "File Bukti Bayar tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
                 echo $errorMSG;
             }
         } else {
@@ -114,54 +114,41 @@ function registerMitra_post()
 
     $ktp =  $_POST['ktp'];
     $email =  $_POST['email'];
-    $password =  $_POST['password'];
     $name =  $_POST['name'];
     $nomorHP =  $_POST['nomorHP'];
-    // $address =  $_POST['address'];
-    // $username =  $_POST['username'];
-    // $kecamatan =  $_POST['kecamatan'];
-    // $kota =  $_POST['kota'];
-    // $provinsi =  $_POST['provinsi'];
-    // $kode_pos = $_POST['kode_pos'];
-    // $country =  $_POST['country'];
-    // $bank =  $_POST['bank'];
-    // $rekening =  $_POST['rekening'];
-    // $atasnama = $_POST['atasnama'];
-    // $cabang     = $_POST['token'];
+    $address =  $_POST['address'];
+    $username =  $_POST['username'];
+    $kecamatan =  $_POST['kecamatan'];
+    $kota =  $_POST['kota'];
+    $provinsi =  $_POST['provinsi'];
+    $kode_pos = $_POST['kode_pos'];
+    $country =  $_POST['country'];
+    $bank =  $_POST['bank'];
+    $rekening =  $_POST['rekening'];
+    $atasnama = $_POST['atasnama'];
+    $cabang     = $_POST['cabang'];
     $referral       = $_POST['referral'];
-    $user_token     = $_POST['token'];
     $createdAt      = date('Y-m-d H:i:s');
+    $timer      = date('Y-m-d H:i:s');
 
-    $data = [];
     $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
     $get_rows = mysqli_num_rows($get_all_data_register);
     if ($get_rows == null) {
         //db dashboard tombo
-        mysqli_query($connect, "INSERT INTO mebers(paket, ktp , email, passw, name, sponsor, hphone, fotoktp, photo, bukti_bayar) VALUES('MITRA','$ktp', '$email' ,'$password', '$name', $referral, '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar')");
+        mysqli_query($connect, "INSERT INTO mebers(paket, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, userid, kecamatan, kota, provinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$ktp', '$email' , '$name', $referral, '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar', '$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang',$timer)");
 
         //db tomboati
-        mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, PASSWORD, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, CREATED_AT) VALUES('$ktp', '$email', '$password', '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar','$createdAt')");
-
-        mysqli_query($connect, "UPDATE mebers SET usertoken=" . $user_token . " WHERE hphone=" . $nomorHP . "");
-
-        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . $user_token . " WHERE NOMORHP=" . $nomorHP . "");
-
-        $get_data_register_by_phone = mysqli_query($connect, "SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
-        $get_rows = mysqli_num_rows($get_data_register_by_phone);
-
-        while ($row = mysqli_fetch_object($get_data_register_by_phone)) {
-            $data[] = $row;
-        }
+        mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT) VALUES('$ktp', '$email', '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
 
         $response = array(
             'error'     => false,
-            'message'   => 'Sukses Register',
-            'data'      => $data
+            'message'   => 'Sukses Register'
         );
     } else {
         $response = array(
             'error'     => true,
-            'message'   => 'Gagal Register'
+            'message'   => 'Gagal Register',
+            'data'      => $data
         );
     }
 
@@ -185,9 +172,9 @@ function login_post()
 
 
     if ($get_rows >= 0) {
-        mysqli_query($connect, "UPDATE mebers SET usertoken=" . $user_token . " WHERE email=" . $email . "");
+        mysqli_query($connect, "UPDATE mebers SET usertoken='" . $user_token . "' WHERE email='" . $email . "'");
 
-        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . $user_token . " WHERE EMAIL=" . $email . "");
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='" . $user_token . "' WHERE EMAIL='" . $email . "'");
 
         $get_data_by_email = mysqli_query($connect2, "SELECT * FROM USER_REGISTER  WHERE EMAIL ='" . $email . "' AND PASSWORD='" . $password . "'");
         $get_rows = mysqli_num_rows($get_data_by_email);
@@ -220,9 +207,9 @@ function logout_post()
     $get_rows = mysqli_num_rows($get_data_by_email);
 
     if ($get_rows >= 0) {
-        mysqli_query($connect, "UPDATE mebers SET usertoken=" . null . " WHERE email=" . $email . "");
+        mysqli_query($connect, "UPDATE mebers SET usertoken='" . null . "' WHERE email='" . $email . "'");
 
-        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=" . null . " WHERE EMAIL=" . $email . "");
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='" . null . "' WHERE EMAIL='" . $email . "'");
 
         $response = array(
             'error'     => false,
