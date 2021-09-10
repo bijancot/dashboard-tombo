@@ -23,7 +23,7 @@ include 'header.php';
                         <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> All Mitra [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3> 
+                        <h3 class="panel-title"><i class="fa fa-user"></i> Pengguna Baru [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3> 
                         </div>
                         <div class="panel-body">
 <div class="table-responsive">
@@ -52,7 +52,13 @@ if(isset($_GET['halaman']))
     $default_index = ($_GET['halaman']-1) * $default_batas;
 }
 
-    $query1 = "SELECT * FROM mebers WHERE paket='MITRA' ORDER BY id DESC limit $default_index, $default_batas";
+if(isset($_GET['cari'])){
+	$cari = $_GET['cari'];
+	echo "<b>Hasil pencarian : ".$cari."</b>";
+}
+
+
+    $query1 = "SELECT * FROM mebers WHERE paket = 'USER' AND hphone like '%".$cari."%' ORDER BY timer DESC limit $default_index, $default_batas";
     $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
     $total_baris = mysqli_num_rows($tampil);
 
@@ -68,14 +74,9 @@ if(isset($_GET['halaman']))
                   <thead>
                       <tr>
                         <th><center>No. </center></th>
-                        <th><center>Userid </i></center></th>
-                        <th><center>Username </i></center></th>
-                        <th><center>Password </i></center></th>
+                        <th><center>Nomor HP</i></center></th>
                         <th><center>Referral </i></center></th>
-                        <th><center>ID Link </i></center></th>
-                        <th><center>Contact </center></th>
                         <th><center>Register Date </center></th>
-                        <th><center>Aksi</center></th>
                       </tr>
                   </thead>
                      <?php 
@@ -85,21 +86,13 @@ if(isset($_GET['halaman']))
 
 $sqlsponsor = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid = '$data[sponsor]' ");
 $rowsponsor = mysqli_fetch_assoc($sqlsponsor);
-$sqlupline = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid = '$data[upline]' ");
-$rowupline = mysqli_fetch_assoc($sqlupline);
 ?>
                     <tbody>
                     <tr>
-                    <td><left><?php echo $no; ?>.</center></td>
-                    <td><left><font color="blue"><b><?php echo $data['id'];?></font></center></td>
-                    <td><left><font color="blue"><b><?php echo $data['userid'];?></font><br><?php echo $data['name'];?></center></td>
-                    <td><left><font color="blue"><b><?php echo $data['passw'];?><br><?php echo $data['transaction_code'];?></font></center></td>
-                    <td><left><font color="blue"><b><?php echo $data['sponsor'];?></font><br><?php echo $rowsponsor['name'];?></center></td>
-                    <td><left><font color="blue"><b><?php echo $data['upline'];?></font><br><?php echo $rowupline['name'];?></center></td>
-                    <td><left><?php echo $data['hphone']; ?><br><?php echo $data['email']; ?><br><?php echo $data['kota']; ?></center></td>
-                   <td><left><br><font color="blue"><b><?php echo $data['timer']; ?></b></font></center></td>
-                     <td><center><a href="admin-profile-edit.php?userid=<?php echo $data['userid']; ?>" class="btn btn-sm btn-warning">Edit <i class="fa fa-arrow-circle-right"></i></a></center></td>
-                   </tr>
+                    <td><center><?php echo $no; ?>.</center></td>
+                    <td><center><font color="blue"><b><?php echo $data['hphone'];?>
+                    <td><center><font color="blue"><b><?php echo $data['sponsor'];?>
+                   <td><center><br><font color="blue"><b><?php echo $data['timer']; ?></b></font></center></td>
 </div>
                  <?php   
     $html_paging = "<li><a href='?halaman=".$nomor_paging."&batas=".$default_batas."'>".$nomor_paging."</a></li>";
@@ -137,7 +130,7 @@ else{
 
 
 
-$query2 = mysqli_query($koneksi, "select * from mebers WHERE paket='MITRA'");
+$query2 = mysqli_query($koneksi, "select * from mebers WHERE paket = 'USER'");
 $jmldata = mysqli_num_rows($query2);
 $jmlhalaman = ceil($jmldata/$default_batas);
 $hal1 = $_GET['halaman']-1;
@@ -145,7 +138,7 @@ $hal2 = $_GET['halaman']+1;
 if ($batas!='') {$batas2 = $_GET['batas'];} else {$batas2 = $default_batas;}
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-all-member-on.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
+<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
 for($i=1;$i<=$jmlhalaman;$i++)
@@ -155,18 +148,18 @@ if ($i != $halaman){
 
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-all-member-on.php?halaman=$i&batas=$batas2\">$i</a></li>
+<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li>
 </ul>";
 }
 else{ 
- echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"admin-all-member-on.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
+ echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
 }
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-all-member-on.php?halaman=$hal2&batas=$batas2\">Next</a></li>
+<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
+echo "<p>Total Record : <b>$jmldata</b> Pengguna Baru</p>";
 ?>
                   <!-- </div>-->
               </div> 

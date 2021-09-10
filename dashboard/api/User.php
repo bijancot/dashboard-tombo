@@ -129,17 +129,24 @@ function registerMitra_post()
     $cabang     = $_POST['cabang'];
     $referral       = $_POST['referral'];
     $createdAt      = date('Y-m-d H:i:s');
-    $timer      = date('Y-m-d H:i:s');
+    $idUserRegister = null;
 
     $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
     $get_rows = mysqli_num_rows($get_all_data_register);
+    
     if ($get_rows == null) {
         //db dashboard tombo
-        mysqli_query($connect, "INSERT INTO mebers(paket, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, userid, kecamatan, kota, provinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$ktp', '$email' , '$name', $referral, '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar', '$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang',$timer)");
+        mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
 
         //db tomboati
         mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT) VALUES('$ktp', '$email', '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
+        
+        $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
 
+        $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
+
+        mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
+        
         $response = array(
             'error'     => false,
             'message'   => 'Sukses Register'
@@ -147,8 +154,7 @@ function registerMitra_post()
     } else {
         $response = array(
             'error'     => true,
-            'message'   => 'Gagal Register',
-            'data'      => $data
+            'message'   => 'Gagal Register'
         );
     }
 
@@ -171,7 +177,7 @@ function login_post()
     $get_rows = mysqli_num_rows($get_all_data_register);
 
 
-    if ($get_rows >= 0) {
+    if ($get_rows > 0) {
         mysqli_query($connect, "UPDATE mebers SET usertoken='" . $user_token . "' WHERE email='" . $email . "'");
 
         mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='" . $user_token . "' WHERE EMAIL='" . $email . "'");
@@ -191,6 +197,7 @@ function login_post()
         $response = array(
             'error'     => true,
             'message'   => 'Gagal Login'
+            
         );
     }
     header('Content-Type: application/json');
