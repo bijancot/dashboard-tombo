@@ -13,35 +13,72 @@
         $referral       = $_POST['referral'];
         $user_token     = $_POST['token'];
 
-        $data = [];
-        $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='".$nomorHP."'");    
-        $get_rows = mysqli_num_rows($get_all_data_register);
+        $data_dash_tombo = [];
+        $data_tomboati = [];
 
-        if($get_rows == null){
-            //db dashboard tombo
-            mysqli_query($connect, "INSERT INTO mebers(paket, hphone,sponsor) VALUES('USER', '$nomorHP','$referral')");
+        //get_data
+        $get_phone_from_data_register       = $connect->query("SELECT * FROM mebers WHERE hphone ='".$nomorHP."'"); 
+        $get_referral_from_data_register    = $connect->query("SELECT * FROM mebers WHERE userid ='".$referral."'");    
+        
+        //get_rows
+        $get_rows_phone                     = mysqli_num_rows($get_phone_from_data_register);
+        $get_rows_referral                  = mysqli_num_rows($get_referral_from_data_register);
 
-            //db tomboati
-            mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORHP,KODEREFERRAL) VALUES('$nomorHP','$referral')");
-            
-            mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=".$user_token." WHERE NOMORHP=".$nomorHP."");
+        //if nomor telepon sudah terdaftar
+        if($get_rows_phone == null){
+            //if referral tersedia
+            if($get_rows_referral != null){
+                //db dashboard tombo
+                mysqli_query($connect, "INSERT INTO mebers(paket, hphone, sponsor) VALUES('USER', '$nomorHP', '$referral')");
 
-            $get_data_register_by_phone = mysqli_query($connect, "SELECT * FROM mebers WHERE hphone ='".$nomorHP."'");
-            $get_rows = mysqli_num_rows($get_data_register_by_phone);
+                //get_data_after_insert_db_dashboard_tombo
+                $get_data_after_insert_db_dashboard_tombo = $connect->query("SELECT * FROM mebers WHERE paket = 'USER' AND hphone ='".$nomorHP."' AND sponsor = '".$referral."' "); 
+                
+                $get_id_from_data_after_insert = null;
+                while($row = mysqli_fetch_array($get_data_after_insert_db_dashboard_tombo)){
+                    $get_id_from_data_after_insert = $row['id'];
+                }
+                
+                //db tomboati
+                mysqli_query($connect2, "INSERT INTO USER_REGISTER(STATUS_USER, IDUSERREGISTER, NOMORHP,KODEREFERRAL) VALUES('USER', '$get_id_from_data_after_insert','$nomorHP','$referral')");
+                
+                //update_user_token_db_tombo
+                mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=".$user_token." WHERE IDUSERREGISTER=".$get_id_from_data_after_insert."");
+                
+                //update_user_token_db_dashboard_tombo
+                mysqli_query($connect, "UPDATE mebers SET usertoken=".$user_token." WHERE id=".$get_id_from_data_after_insert."");
+                
+                //insert chat_room tomboati
+                mysqli_query($connect2, "INSERT INTO CHAT_ROOM(IDUSERREGISTER) VALUES('$get_id_from_data_after_insert')");
+                
+                $get_data_register_by_phone = mysqli_query($connect, "SELECT * FROM mebers WHERE id=".$get_id_from_data_after_insert."");
+                $get_data_register_by_phone_tomboati = mysqli_query($connect2, "SELECT * FROM USER_REGISTER JOIN CHAT_ROOM ON CHAT_ROOM.IDUSERREGISTER = USER_REGISTER.IDUSERREGISTER WHERE USER_REGISTER.IDUSERREGISTER=".$get_id_from_data_after_insert."");
+                $get_rows = mysqli_num_rows($get_data_register_by_phone);
 
-            while($row=mysqli_fetch_object($get_data_register_by_phone)){
-                $data[] =$row;
+                while($row=mysqli_fetch_object($get_data_register_by_phone)){
+                    $data_dash_tombo[] =$row;
+                }
+
+                while($row_tomboati=mysqli_fetch_object($get_data_register_by_phone_tomboati)){
+                    $data_tomboati[] =$row_tomboati;
+                }
+
+                $response=array(
+                    'error'                     => false,
+                    'message'                   =>'Sukses Register',
+                    'data_db_dash_tombo'        => $data_dash_tombo,
+                    'data_tomboati'             => $data_tomboati
+                );
+            }else{
+                $response=array(
+                    'error'     => true,
+                    'message'   =>'Referral tidak tersedia'
+                );
             }
-
-            $response=array(
-                'error'     => false,
-                'message'   =>'Sukses Register',
-                'data'      => $data
-            );
         }else{
             $response=array(
                 'error'     => true,
-                'message'   =>'Gagal Register'
+                'message'   =>'No HP sudah tersedia'
             );
         }
         
