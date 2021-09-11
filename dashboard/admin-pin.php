@@ -189,7 +189,7 @@ else{
 <li class=\"page-item\"><a href=\"admin-pin.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 echo "<p><a href=\"excel/export_excel_pin.php\"><b><h3>Export to Excel</a></b></h3></p>";
 ?>
                   <!-- </div>-->

@@ -33,7 +33,7 @@ include 'header.php';
                 <section class="content-header">
                     <h1>
                         Profile
-                        <small>Member</small>
+                        <small>Mitra</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Profile</a></li>

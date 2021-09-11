@@ -153,7 +153,7 @@ else{
 <li class=\"page-item\"><a href=\"admin-ticket.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 ?>
                   <!-- </div>-->
               </div> 

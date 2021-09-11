@@ -30,7 +30,7 @@ $pin = $_POST['pin'];
 $nama_member=$data_member['name'];
 
 if ($nama_member==""){
-header('location:pin-transfer?pin='.$pin.'&error=gagal-username tidak valid');	
+header('location:pin-transfer.php?pin='.$pin.'&error=gagal-username tidak valid');	
 }
 
            ?>
@@ -79,7 +79,7 @@ header('location:pin-transfer?pin='.$pin.'&error=gagal-username tidak valid');
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
                                   <input type="submit" name="pin-transfer" value="PIN Transfer"  class="btn btn-sm btn-primary"/>&nbsp;
-	                              <a href="pin" class="btn btn-sm btn-danger">cancel </a>
+	                              <a href="pin.php" class="btn btn-sm btn-danger">cancel </a>
                               </div>
                           </div>
                       </form>

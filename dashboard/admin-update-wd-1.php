@@ -47,7 +47,7 @@ $rekening = $_POST['rekening'];
 
 $query = mysqli_query($koneksi, "UPDATE hm2_history SET type='withdrawal', description='WD to $rekening' WHERE id='$id'")or die(mysql_error());
 
-header('location:admin-withdrawal-onprocess');
+header('location:admin-withdrawal-onprocess.php');
 
 }
 
@@ -166,7 +166,7 @@ $dataTampilx = mysqli_fetch_assoc($sqlTampilx);
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
-                                  <a href="index" class="btn btn-sm btn-danger">Batal </a> <input type="submit" name="update-wd" value="Next >>"  class="btn btn-sm btn-primary"/>&nbsp;
+                                  <a href="index.php" class="btn btn-sm btn-danger">Batal </a> <input type="submit" name="update-wd" value="Next >>"  class="btn btn-sm btn-primary"/>&nbsp;
 	                              
                               </div>
                           </div>

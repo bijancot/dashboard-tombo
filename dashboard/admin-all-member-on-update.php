@@ -23,7 +23,7 @@ include 'header.php';
                         <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> All Members [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3> 
+                        <h3 class="panel-title"><i class="fa fa-user"></i>Mitra</h3> 
                         </div>
                         <div class="panel-body">
 <div class="table-responsive">
@@ -200,7 +200,7 @@ else{
 <li class=\"page-item\"><a href=\"admin-all-member-on-update.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 ?>
                   <!-- </div>-->
               </div> 

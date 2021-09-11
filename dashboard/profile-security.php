@@ -203,7 +203,7 @@ header('location:profile-edit?error=CHACK EMAIL ANDA');
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
                                   <input type="submit" name="update-tpassword" value="Change TPassword"  class="btn btn-sm btn-primary"/>&nbsp;
-	                              <a href="profile-security?tpassword=forgot" class="btn btn-sm btn-danger">Forgot TPassword </a>
+	                              <a href="profile-security.php?tpassword=forgot" class="btn btn-sm btn-danger">Forgot TPassword </a>
                               </div>
                           </div>
                       </form>

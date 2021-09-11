@@ -103,7 +103,7 @@ window.location=document.getElementById("link").value
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
-	                              <a href="pin-order-history" class="btn btn-sm btn-danger">Cancel </a>
+	                              <a href="pin-order-history.php" class="btn btn-sm btn-danger">Cancel </a>
                               </div>
                           </div>
                       </form>

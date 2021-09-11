@@ -105,7 +105,7 @@ $row_timer = mysqli_fetch_assoc($data_timer);
 								$status_pin='<span class="label label-success">Active</span>';
 							}
                             if ($data['transfer']=='' AND $data['userid']==''){
-								$status_transfer='<a href="pin-transfer?pin='.$data['pin'].'" class="btn btn-sm btn-primary">transfer </a>'; 
+								$status_transfer='<a href="pin-transfer.php?pin='.$data['pin'].'" class="btn btn-sm btn-primary">transfer </a>'; 
 							} else {
                                 $status_transfer='<span class="label label-danger">lock</span>';
                             }

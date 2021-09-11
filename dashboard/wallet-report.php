@@ -143,7 +143,7 @@ $hal2 = $_GET['halaman']+1;
 if ($batas!='') {$batas2 = $_GET['batas'];} else {$batas2 = $default_batas;}
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"wallet-report?halaman=$hal1&batas=$batas2\">Previous</a></li>
+<li class=\"page-item\"><a href=\"wallet-report.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
 for($i=1;$i<=$jmlhalaman;$i++)
@@ -153,15 +153,15 @@ if ($i != $halaman){
 
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"wallet-report?halaman=$i&batas=$batas2\">$i</a></li>
+<li class=\"page-item\"><a href=\"wallet-report.php?halaman=$i&batas=$batas2\">$i</a></li>
 </ul>";
 }
 else{ 
- echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"wallet-report?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
+ echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"wallet-report.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
 }
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"wallet-report?halaman=$hal2&batas=$batas2\">Next</a></li>
+<li class=\"page-item\"><a href=\"wallet-report.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
 echo "<p>Total Record : <b>$jmldata</b> transaction</p>";

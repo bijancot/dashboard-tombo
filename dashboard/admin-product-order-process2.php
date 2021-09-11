@@ -82,6 +82,6 @@ $insert10 = mysqli_query($koneksi, "INSERT INTO bonus_repeat_order (userid, bonu
 
 $query = mysqli_query($koneksi, "UPDATE product_order SET status='1' WHERE code='$code' ")or die(mysql_error());
 
-header('location:admin-product-order-history');	
+header('location:admin-product-order-history.php');	
     }
 ?>

@@ -12,6 +12,6 @@ $code = $_POST['code'];
 
 $query = mysqli_query($koneksi, "UPDATE pin_request SET unik='$unik', status='1', message='$message', gateway='BRI', date=now() WHERE code='$code' AND userid='$userid' ")or die(mysql_error());
 
-header('location:pin-order-history');	
+header('location:pin-order-history.php');	
     }
 ?>

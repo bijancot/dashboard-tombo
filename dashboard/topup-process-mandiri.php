@@ -117,7 +117,7 @@ $amountunik = $data['amount'] + $unik;
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10" id="formsubmitbutton">
                                   <input type="submit" name="Upload Image" value="Upload" onclick="ButtonClicked()" class="btn btn-sm btn-primary" />&nbsp;
-	                              <a href="pin-order-history" class="btn btn-sm btn-danger">Cancel </a>
+	                              <a href="pin-order-history.php" class="btn btn-sm btn-danger">Cancel </a>
 	                               <div id="buttonreplacement" style="margin-left:30px; display:none;">
 <img src="loading.gif" alt="loading...">
 

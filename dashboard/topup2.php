@@ -23,6 +23,6 @@ $unik = $_POST['unik'];
 
 $insert = mysqli_query($koneksi, "INSERT INTO hm2_pending_deposits (user_id, amount, unik, code, date) VALUES('$id', '$amount', '$unik', '$code', now())") or die(mysqli_error());
 
-header('location:topup-history');	
+header('location:topup-history.php');	
     }
 ?>

@@ -47,8 +47,8 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </div>
-                                <a href="admin-all-member-on" class="small-box-footer">
-                                    Members List <span class="glyphicon glyphicon-chevron-right"></span>
+                                <a href="admin-all-member-on.php" class="small-box-footer">
+                                    Mitra List <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -66,7 +66,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon"></span>
                                 </div>
-                                <a href="admin-all-member-on" class="small-box-footer">
+                                <a href="admin-all-member-on.php" class="small-box-footer">
                                     Mitra List<span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -85,7 +85,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon"></span>
                                 </div>
-                                <a href="admin-all-point-new" class="small-box-footer">
+                                <a href="admin-all-point-new.php" class="small-box-footer">
                                     Reseller List <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -107,7 +107,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon fa fa-sitemap"></span>
                                 </div>
-                                <a href="binary-tree" class="small-box-footer">
+                                <a href="binary-tree.php" class="small-box-footer">
                                     Binary Tree <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -136,7 +136,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </div>
-                                <a href="../wallet/wallet-report" class="small-box-footer">
+                                <a href="../wallet/wallet-report.php" class="small-box-footer">
                                     History Mutasi <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -155,7 +155,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-sort-by-attributes"></span>
                                 </div>
-                                <a href="topup-history" class="small-box-footer">
+                                <a href="topup-history.php" class="small-box-footer">
                                     Deposit Record <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -175,7 +175,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-stats"></span>
                                 </div>
-                                <a href="../wallet/withdrawal-processed" class="small-box-footer">
+                                <a href="../wallet/withdrawal-processed.php" class="small-box-footer">
                                     Record Withdrawal <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -194,7 +194,7 @@ $total_point=mysqli_num_rows($tampil_point);
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-signal"></span>
                                 </div>
-                                <a href="../wallet/pin-order" class="small-box-footer">
+                                <a href="../wallet/pin-order.php" class="small-box-footer">
                                     Order PIN Aktivasi<span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
@@ -249,7 +249,7 @@ $total_point=mysqli_num_rows($tampil_point);
 <?php
 $status = $data_deposit['status'];
 if($status=='pending'){
-$statusx="<a href=\"admin-update-deposit-1?id=$data_deposit[id]\" class=\"btn btn-sm btn-success\">process <i class=\"fa fa-arrow-circle-right\"></i></a> 
+$statusx="<a href=\"admin-update-deposit-1.php?id=$data_deposit[id]\" class=\"btn btn-sm btn-success\">process <i class=\"fa fa-arrow-circle-right\"></i></a> 
 <a href=\"#\" class=\"btn btn-sm btn-warning\">cancel <i class=\"fa fa-arrow-circle-right\"></i></a>"
 ;} 
 else {$statusx="<a href=\"#\" class=\"btn btn-sm btn-warning\">processed <i class=\"fa fa-arrow-circle-right\"></i></a>";}

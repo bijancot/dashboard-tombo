@@ -62,14 +62,14 @@ header('location: index.php?error=UPGRADE MEMBERSHIP SUKSES');
                                         <?php echo "$total"; ?>
                                     </h3>
                                     <p>
-                                       Direct Member
+                                       Direct Mitra
                                     </p>
                                 </div>
                                 <div class="icon">
                                     <span class="glyphicon glyphicon-user"></span>
                                 </div>
                                 <a href="direct-member" class="small-box-footer">
-                                    Listing Member <span class="glyphicon glyphicon-chevron-right"></span>
+                                    Listing Mitra <span class="glyphicon glyphicon-chevron-right"></span>
                                 </a>
                             </div>
                         </div><!-- ./col -->
@@ -218,7 +218,7 @@ if ($paket=='YUNIOR PRONZE' OR $paket=='BRONZE'){
 <section class="col-lg-12 connectedSortable">                            
                             <div class="panel panel-danger">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Data Calon Member</h3> 
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Data Calon Mitra</h3> 
                         </div>
                         <div class="panel-body">
                        <div class="table-responsive">
@@ -261,7 +261,7 @@ $name = $data['nama'];
              $hp62 = '62'.substr(trim($data['handphone']), 1);
          }
 echo "<a href='https://api.whatsapp.com/send?phone=$hp62&text=Sdr.%20$name%20bagaimana%20kabar%20Anda%20hari%20ini?%20Semoga%20dalam%20keadaan%20penuh%20semangat.%20-----
-Sdr.%20$name%20didalam%20member%20area%20ada%20menu%20training,%20dimana%20jika%20Anda%20mengikuti%20dan%20menjalankannya%20maka%20Anda%20akan%20tahu%20bagaimana%20mudahnya%20menjalankan%20bisnis%20ini.%20-----
+Sdr.%20$name%20didalam%20mitra%20area%20ada%20menu%20training,%20dimana%20jika%20Anda%20mengikuti%20dan%20menjalankannya%20maka%20Anda%20akan%20tahu%20bagaimana%20mudahnya%20menjalankan%20bisnis%20ini.%20-----
 maxgoo.id%20%20-----
 care@maxgoo.id
 

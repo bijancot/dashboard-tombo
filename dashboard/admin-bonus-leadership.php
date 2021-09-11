@@ -100,7 +100,8 @@ $paket=$data_nama['paket'];
 
 <?php
 $query = mysqli_query($koneksi, "UPDATE bonus_titik SET paket='$paket' WHERE userid='$userid' ")or die(mysql_error());
-$query2 = "DELETE FROM bonus_titik WHERE paket='MEMBER'";
+// $query2 = "DELETE FROM bonus_titik WHERE paket='MEMBER'";
+$query2 = "DELETE FROM bonus_titik WHERE paket='MITRA'";
 $result = mysqli_query($koneksi, $query2);
 
 
@@ -182,7 +183,7 @@ else{
 <li class=\"page-item\"><a href=\"admin-bonus-leadership.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 echo "<p><a href=\"excel/export_excel_bonussponsor.php\"><b><h3>Export to Excel</a></b></h3></p>";
 ?>
                   <!-- </div>-->

@@ -31,7 +31,7 @@ include 'header.php';
 
                             <div class="panel panel-success">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><span class="glyphicon glyphicon-book"></span> Testimonial Member</h3> 
+                        <h3 class="panel-title"><span class="glyphicon glyphicon-book"></span> Testimonial Mitra</h3> 
                         </div>
                         <div class="panel-body">
                        <div class="table-responsive">

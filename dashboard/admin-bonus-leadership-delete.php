@@ -22,7 +22,8 @@ $userid=$data['userid'];
 $paket=$data_nama['paket'];
 
 $query = mysqli_query($koneksi, "UPDATE bonus_titik SET paket='$paket' WHERE userid='$userid' ")or die(mysql_error());
-$query2 = "DELETE FROM bonus_titik WHERE paket='MEMBER'";
+// $query2 = "DELETE FROM bonus_titik WHERE paket='MEMBER'";
+$query2 = "DELETE FROM bonus_titik WHERE paket='MITRA'";
 $result = mysqli_query($koneksi, $query2);
 
 ?>
