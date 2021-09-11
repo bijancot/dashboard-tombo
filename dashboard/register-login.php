@@ -73,7 +73,7 @@ header('location:../info/index.html');	}
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="register?ref=$username">
+						<a class="txt1" href="register.php?ref=$username">
 							daftarkan keanggotaan baru
 						</a>
 					</div>

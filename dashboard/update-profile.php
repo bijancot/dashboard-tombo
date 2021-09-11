@@ -26,7 +26,7 @@ $result=mysqli_query($koneksi,$save) or display_html(mysqli_error(), "error.html
 
 }
 if ($query){
-header('location:profile');	
+header('location:profile.php');	
 } else {
 	echo "gagal";
     }

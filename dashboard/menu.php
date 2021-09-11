@@ -1,7 +1,7 @@
                     <br />
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="index">
+                            <a href="index.php">
                                 <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -12,15 +12,15 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="profile"><i class="fa fa-angle-double-right"></i>Profile</a>
-                                <li><a href="profile-edit"><i class="fa fa-angle-double-right"></i>Edit Profile</a>
-                                <li><a href="profile-security"><i class="fa fa-angle-double-right"></i>Security</a>
+                                <li><a href="profile.php"><i class="fa fa-angle-double-right"></i>Profile</a>
+                                <li><a href="profile-edit.php"><i class="fa fa-angle-double-right"></i>Edit Profile</a>
+                                <li><a href="profile-security.php"><i class="fa fa-angle-double-right"></i>Security</a>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="direct-member">
-                                <i class="glyphicon fa fa-users"></i> <span>Direct Member</span>
+                            <a href="direct-member.php">
+                                <i class="glyphicon fa fa-users"></i> <span>Direct Mitra</span>
                             </a>
                         </li>
 
@@ -31,21 +31,21 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="g1"><i class="fa fa-angle-double-right"></i> Generasi 1</a></li>
-                               <li><a href="g2"><i class="fa fa-angle-double-right"></i> Generasi 2</a></li>
-                               <li><a href="g3"><i class="fa fa-angle-double-right"></i> Generasi 3</a></li>
-                               <li><a href="g4"><i class="fa fa-angle-double-right"></i> Generasi 4</a></li>
-                               <li><a href="g5"><i class="fa fa-angle-double-right"></i> Generasi 5</a></li>
-                               <li><a href="g6"><i class="fa fa-angle-double-right"></i> Generasi 6</a></li>
-                               <li><a href="g7"><i class="fa fa-angle-double-right"></i> Generasi 7</a></li>
-                               <li><a href="g8"><i class="fa fa-angle-double-right"></i> Generasi 8</a></li>
-                               <li><a href="g9"><i class="fa fa-angle-double-right"></i> Generasi 9</a></li>
-                               <li><a href="g10"><i class="fa fa-angle-double-right"></i> Generasi 10</a></li>
+                               <li><a href="g1.php"><i class="fa fa-angle-double-right"></i> Generasi 1</a></li>
+                               <li><a href="g2.php"><i class="fa fa-angle-double-right"></i> Generasi 2</a></li>
+                               <li><a href="g3.php"><i class="fa fa-angle-double-right"></i> Generasi 3</a></li>
+                               <li><a href="g4.php"><i class="fa fa-angle-double-right"></i> Generasi 4</a></li>
+                               <li><a href="g5.php"><i class="fa fa-angle-double-right"></i> Generasi 5</a></li>
+                               <li><a href="g6.php"><i class="fa fa-angle-double-right"></i> Generasi 6</a></li>
+                               <li><a href="g7.php"><i class="fa fa-angle-double-right"></i> Generasi 7</a></li>
+                               <li><a href="g8.php"><i class="fa fa-angle-double-right"></i> Generasi 8</a></li>
+                               <li><a href="g9.php"><i class="fa fa-angle-double-right"></i> Generasi 9</a></li>
+                               <li><a href="g10.php"><i class="fa fa-angle-double-right"></i> Generasi 10</a></li>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="binary-tree">
+                            <a href="binary-tree.php">
                                 <i class="glyphicon fa fa-sitemap"></i> <span>Binary Tree </span>
                             </a>
                         </li>
@@ -58,13 +58,13 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="bonus-sponsor"><i class="fa fa-angle-double-right"></i> Komisi Sponsor</a></li>
-                               <li><a href="bonus-pasangan"><i class="fa fa-angle-double-right"></i> Komisi Pasangan</a></li>
-                               <li><a href="bonus-level"><i class="fa fa-angle-double-right"></i> Komisi Level</a></li>
-                               <li><a href="bonus-leadership"><i class="fa fa-angle-double-right"></i> Bonus Leaders Club</a></li>
+                               <li><a href="bonus-sponsor.php"><i class="fa fa-angle-double-right"></i> Komisi Sponsor</a></li>
+                               <li><a href="bonus-pasangan.php"><i class="fa fa-angle-double-right"></i> Komisi Pasangan</a></li>
+                               <li><a href="bonus-level.php"><i class="fa fa-angle-double-right"></i> Komisi Level</a></li>
+                               <li><a href="bonus-leadership.php"><i class="fa fa-angle-double-right"></i> Bonus Leaders Club</a></li>
                                <li><a href="#"><i class="fa fa-angle-double-right"></i> Komisi Repeat Order</a></li>
-                               <li><a href="bonus-royalty-development"><i class="fa fa-angle-double-right"></i><i class="fa fa-angle-double-right"></i> Komisi Development</a></li>
-                               <li><a href="bonus-royalty-generasi"><i class="fa fa-angle-double-right"></i><i class="fa fa-angle-double-right"></i> Komisi Generasi</a></li>
+                               <li><a href="bonus-royalty-development.php"><i class="fa fa-angle-double-right"></i><i class="fa fa-angle-double-right"></i> Komisi Development</a></li>
+                               <li><a href="bonus-royalty-generasi.php"><i class="fa fa-angle-double-right"></i><i class="fa fa-angle-double-right"></i> Komisi Generasi</a></li>
                             </ul>
                         </li>
 
@@ -76,9 +76,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="topup"><i class="fa fa-angle-double-right"></i> Topup</a></li>
-                               <li><a href="topup-history"><i class="fa fa-angle-double-right"></i> History Topup</a></li>
-                               <li><a href="exchange"><i class="fa fa-angle-double-right"></i> Exchange</a></li>
+                               <li><a href="topup.php"><i class="fa fa-angle-double-right"></i> Topup</a></li>
+                               <li><a href="topup-history.php"><i class="fa fa-angle-double-right"></i> History Topup</a></li>
+                               <li><a href="exchange.php"><i class="fa fa-angle-double-right"></i> Exchange</a></li>
                             </ul>
 
 
@@ -89,14 +89,14 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="../wallet/withdrawal-request-1"><i class="fa fa-angle-double-right"></i> Withdrawal</a></li>
-                               <li><a href="../wallet/withdrawal-onprocess"><i class="fa fa-angle-double-right"></i> On Process</a></li>
-                               <li><a href="../wallet/withdrawal-processed"><i class="fa fa-angle-double-right"></i> Processed</a></li>
+                               <li><a href="../wallet/withdrawal-request-1.php"><i class="fa fa-angle-double-right"></i> Withdrawal</a></li>
+                               <li><a href="../wallet/withdrawal-onprocess.php"><i class="fa fa-angle-double-right"></i> On Process</a></li>
+                               <li><a href="../wallet/withdrawal-processed.php"><i class="fa fa-angle-double-right"></i> Processed</a></li>
                             </ul>
                         </li>
 
                         <li class="active">
-                            <a href="../wallet/wallet-report">
+                            <a href="../wallet/wallet-report.php">
                                 <i class="glyphicon fa fa-money"></i> <span>History Mutasi</span>
                             </a>
                         </li>
@@ -108,16 +108,16 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="product-order"><i class="fa fa-angle-double-right"></i> Order Product</a></li>
-                               <li><a href="product-order-history"><i class="fa fa-angle-double-right"></i> History Order</a></li>
-                               <li><a href="bonus-ro"><i class="fa fa-angle-double-right"></i> Bonus RO</a></li>
+                               <li><a href="product-order.php"><i class="fa fa-angle-double-right"></i> Order Product</a></li>
+                               <li><a href="product-order-history.php"><i class="fa fa-angle-double-right"></i> History Order</a></li>
+                               <li><a href="bonus-ro.php"><i class="fa fa-angle-double-right"></i> Bonus RO</a></li>
                             </ul>
                         </li>
 
 
 
                         <li class="logout">
-                            <a href="logout">
+                            <a href="logout.php">
                                 <i class="glyphicon fa fa-key"></i> <span>Logout</span>
                                 <i class=""></i>
                             </a>

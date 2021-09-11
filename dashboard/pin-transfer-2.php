@@ -17,9 +17,9 @@ $tpass=$data_member['transaction_code'];
 
 if ($tpass==$tpassword){
 $query = mysqli_query($koneksi, "UPDATE pin SET transfer='$transfer' WHERE pin='$pin' ")or die(mysql_error());
-header('location:pin?error=transfer pin berhasil');	
+header('location:pin.php?error=transfer pin berhasil');	
 } else {
-header('location:pin-transfer?pin='.$pin.'&error=gagal-pin transaksi '.$tpassword.' salah');	
+header('location:pin-transfer.php?pin='.$pin.'&error=gagal-pin transaksi '.$tpassword.' salah');	
     }
     }
 ?>

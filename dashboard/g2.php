@@ -26,7 +26,7 @@ include 'header.php';
                         <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> Member Generasi 2</h3> 
+                        <h3 class="panel-title"><i class="fa fa-user"></i> Mitra Generasi 2</h3> 
                         </div>
                         <div class="panel-body">
                        <div class="table-responsive">
@@ -78,7 +78,7 @@ $rowsponsor = mysqli_fetch_assoc($sqlsponsor);
                    </table>
                   </div>
                 <div class="text-right">
-                  <a href="binary-tree.php" class="btn btn-sm btn-warning">Register Member Baru <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="binary-tree.php" class="btn btn-sm btn-warning">Register Mitra Baru <i class="fa fa-arrow-circle-right"></i></a>
               
                 </div>
               </div> 

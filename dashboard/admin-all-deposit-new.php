@@ -83,7 +83,7 @@ if(isset($_GET['halaman']))
 
 $status = $data_deposit['status'];
 if ($status == 'pending'){$statusprosesxx='
-<a href="admin-update-deposit-1?id='.$data_deposit['id'].'" class="btn btn-sm btn-warning"><i class="fa fa-arrow-circle-right"> PROCESS</i></a>
+<a href="admin-update-deposit-1.php?id='.$data_deposit['id'].'" class="btn btn-sm btn-warning"><i class="fa fa-arrow-circle-right"> PROCESS</i></a>
 ';} else {$statusprosesxx='';}
 
 

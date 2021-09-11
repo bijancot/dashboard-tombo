@@ -1,9 +1,12 @@
                     <br />
                     <ul class="sidebar-menu">
                         <li class="active">
-                            <a href="index.php">
+                        <?php
+                            '<a href="index.php">
                                 <i class="glyphicon glyphicon-dashboard"></i> <span>Dashboard</span>
                             </a>
+                            '
+                            ?>
                         </li>
 
                         <li class="treeview">
@@ -11,18 +14,20 @@
                                 <i class="glyphicon fa fa-user"></i> <span>Profile</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <?php
+                            '<ul class="treeview-menu">
                                 <li><a href="profile.php"><i class="fa fa-angle-double-right"></i>Profile</a>
                                 <li><a href="profile-edit.php"><i class="fa fa-angle-double-right"></i>Edit Profile</a>
-                            </ul>
+                            </ul>'
+                            ?>
                         </li>
-
-                        <li class="active">
+                        <?php
+                        '<li class="active">
                             <a href="direct-member.php">
-                                <i class="glyphicon fa fa-users"></i> <span>Direct Member</span>
+                                <i class="glyphicon fa fa-users"></i> <span>Direct Mitra</span>
                             </a>
-                        </li>
-
+                        </li>'
+                        ?>
                         <li class="treeview">
                             <a href="#">
                                 <i class="glyphicon fa fa-sitemap"></i>
@@ -103,7 +108,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="testimonial.php"><i class="fa fa-angle-double-right"></i> Testimonial Member</a></li>
+                               <li><a href="testimonial.php"><i class="fa fa-angle-double-right"></i> Testimonial Mitra</a></li>
                                <li><a href="testimonial-add.php"><i class="fa fa-angle-double-right"></i> Add Testimonial</a></li>
                             </ul>
                         </li>
@@ -115,7 +120,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                               <li><a href="tutorial.php"><i class="fa fa-angle-double-right"></i> Register Member</a></li>
+                               <li><a href="tutorial.php"><i class="fa fa-angle-double-right"></i> Register Mitra</a></li>
                                <li><a href="tutorial-replika.php"><i class="fa fa-angle-double-right"></i> Website Replika</a></li>
                                <li><a href="tutorial-kredivo.php"><i class="fa fa-angle-double-right"></i> Cicilan Kredivo</a></li>
                             </ul>

@@ -8,7 +8,7 @@ include 'header.php';
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Direct Member
+                        Direct Mitra
                         <small>Data</small>
                     </h1>
              <?php
@@ -43,7 +43,7 @@ include 'header.php';
                         <div class="col-lg-12">
                     <div class="panel panel-success">
                         <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> Direct Member / Sponsor Langsung</h3> 
+                        <h3 class="panel-title"><i class="fa fa-user"></i> Direct Mitra / Sponsor Langsung</h3> 
                         </div>
                         <div class="panel-body">
                        <div class="table-responsive">
@@ -96,7 +96,7 @@ include 'header.php';
                    </table>
                   </div>
                 <div class="text-right">
-                  <a href="binary-tree.php" class="btn btn-sm btn-warning">Register Member Baru <i class="fa fa-arrow-circle-right"></i></a>
+                  <a href="binary-tree.php" class="btn btn-sm btn-warning">Register Mitra Baru <i class="fa fa-arrow-circle-right"></i></a>
               
                 </div>
               </div> 

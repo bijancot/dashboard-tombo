@@ -91,7 +91,7 @@ $class2='';
                     <td><center><?php echo $data['tanggal'];?></center></td>
                     <td><center><?php echo $data['code'];?></center></td>
                     <td><center><?php echo $data['gateway'];?></center></td>
-                    <td><center><a href="pin-order-process?code=<?php echo $data['code'];?>" class="<?php echo $class2;?>"><?php echo $tindakan;?></a> <a href="pin-order-delete?code=<?php echo $data['code'];?>" class="<?php echo $class;?>"><?php echo $delete;?></a>
+                    <td><center><a href="pin-order-process.php?code=<?php echo $data['code'];?>" class="<?php echo $class2;?>"><?php echo $tindakan;?></a> <a href="pin-order-delete.php?code=<?php echo $data['code'];?>" class="<?php echo $class;?>"><?php echo $delete;?></a>
 <br><br><img src="<?php echo $data['photo']; ?>" class="img-rounded" width="50" style="border: 2px solid #666;" />
 </center></td>
                     </tr></div>

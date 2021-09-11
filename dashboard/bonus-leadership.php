@@ -78,7 +78,7 @@ $data_nama=mysqli_fetch_array($tampil_nama);
 
 <?
                             if ($data['paid'] == '0'){
-								$statusnya='<span class="label label-warning">On Proces</span> <a href="bonus-send?id='.$data['timer'].'" title="topup bonus ke wallet balance"><span class="label label-success">Send to Wallet</span></a>';
+								$statusnya='<span class="label label-warning">On Proces</span> <a href="bonus-send.php?id='.$data['timer'].'" title="topup bonus ke wallet balance"><span class="label label-success">Send to Wallet</span></a>';
 								
 							}
                             else if ($data['paid'] == '1' ){

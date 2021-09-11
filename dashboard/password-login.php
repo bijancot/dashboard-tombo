@@ -27,7 +27,7 @@ Sdr. $user_name, berikut password login Anda :
 Username  : $user_userid
 Password : $user_passwd
 
-Login to member area :
+Login to Mitra area :
 https://TomboAti/backoffice/login.php.
 
 ----------------------------
@@ -71,7 +71,7 @@ curl_setopt($curlHandle, CURLOPT_POST, 1);
 $results = curl_exec($curlHandle);
 curl_close($curlHandle);
 
-header('location:login.php?error=TERIMA KASIH... silahkan check Email anda dan demi keamanan, gantilah Password anda melalui MEMBER AREA');	
+header('location:login.php?error=TERIMA KASIH... silahkan check Email anda dan demi keamanan, gantilah Password anda melalui Mitra AREA');	
 ;}
 
 ?>
@@ -131,8 +131,8 @@ header('location:login.php?error=TERIMA KASIH... silahkan check Email anda dan d
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="login">
-							Member Login
+						<a class="txt1" href="login.php">
+							Mitra Login
 						</a>
 					</div>
 				</form>

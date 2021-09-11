@@ -150,7 +150,7 @@ $hal2 = $_GET['halaman']+1;
 if ($batas!='') {$batas2 = $_GET['batas'];} else {$batas2 = $default_batas;}
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-bonus-upline?halaman=$hal1&batas=$batas2\">Previous</a></li>
+<li class=\"page-item\"><a href=\"admin-bonus-upline.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
 for($i=1;$i<=$jmlhalaman;$i++)
@@ -164,14 +164,14 @@ if ($i != $halaman){
 </ul>";
 }
 else{ 
- echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"admin-bonus-upline?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
+ echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"admin-bonus-upline.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
 }
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-bonus-upline?halaman=$hal2&batas=$batas2\">Next</a></li>
+<li class=\"page-item\"><a href=\"admin-bonus-upline.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 echo "<p><a href=\"excel/export_excel_bonussponsor.php\"><b><h3>Export to Excel</a></b></h3></p>";
 ?>
                   <!-- </div>-->

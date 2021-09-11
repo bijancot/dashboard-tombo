@@ -8,7 +8,7 @@ $sponsor=$_SESSION['referral'];
 } 
 else 
 { 
-header('Location: register?ref=000001');
+header('Location: register.php?ref=000001');
 }
 
 
@@ -98,7 +98,7 @@ header("Location:../info");
 					</div>
 
 					<div class="text-center p-t-90">
-						<a class="txt1" href="register-login">
+						<a class="txt1" href="register-login.php">
 							saya sudah memiliki keanggotaan
 						</a><br>
 					</div>

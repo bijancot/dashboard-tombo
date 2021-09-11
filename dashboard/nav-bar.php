@@ -153,7 +153,7 @@
 
                         <div class="contact">
 
-                            <a href="backoffice/login.php?ref=<?php echo "$sponsor"; ?>">LOGIN MEMBER</a>
+                            <a href="backoffice/login.php?ref=<?php echo "$sponsor"; ?>">LOGIN Mitra</a>
 
 						</div>
 

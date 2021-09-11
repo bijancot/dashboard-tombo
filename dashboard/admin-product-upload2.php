@@ -17,7 +17,7 @@ if (!empty($_FILES["nama_file"]["tmp_name"]))
 			$sql="UPDATE products SET file_name='$gambar' WHERE code='$code'";
 			$res=mysqli_query($koneksi, $sql);
 
-            echo "<script>alert('Data Customer berhasil diupdate!'); window.location = 'admin-product-list'</script>";	   
+            echo "<script>alert('Data Customer berhasil diupdate!'); window.location = 'admin-product-list.php'</script>";	   
 		} else {
 		   echo "<p>Gambar gagal dikirim</p>";
 		}

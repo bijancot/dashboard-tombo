@@ -118,7 +118,7 @@ $class2='';
                     <td><center><?php echo $data['tanggal'];?></center></td>
                     <td><center><?php echo $data['code'];?></center></td>
                     <td><center><?php echo $data['gateway'];?></center></td>
-                    <td><center><a href="pin-order-process?code=<?php echo $data['code'];?>" class="<?php echo $class2;?>"><?php echo $tindakan;?></a> <a href="pin-order-delete?code=<?php echo $data['code'];?>" class="<?php echo $class;?>"><?php echo $delete;?></a>
+                    <td><center><a href="pin-order-process.php?code=<?php echo $data['code'];?>" class="<?php echo $class2;?>"><?php echo $tindakan;?></a> <a href="pin-order-delete.php?code=<?php echo $data['code'];?>" class="<?php echo $class;?>"><?php echo $delete;?></a>
 <br><br><img src="<?php echo $data['photo']; ?>" class="img-rounded" width="50" style="border: 2px solid #666;" />
 </center></td>
                     </tr>
@@ -168,7 +168,7 @@ $hal2 = $_GET['halaman']+1;
 if ($batas!='') {$batas2 = $_GET['batas'];} else {$batas2 = $default_batas;}
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess?halaman=$hal1&batas=$batas2\">Previous</a></li>
+<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
 for($i=1;$i<=$jmlhalaman;$i++)
@@ -178,18 +178,18 @@ if ($i != $halaman){
 
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess?halaman=$i&batas=$batas2\">$i</a></li>
+<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess.php?halaman=$i&batas=$batas2\">$i</a></li>
 </ul>";
 }
 else{ 
- echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"admin-pin-order-history-onprocess?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
+ echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"admin-pin-order-history-onprocess.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
 }
  echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess?halaman=$hal2&batas=$batas2\">Next</a></li>
+<li class=\"page-item\"><a href=\"admin-pin-order-history-onprocess.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+echo "<p>Total Record : <b>$jmldata</b> Mitra</p>";
 echo "<p><a href=\"excel/export_excel_pin_order\"><b><h3>Export to Excel</a></b></h3></p>";
 ?>
                   <!-- </div>-->

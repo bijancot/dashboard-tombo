@@ -231,7 +231,7 @@
      <!-- header logo: style can be found in header.less -->
      <header class="header">
          <a href="index.php" class="logo">
-             Member Area
+             Mitra Area
          </a>
          <nav class="navbar navbar-static-top" role="navigation">
              <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -291,10 +291,10 @@
                              <!-- Menu Footer-->
                              <li class="user-footer">
                                  <div class="pull-left">
-                                     <a href="profile" class="btn btn-default btn-flat"> Profile </a>
+                                     <a href="profile.php" class="btn btn-default btn-flat"> Profile </a>
                                  </div>
                                  <div class="pull-right">
-                                     <a href="logout" class="btn btn-default btn-flat" onclick="return confirm ('Apakah Anda Akan Keluar.?');"> Logout </a>
+                                     <a href="logout.php" class="btn btn-default btn-flat" onclick="return confirm ('Apakah Anda Akan Keluar.?');"> Logout </a>
                                  </div>
                              </li>
                          </ul>

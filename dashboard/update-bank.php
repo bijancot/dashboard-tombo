@@ -18,5 +18,5 @@ $save="INSERT INTO logupdate SET
                ip='$ipaddress',
                timer=now()";
 $result=mysqli_query($koneksi,$save) or display_html(mysqli_error(), "error.html");
-header('location:profile-edit');	
+header('location:profile-edit.php');	
 ?>

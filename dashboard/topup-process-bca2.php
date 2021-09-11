@@ -12,6 +12,6 @@ $code = $_POST['code'];
 
 $query = mysqli_query($koneksi, "UPDATE hm2_pending_deposits SET unik='$unik', status='1', message='$message', gateway='BCA', date=now() WHERE code='$code' AND userid='$userid' ")or die(mysql_error());
 
-header('location:topup-history');	
+header('location:topup-history.php');	
     }
 ?>

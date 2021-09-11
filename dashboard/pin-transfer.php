@@ -71,7 +71,7 @@ $pin = $_GET['pin'];
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
                                   <input type="submit" name="pin-transfer" value="PIN Transfer"  class="btn btn-sm btn-primary"/>&nbsp;
-	                              <a href="pin" class="btn btn-sm btn-danger">cancel </a>
+	                              <a href="pin.php" class="btn btn-sm btn-danger">cancel </a>
                               </div>
                           </div>
                       </form>

@@ -12,7 +12,7 @@ $status = $_POST['status'];
 
 $query = mysqli_query($koneksi, "UPDATE testimonials SET status='$status', content='$content' WHERE userid='$username' AND id='$id'")or die(mysql_error());
 if ($query){
-header('location:admin-testimonial');	
+header('location:admin-testimonial.php');	
 }
 }
 ?>

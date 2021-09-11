@@ -71,7 +71,7 @@ include 'header.php';
                           <div class="form-group">
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
-	                              <a href="bonus-sponsor" class="btn btn-sm btn-danger">Cancel </a>
+	                              <a href="bonus-sponsor.php" class="btn btn-sm btn-danger">Cancel </a>
 
 
                                   <input type="submit" name="send-bonus" onclick="ButtonClicked()" value="SEND" class="btn btn-sm btn-primary" />

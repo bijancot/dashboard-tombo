@@ -89,6 +89,6 @@ if ($row_level == 50){$bonus=286; $point=0.01;}
 
 
 
-echo "<script type='text/javascript'>document.location.href = 'admin-all-deposit-new';</script>";
+echo "<script type='text/javascript'>document.location.href = 'admin-all-deposit-new.php';</script>";
 }
 ?>
