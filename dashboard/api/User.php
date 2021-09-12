@@ -15,10 +15,12 @@ function registerMitra_post()
 {
     global $connect, $connect2;
 
-    $data = json_decode(file_get_contents("php://input"), true);
-    $fotoktp  =  $_FILES['fotoktp']['name'];
-    $tempPath  =  $_FILES['fotoktp']['tmp_name'];
-    $fileSize  =  $_FILES['fotoktp']['size'];
+    $response       = [];
+    $randKTP        = rand();
+    $data           = json_decode(file_get_contents("php://input"), true);
+    $fotoktp        = $_FILES['fotoktp']['name'];
+    $tempPath       = $_FILES['fotoktp']['tmp_name'];
+    $fileSize       = $_FILES['fotoktp']['size'];
 
     if (empty($fotoktp)) {
         $errorMSG = json_encode(array("message" => "File KTP Kosong", "status" => false));
@@ -30,27 +32,25 @@ function registerMitra_post()
         $valid_extensions = array('jpeg', 'jpg', 'png');
 
         if (in_array($fileExt, $valid_extensions)) {
-            if (!file_exists($upload_path . $fotoktp)) {
+                $file_foto_ktp = $randKTP.'_'.$fotoktp;
 
                 if ($fileSize < 2000000) {
-                    move_uploaded_file($tempPath, $upload_path . $fotoktp);
+                    move_uploaded_file($tempPath, $upload_path . $file_foto_ktp);
                 } else {
                     $errorMSG = json_encode(array("message" => "File KTP maksimal 2MB", "status" => false));
                     echo $errorMSG;
                 }
-            } else {
-                $errorMSG = json_encode(array("message" => "File KTP tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
-                echo $errorMSG;
-            }
+            
         } else {
             $errorMSG = json_encode(array("message" => "Hanya file JPG, JPEG & PNG", "status" => false));
             echo $errorMSG;
         }
     }
 
-    $fotoprofil  =  $_FILES['fotoprofil']['name'];
-    $tempPath  =  $_FILES['fotoprofil']['tmp_name'];
-    $fileSize  =  $_FILES['fotoprofil']['size'];
+    $randProfil     = rand();
+    $fotoprofil     = $_FILES['fotoprofil']['name'];
+    $tempPath       = $_FILES['fotoprofil']['tmp_name'];
+    $fileSize       = $_FILES['fotoprofil']['size'];
 
     if (empty($fotoprofil)) {
         $errorMSG = json_encode(array("message" => "File Foto Profil Kosong", "status" => false));
@@ -62,27 +62,25 @@ function registerMitra_post()
         $valid_extensions = array('jpeg', 'jpg', 'png');
 
         if (in_array($fileExt, $valid_extensions)) {
-            if (!file_exists($upload_path . $fotoprofil)) {
+            $file_foto_profil = $randProfil.'_'.$fotoprofil;
 
-                if ($fileSize < 2000000) {
-                    move_uploaded_file($tempPath, $upload_path . $fotoprofil);
-                } else {
-                    $errorMSG = json_encode(array("message" => "File Foto Profil maksimal 2MB", "status" => false));
-                    echo $errorMSG;
-                }
+            if ($fileSize < 2000000) {
+                move_uploaded_file($tempPath, $upload_path . $file_foto_profil);
             } else {
-                $errorMSG = json_encode(array("message" => "File Foto Profil tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
+                $errorMSG = json_encode(array("message" => "File Foto Profil maksimal 2MB", "status" => false));
                 echo $errorMSG;
             }
+            
         } else {
             $errorMSG = json_encode(array("message" => "Format Foto Profil  JPG, JPEG & PNG", "status" => false));
             echo $errorMSG;
         }
     }
 
-    $buktiBayar  =  $_FILES['buktibayar']['name'];
-    $tempPath  =  $_FILES['buktibayar']['tmp_name'];
-    $fileSize  =  $_FILES['buktibayar']['size'];
+    $randBukti      = rand();
+    $buktiBayar     = $_FILES['buktibayar']['name'];
+    $tempPath       = $_FILES['buktibayar']['tmp_name'];
+    $fileSize       = $_FILES['buktibayar']['size'];
 
     if (empty($buktiBayar)) {
         $errorMSG = json_encode(array("message" => "File Bukti Bayar Kosong", "status" => false));
@@ -94,39 +92,37 @@ function registerMitra_post()
         $valid_extensions = array('jpeg', 'jpg', 'png');
 
         if (in_array($fileExt, $valid_extensions)) {
-            if (!file_exists($upload_path . $buktiBayar)) {
+                
+            $file_bukti_bayar = $randBukti.'_'.$buktiBayar;
 
-                if ($fileSize < 2000000) {
-                    move_uploaded_file($tempPath, $upload_path . $buktiBayar);
-                } else {
-                    $errorMSG = json_encode(array("message" => "File Bukti Bayar maksimal 2MB", "status" => false));
-                    echo $errorMSG;
-                }
+            if ($fileSize < 2000000) {
+                move_uploaded_file($tempPath, $upload_path . $file_bukti_bayar);
             } else {
-                $errorMSG = json_encode(array("message" => "File Bukti Bayar tidak bisa diunggah, silahkan pilih file lainnya", "status" => false));
+                $errorMSG = json_encode(array("message" => "File Bukti Bayar maksimal 2MB", "status" => false));
                 echo $errorMSG;
             }
+            
         } else {
             $errorMSG = json_encode(array("message" => "Format file Bukti Bayar  JPG, JPEG & PNG", "status" => false));
             echo $errorMSG;
         }
     }
 
-    $ktp =  $_POST['ktp'];
-    $email =  $_POST['email'];
-    $name =  $_POST['name'];
-    $nomorHP =  $_POST['nomorHP'];
-    $address =  $_POST['address'];
-    $username =  $_POST['username'];
-    $kecamatan =  $_POST['kecamatan'];
-    $kota =  $_POST['kota'];
-    $provinsi =  $_POST['provinsi'];
-    $kode_pos = $_POST['kode_pos'];
-    $country =  $_POST['country'];
-    $bank =  $_POST['bank'];
-    $rekening =  $_POST['rekening'];
-    $atasnama = $_POST['atasnama'];
-    $cabang     = $_POST['cabang'];
+    $ktp            = $_POST['ktp'];
+    $email          = $_POST['email'];
+    $name           = $_POST['name'];
+    $nomorHP        = $_POST['nomorHP'];
+    $address        = $_POST['address'];
+    $username       = $_POST['username'];
+    $kecamatan      = $_POST['kecamatan'];
+    $kota           = $_POST['kota'];
+    $provinsi       = $_POST['provinsi'];
+    $kode_pos       = $_POST['kode_pos'];
+    $country        = $_POST['country'];
+    $bank           = $_POST['bank'];
+    $rekening       = $_POST['rekening'];
+    $atasnama       = $_POST['atasnama'];
+    $cabang         = $_POST['cabang'];
     $referral       = $_POST['referral'];
     $createdAt      = date('Y-m-d H:i:s');
     $idUserRegister = null;
@@ -134,29 +130,58 @@ function registerMitra_post()
     $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
     $get_rows = mysqli_num_rows($get_all_data_register);
     
-    if ($get_rows == null) {
-        //db dashboard tombo
-        mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
+    if($username != '' &&  $name != '' && $nomorHP != '' && $bank != '' && $cabang != '' && $atasnama != '' && $rekening != '' && $email != '' && $kota != '' && $kecamatan != '' && $provinsi != '' && $kode_pos != '' && $address != '' && $country != ''){
+        if ($get_rows == null) {
 
-        //db tomboati
-        mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT) VALUES('$ktp', '$email', '$name', '$referral', '$nomorHP','$fotoktp','$fotoprofil','$buktiBayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
-        
-        $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
+            $get_data_email     = $connect->query("SELECT * FROM mebers WHERE email = '".$email."' "); 
+            $get_data_user_id   = $connect->query("SELECT * FROM mebers WHERE userid = '".$username."' "); 
+            $get_rows_email     = mysqli_num_rows($get_data_email); 
+            $get_rows_user_id   = mysqli_num_rows($get_data_user_id); 
+            
+            if($get_rows_email == null){
+                if($get_rows_user_id == null){
+                    //db dashboard tombo
+                    mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
+                        
+                    //db tomboati
+                    mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT, STATUS_USER) VALUES('$ktp', '$email', '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt', 'BARU')");
 
-        $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
+                    $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
 
-        mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
-        
-        $response = array(
-            'error'     => false,
-            'message'   => 'Sukses Register'
-        );
-    } else {
+                    $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
+
+                    mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
+
+                    $response = array(
+                        'error'     => false,
+                        'message'   => 'Sukses Register'
+                    );
+                }else{
+                    $response = array(
+                        'error'     => true,
+                        'message'   => 'Username sudah terdaftar sebelumnya'
+                    );
+                }
+            }else{
+                $response = array(
+                    'error'     => true,
+                    'message'   => 'Email sudah terdaftar sebelumnya'
+                );
+            }
+            
+        } else {
+            $response = array(
+                'error'     => true,
+                'message'   => 'No HP sudah terdaftar sebelumnya'
+            );
+        }
+    }else{
         $response = array(
             'error'     => true,
-            'message'   => 'Gagal Register'
+            'message'   => 'Terdapat data kosong'
         );
     }
+    
 
     header('Content-Type: application/json');
     echo json_encode($response);
