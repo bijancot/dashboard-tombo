@@ -43,10 +43,10 @@
                 mysqli_query($connect2, "INSERT INTO USER_REGISTER(STATUS_USER, IDUSERREGISTER, NOMORHP,KODEREFERRAL) VALUES('USER', '$get_id_from_data_after_insert','$nomorHP','$referral')");
                 
                 //update_user_token_db_tombo
-                mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN=".$user_token." WHERE IDUSERREGISTER=".$get_id_from_data_after_insert."");
+                mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='$user_token' WHERE IDUSERREGISTER=".$get_id_from_data_after_insert."");
                 
                 //update_user_token_db_dashboard_tombo
-                mysqli_query($connect, "UPDATE mebers SET usertoken=".$user_token." WHERE id=".$get_id_from_data_after_insert."");
+                mysqli_query($connect, "UPDATE mebers SET usertoken='$user_token' WHERE id=".$get_id_from_data_after_insert."");
                 
                 //insert chat_room tomboati
                 mysqli_query($connect2, "INSERT INTO CHAT_ROOM(IDUSERREGISTER) VALUES('$get_id_from_data_after_insert')");
