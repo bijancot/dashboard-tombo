@@ -147,7 +147,7 @@
      </style>
      <meta charset="UTF-8">
      <meta name="robots" content="noindex" />
-     <title>TomboAtiTour.com - Dashboard</title>
+     <title>Tombo Ati</title>
      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
      <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
      <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />

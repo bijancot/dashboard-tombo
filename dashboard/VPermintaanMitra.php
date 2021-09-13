@@ -1,6 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>Tombo Ati | Permintaan Mitra</title>
+    <link rel="stylesheet" href="modalstyle.css">
+</head>
 <?php
 session_start();
 include 'header.php';
+include 'config2.php';
 ?>
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -80,9 +90,6 @@ include 'header.php';
                                             <center>Referral </center>
                                         </th>
                                         <th>
-                                            <center>Bukti Bayar</center>
-                                        </th>
-                                        <th>
                                             <center>Register Date </center>
                                         </th>
                                         <th>
@@ -125,16 +132,17 @@ include 'header.php';
                                                 <font color="blue"><b><?php echo $data['sponsor']; ?>
                                         </td>
                                         <td>
-                                            <left>
-                                                <font color="blue"><b><?php echo $data['buktibayar']; ?>
-                                        </td>
-                                        <td>
-                                            <center><br>
+                                            <center>
                                                 <font color="blue"><b><?php echo $data['timer']; ?></b></font>
-                                                </center>
+                                            </center>
                                         </td>
                                         <td>
-                                            <center><a href="admin-profile-edit.php?userid=<?php echo $data['userid']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>Verifikasi</a></center>
+                                            <center>
+                                                <!-- <a href="admin-profile-edit.php?userid=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</a> -->
+                                                <?php echo "<a href='#modalVerif' class='btn btn-primary btn-sm' data-toggle='modal' data-id=" . $data['id'] . " ><i class='fa fa-check m-r-4'></i>Verifikasi</a>"; ?>
+                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                                            </center>
+
                                         </td>
                                     </tr>
                         </div>
@@ -147,67 +155,148 @@ include 'header.php';
                         </tbody>
                         </table>
 
-                        <form method="get">
-                            <div class="form-group row">
-                                <div class="col-sm-3">
-                                    <input class="form-control" name="batas" value='<?php echo $default_batas ?>' />
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" type="submit">BARIS</button>
+                        <!-- modal verifikasi -->
+                            <div id="modalVerif" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Verifikasi Permintaan Mitra </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="fetched-data"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="<?= 'verifMitra.php?id=dataid'?>"  type="submit" class="btn btn-primary "><i class="fa fa-check m-r-4"></i>Verifikasi</a>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-                        <center>
+                            <!-- end modal  -->
+                            <!-- modal detail -->
+                            <div id="myModal" class="modal">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Detail Permintaan Mitra</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="fetched-data"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end modal  -->
+                            <form method="get">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <input class="form-control" name="batas" value='<?php echo $default_batas ?>' />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-default btn-block" type="submit">BARIS</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <center>
 
 
-                            <?php
+                                <?php
 
-                            $halaman = @$_GET['halaman'];
-                            if (empty($halaman)) {
-                                $posisi  = 0;
-                                $halaman = 1;
-                            } else {
-                                $posisi  = ($halaman - 1) * $default_batas;
-                            }
-
-
-
-                            $query2 = mysqli_query($koneksi, "select * from mebers WHERE paket='BARU'");
-                            $jmldata = mysqli_num_rows($query2);
-                            $jmlhalaman = ceil($jmldata / $default_batas);
-                            $hal1 = $_GET['halaman'] - 1;
-                            $hal2 = $_GET['halaman'] + 1;
-                            if ($batas != '') {
-                                $batas2 = $_GET['batas'];
-                            } else {
-                                $batas2 = $default_batas;
-                            }
-                            echo " 
-<ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
-</ul>";
-
-                            for ($i = 1; $i <= $jmlhalaman; $i++)
-
-
-                                if ($i != $halaman) {
-
-                                    echo " 
-<ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li>
-</ul>";
+                                $halaman = @$_GET['halaman'];
+                                if (empty($halaman)) {
+                                    $posisi  = 0;
+                                    $halaman = 1;
                                 } else {
-                                    echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li></ul>";
+                                    $posisi  = ($halaman - 1) * $default_batas;
                                 }
-                            echo " 
+
+
+
+                                $query2 = mysqli_query($koneksi, "select * from mebers WHERE paket='BARU'");
+                                $jmldata = mysqli_num_rows($query2);
+                                $jmlhalaman = ceil($jmldata / $default_batas);
+                                $hal1 = $_GET['halaman'] - 1;
+                                $hal2 = $_GET['halaman'] + 1;
+                                if ($batas != '') {
+                                    $batas2 = $_GET['batas'];
+                                } else {
+                                    $batas2 = $default_batas;
+                                }
+                                echo " 
 <ul class=\"pagination\">
-<li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal2&batas=$batas2\">Next</a></li>
+<li class=\"page-item\"><a href=\"VPermintaanMitra.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
-                            echo "<p>Total Record : <b>$jmldata</b> Member</p>";
-                            ?>
-                            <!-- </div>-->
+                                for ($i = 1; $i <= $jmlhalaman; $i++)
+
+
+                                    if ($i != $halaman) {
+
+                                        echo " 
+<ul class=\"pagination\">
+<li class=\"page-item\"><a href=\"VPermintaanMitra.php?halaman=$i&batas=$batas2\">$i</a></li>
+</ul>";
+                                    } else {
+                                        echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"VPermintaanMitra.php?halaman=$i&batas=$batas2\">$i</a></li></ul>";
+                                    }
+                                echo " 
+<ul class=\"pagination\">
+<li class=\"page-item\"><a href=\"VPermintaanMitra.php?halaman=$hal2&batas=$batas2\">Next</a></li>
+</ul>";
+
+                                echo "<p>Total Record : <b>$jmldata</b> Member</p>";
+                                ?>
+                                <!-- </div>-->
                     </div>
                 </div>
             </div><!-- col-lg-12-->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#myModal').on('show.bs.modal', function(e) {
+                        var rowid = $(e.relatedTarget).data('id');
+                        $.ajax({
+                            type: 'post',
+                            url: 'detailPermintaanMitra.php',
+                            data: 'rowid=' + rowid,
+                            success: function(data) {
+                                $('.fetched-data').html(data); 
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#modalVerif').on('show.bs.modal', function(e) {
+                        var rowid = $(e.relatedTarget).data('id');
+                        $.ajax({
+                            type: 'post',
+                            url: 'verifikasiPermintaanMitra.php',
+                            data: 'rowid=' + rowid,
+                            success: function(data) {
+                                $('.fetched-data').html(data); 
+                            }
+                        });
+                    });
+                });
+            </script>
+           <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#modalVerif').on('show.bs.modal', function(e) {
+                        var rowid = $(e.relatedTarget).data('id');
+                        $.ajax({
+                            type: 'post',
+                            url: 'verifMitra.php',
+                            data: 'rowid=' + rowid,
+                            success: function(data) {
+                                $('.dataid').val(data);
+                            }
+                        });
+                    });
+                });
+            </script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
             <?php include 'footer.php'; ?>
