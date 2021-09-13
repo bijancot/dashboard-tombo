@@ -133,29 +133,50 @@ function registerMitra_post()
     if($username != '' &&  $name != '' && $nomorHP != '' && $bank != '' && $cabang != '' && $atasnama != '' && $rekening != '' && $email != '' && $kota != '' && $kecamatan != '' && $provinsi != '' && $kode_pos != '' && $address != '' && $country != ''){
         if ($get_rows == null) {
 
-            $get_data_email     = $connect->query("SELECT * FROM mebers WHERE email = '".$email."' "); 
-            $get_data_user_id   = $connect->query("SELECT * FROM mebers WHERE userid = '".$username."' "); 
-            $get_rows_email     = mysqli_num_rows($get_data_email); 
-            $get_rows_user_id   = mysqli_num_rows($get_data_user_id); 
+            $get_data_email                     = $connect->query("SELECT * FROM mebers WHERE email = '".$email."' "); 
+            $get_data_user_id                   = $connect->query("SELECT * FROM mebers WHERE userid = '".$username."' "); 
+            $get_referral_from_data_register    = $connect->query("SELECT * FROM mebers WHERE userid ='".$referral."'");    
+            
+            $get_rows_email                     = mysqli_num_rows($get_data_email); 
+            $get_rows_user_id                   = mysqli_num_rows($get_data_user_id); 
+            $get_rows_referral                  = mysqli_num_rows($get_referral_from_data_register);
             
             if($get_rows_email == null){
                 if($get_rows_user_id == null){
-                    //db dashboard tombo
-                    mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
-                        
-                    //db tomboati
-                    mysqli_query($connect2, "INSERT INTO USER_REGISTER(NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT, STATUS_USER) VALUES('$ktp', '$email', '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt', 'BARU')");
+                    
+                    //if referral tersedia
+                    if($get_rows_referral != null){
+                            //db dashboard tombo
+                            mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
+                            
+                            //get_data_after_insert_db_dashboard_tombo
+                            $get_data_after_insert_db_dashboard_tombo = $connect->query("SELECT * FROM mebers WHERE userid ='".$username."' "); 
+                            
+                            $get_id_from_data_after_insert = null;
+                            while($row = mysqli_fetch_array($get_data_after_insert_db_dashboard_tombo)){
+                                $get_id_from_data_after_insert = $row['id'];
+                            }
 
-                    $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
+                            //db tomboati
+                            mysqli_query($connect2, "INSERT INTO USER_REGISTER(IDUSERREGISTER, NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT, STATUS_USER) VALUES('$get_id_from_data_after_insert','$ktp', '$email', '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt', 'BARU')");
 
-                    $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
+                            $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
 
-                    mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
+                            $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
 
-                    $response = array(
-                        'error'     => false,
-                        'message'   => 'Sukses Register'
-                    );
+                            mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
+
+                            $response = array(
+                                'error'     => false,
+                                'message'   => 'Sukses Register'
+                            );
+
+                    }else{
+                        $response=array(
+                            'error'     => true,
+                            'message'   =>'Referral tidak tersedia'
+                        );
+                    }
                 }else{
                     $response = array(
                         'error'     => true,
