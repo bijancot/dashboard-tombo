@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <title>Tombo Ati | Pengguna Baru</title>
+    <link rel="stylesheet" href="modalstyle.css">
+</head>
 <?php
 session_start();
 include 'header.php';
@@ -76,6 +85,11 @@ include 'header.php';
                                         <th>
                                             <center>Register Date </center>
                                         </th>
+                                        <th>
+                                            <center>
+                                                Aksi
+                                            </center>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <!-- <?php
@@ -100,9 +114,14 @@ include 'header.php';
                                             <center>
                                                 <font color="blue"><b><?php echo $data['sponsor']; ?>
                                         <td>
-                                            <center><br>
+                                            <center>
                                                 <font color="blue"><b><?php echo $data['timer']; ?></b></font>
-                                                </center>
+                                            </center>
+                                        </td>
+                                        <td>
+                                            <center>
+                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                                            </center>
                                         </td>
                                     </tr>
                         </div>
@@ -114,7 +133,22 @@ include 'header.php';
                                 ?> -->
                         </tbody>
                         </table>
-
+                        <!-- modal detail -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Detail Pengguna Baru</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="fetched-data"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end modal -->
                         <form method="get">
                             <div class="form-group row">
                                 <div class="col-sm-3">
@@ -126,8 +160,6 @@ include 'header.php';
                             </div>
                         </form>
                         <center>
-
-
                             <?php
 
                             $halaman = @$_GET['halaman'];
@@ -178,4 +210,23 @@ include 'header.php';
                     </div>
                 </div>
             </div><!-- col-lg-12-->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#myModal').on('show.bs.modal', function(e) {
+                        var rowid = $(e.relatedTarget).data('id');
+                        //menggunakan fungsi ajax untuk pengambilan data
+                        $.ajax({
+                            type: 'post',
+                            url: 'detailPenggunaBaru.php',
+                            data: 'rowid=' + rowid,
+                            success: function(data) {
+                                $('.fetched-data').html(data); //menampilkan data ke dalam modal
+                            }
+                        });
+                    });
+                });
+            </script>
+             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+           
             <?php include 'footer.php'; ?>
