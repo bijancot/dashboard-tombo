@@ -292,7 +292,7 @@
                                     <p> Tidak Ada Pemberitahuan</p>
                                  </a>
                                  <?php }else{?>
-                                 <a class="dropdown-item notification-dropdown badge text-left" href="#!">
+                                 <a class="dropdown-item notification-dropdown badge text-left" href="https://localhost/dashboard-tombo/backoffice/register.php">
                                      <div class="dropdown-notifications-item-content">
                                          <p class="dropdown-item-content-text notification-dropdown lg">User Baru</h3>
                                          <div class="dropdown-item-content-details notification-dropdown">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>

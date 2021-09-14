@@ -12,6 +12,7 @@ $name = $_GET['name'];
 $hphone = $_GET['hphone'];
 $email = $_GET['email'];
 $ktp = $_GET['ktp'];
+$fotoktp = $_GET['fotoktp'];
 $address = $_GET['address'];
 $kecamatan = $_GET['kecamatan'];
 $kota = $_GET['kota'];
@@ -69,45 +70,40 @@ if (isset($_POST['button'])) {
     $g9 = $row['g8'];
     $g10 = $row['g9'];
 
-    // UPLOAD FOTO KTP
-    $ekstensi_diperbolehkan    = array('png', 'jpg', 'jpeg');
-    $nama = $_FILES['fotoktp']['name'];
-    $x = explode('.', $nama);
-    $ekstensi = strtolower(end($x));
-    $ukuran    = $_FILES['fotoktp']['size'];
-    $file_tmp = $_FILES['fotoktp']['tmp_name'];
-
-    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-        if ($ukuran < 1044070) {
-            move_uploaded_file($file_tmp, 'img/foto-ktp/' . $nama);
-            $fotoktp = 'img/foto-ktp/' . $nama;
-        } else {
-            echo 'UKURAN FILE TERLALU BESAR';
-        }
-    } else {
-        echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
-    }
-
+    // msg
+    $msg = "";
     $sql_upline = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$upline'");
     $total_upline = mysqli_num_rows($sql_upline);
     if ($total_upline == 0) {
-        echo "<script type='text/javascript'>document.location.href = 'register?error=Username Upile tidak Ditemukan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
+        echo '<script type="text/javascript">alert("Username Upline Tidak Ditemukan");</script>';
+        echo "<script type='text/javascript'>document.location.href = 'register?error=Username Upline tidak Ditemukan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
+        
     }
 
     $sql_username = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$userid'");
     $total_username = mysqli_num_rows($sql_username);
     if ($total_username !== 0) {
-        echo "<script type='text/javascript'>document.location.href = 'register?error=Username Sudah Digunakan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
+        echo '<script type="text/javascript">alert("Username Sudah Digunakan");</script>';
+        echo "<script type='text/javascript'>document.location.href = 'register?error=Username Sudah Digunakan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
     } else {
-        // CEK APAKAH UPLINE ADA DI DB
-        $upline = mysql_real_escape_string($upline); // escape string before passing it to query.
-        $cek_upline = mysql_query("SELECT userid FROM mebers WHERE userid='" . $upline . "'");
+        // UPLOAD FOTO KTP
+        $ekstensi_diperbolehkan    = array('PNG', 'JPG', 'JPEG','png', 'jpg', 'jpeg');
+        $nama = $_FILES['fotoktp']['name'];
+        $temp = explode('.', $nama);
+        $ekstensi = strtolower(end($temp));
+        $newfilename = round(microtime(true)) . '.' . end($temp);
+        $ukuran    = $_FILES['fotoktp']['size'];
+        $file_tmp = $_FILES['fotoktp']['tmp_name'];
 
-        // JIKA ADA 
-        if($cek_upline){
-            $teks_upline = "Terdapat USER ID nya";
-        }else{
-            $teks_upline = "Tidak ada USER ID nya";
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            if ($ukuran < 1044070) {
+                move_uploaded_file($file_tmp, 'img/foto-ktp/' . $newfilename);
+                $fotoktp = 'img/foto-ktp/' . $newfilename;
+            } else {
+                echo '<script type="text/javascript">alert("UKURAN FILE TERLALU BESAR");</script>';
+            }
+        } else {
+            echo '<script type="text/javascript>alert("EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN");</script>';
         }
 
         $insert = mysqli_query($koneksi, "INSERT INTO mebers 
@@ -175,13 +171,6 @@ if ($sum_register > 0) {
                         <i class="ik ik-file-text bg-blue"></i>
                         <div class="d-inline">
                             <h5>Register Mitra</h5>
-                            <b>
-                                <?php 
-                                if (isset($teks_upline)){ 
-                                echo $teks_upline;
-                                }
-                                ?>
-                            </b>
                         </div>
                     </div>
                 </div>
@@ -431,7 +420,7 @@ if ($sum_register > 0) {
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <form class="forms-sample" action="register" method="post" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Freelance</label>
@@ -442,79 +431,80 @@ if ($sum_register > 0) {
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID Link<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="upline" type="text" class="form-control" id="exampleInputUsername2" placeholder="ID Link" value="<?php echo $_GET['upline']; ?>"  required/>
+                                                    <input name="upline" type="text" class="form-control" id="exampleInputUsername2" placeholder="ID Link" value="<?php echo $_GET['upline']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="userid" type="text" class="form-control" id="exampleInputUsername2" placeholder="Username" value="<?php echo $_GET['userid']; ?>"  required/>
+                                                    <input name="userid" type="text" class="form-control" id="exampleInputUsername2" placeholder="Username" value="<?php echo $_GET['userid']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="name" type="text" class="form-control" id="exampleInputUsername2" placeholder="name" value="<?php echo $_GET['name']; ?>"  required/>
+                                                    <input name="name" type="text" class="form-control" id="exampleInputUsername2" placeholder="name" value="<?php echo $_GET['name']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">HP<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="hphone" type="text" class="form-control" id="exampleInputUsername2" placeholder="hphone" value="<?php echo $_GET['hphone']; ?>"  required/>
+                                                    <input name="hphone" type="text" class="form-control" id="exampleInputUsername2" placeholder="hphone" value="<?php echo $_GET['hphone']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="email" type="email" class="form-control" id="exampleInputUsername2" placeholder="email" value="<?php echo $_GET['email']; ?>"  required/>
+                                                    <input name="email" type="email" class="form-control" id="exampleInputUsername2" placeholder="email" value="<?php echo $_GET['email']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">KTP<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="ktp" type="number" class="form-control" id="exampleInputUsername2" placeholder="nik" value="<?php echo $_GET['ktp']; ?>" required/>
+                                                    <input name="ktp" type="number" class="form-control" id="exampleInputUsername2" placeholder="nik" value="<?php echo $_GET['ktp']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="foto-KTP" class="col-sm-3 col-form-label">Foto KTP<span class="text-danger">*</span></label>
+                                                <label for="foto-KTP" class="col-sm-3 col-form-label">Foto KTP<br><small>Maksimal 5 MB</small><span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="fotoktp" type="file" class="form-control-file" id="foto-KTP" required/>
+                                                    <input name="fotoktp" type="file" class="form-control-file" id="foto-KTP" value="<?php echo $_GET['fotoktp']; ?>" required />
+                                                    <small> Format : .jpg .jpeg .png </small>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Alamat<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="address" type="text" class="form-control" id="exampleInputUsername2" placeholder="Alamat" value="<?php echo $_GET['address']; ?>" required/>
+                                                    <input name="address" type="text" class="form-control" id="exampleInputUsername2" placeholder="Alamat" value="<?php echo $_GET['address']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kecamatan<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kecamatan" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kecamatan" value="<?php echo $_GET['kecamatan']; ?>" required/>
+                                                    <input name="kecamatan" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kecamatan" value="<?php echo $_GET['kecamatan']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kota<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kota" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kota" value="<?php echo $_GET['kota']; ?>" required/>
+                                                    <input name="kota" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kota" value="<?php echo $_GET['kota']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Propinsi<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="propinsi" type="text" class="form-control" id="exampleInputUsername2" placeholder="Propinsi" value="<?php echo $_GET['propinsi']; ?>" required/>
+                                                    <input name="propinsi" type="text" class="form-control" id="exampleInputUsername2" placeholder="Propinsi" value="<?php echo $_GET['propinsi']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kodepos<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kode_pos" type="number" class="form-control" id="exampleInputUsername2" placeholder="Kodepos" value="<?php echo $_GET['kode_pos']; ?>" required/>
+                                                    <input name="kode_pos" type="number" class="form-control" id="exampleInputUsername2" placeholder="Kodepos" value="<?php echo $_GET['kode_pos']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Negara<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="country" type="text" class="form-control" id="exampleInputUsername2" placeholder="Negara" value="<?php echo $_GET['country']; ?>" required/>
+                                                    <input name="country" type="text" class="form-control" id="exampleInputUsername2" placeholder="Negara" value="<?php echo $_GET['country']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
