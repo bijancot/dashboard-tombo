@@ -19,7 +19,7 @@ if ($_POST['rowid']) {
     $result = $koneksi->query($sql);
     foreach ($result as $baris) { ?>
         <table class="table">
-        <tr>
+            <tr>
                 <td>Nomor HP</td>
                 <td>:</td>
                 <td><?php echo $baris['hphone']; ?></td>
@@ -102,12 +102,12 @@ if ($_POST['rowid']) {
             <tr>
                 <td>Foto Profil</td>
                 <td>:</td>
-                <td><?="<img src='upload/users/".$baris['photo']."'style='width:200px; height:100px;'>"?></td>
+                <td><?= "<img src='upload/users/" . $baris['photo'] . "'style='width:200px; height:100px;'>" ?></td>
             </tr>
             <tr>
                 <td>Foto KTP</td>
                 <td>:</td>
-                <td><?="<img src='upload/users/".$baris['fotoktp']."'style='width:200px; height:100px;'>"?></td>            
+                <td><?= "<img src='upload/users/" . $baris['fotoktp'] . "'style='width:200px; height:100px;'>" ?></td>
             </tr>
         </table>
 <?php
