@@ -440,81 +440,81 @@ if ($sum_register > 0) {
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID Link</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID Link<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="upline" type="text" class="form-control" id="exampleInputUsername2" placeholder="ID Link" value="<?php echo $_GET['upline']; ?>" />
+                                                    <input name="upline" type="text" class="form-control" id="exampleInputUsername2" placeholder="ID Link" value="<?php echo $_GET['upline']; ?>"  required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="userid" type="text" class="form-control" id="exampleInputUsername2" placeholder="Username" value="<?php echo $_GET['userid']; ?>" />
+                                                    <input name="userid" type="text" class="form-control" id="exampleInputUsername2" placeholder="Username" value="<?php echo $_GET['userid']; ?>"  required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Nama<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="name" type="text" class="form-control" id="exampleInputUsername2" placeholder="name" value="<?php echo $_GET['name']; ?>" />
+                                                    <input name="name" type="text" class="form-control" id="exampleInputUsername2" placeholder="name" value="<?php echo $_GET['name']; ?>"  required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">HP</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">HP<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="hphone" type="text" class="form-control" id="exampleInputUsername2" placeholder="hphone" value="<?php echo $_GET['hphone']; ?>" />
+                                                    <input name="hphone" type="text" class="form-control" id="exampleInputUsername2" placeholder="hphone" value="<?php echo $_GET['hphone']; ?>"  required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Email<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="email" type="email" class="form-control" id="exampleInputUsername2" placeholder="email" value="<?php echo $_GET['email']; ?>" />
+                                                    <input name="email" type="email" class="form-control" id="exampleInputUsername2" placeholder="email" value="<?php echo $_GET['email']; ?>"  required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">KTP</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">KTP<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="ktp" type="number" class="form-control" id="exampleInputUsername2" placeholder="nik" value="<?php echo $_GET['ktp']; ?>" />
+                                                    <input name="ktp" type="number" class="form-control" id="exampleInputUsername2" placeholder="nik" value="<?php echo $_GET['ktp']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="foto-KTP" class="col-sm-3 col-form-label">Foto KTP</label>
+                                                <label for="foto-KTP" class="col-sm-3 col-form-label">Foto KTP<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="fotoktp" type="file" class="form-control-file" id="foto-KTP" />
+                                                    <input name="fotoktp" type="file" class="form-control-file" id="foto-KTP" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Alamat</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Alamat<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="address" type="text" class="form-control" id="exampleInputUsername2" placeholder="Alamat" value="<?php echo $_GET['address']; ?>" />
+                                                    <input name="address" type="text" class="form-control" id="exampleInputUsername2" placeholder="Alamat" value="<?php echo $_GET['address']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kecamatan</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kecamatan<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kecamatan" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kecamatan" value="<?php echo $_GET['kecamatan']; ?>" />
+                                                    <input name="kecamatan" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kecamatan" value="<?php echo $_GET['kecamatan']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kota</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kota<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kota" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kota" value="<?php echo $_GET['kota']; ?>" />
+                                                    <input name="kota" type="text" class="form-control" id="exampleInputUsername2" placeholder="Kota" value="<?php echo $_GET['kota']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Propinsi</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Propinsi<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="propinsi" type="text" class="form-control" id="exampleInputUsername2" placeholder="Propinsi" value="<?php echo $_GET['propinsi']; ?>" />
+                                                    <input name="propinsi" type="text" class="form-control" id="exampleInputUsername2" placeholder="Propinsi" value="<?php echo $_GET['propinsi']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kodepos</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Kodepos<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="kode_pos" type="number" class="form-control" id="exampleInputUsername2" placeholder="Kodepos" value="<?php echo $_GET['kode_pos']; ?>" />
+                                                    <input name="kode_pos" type="number" class="form-control" id="exampleInputUsername2" placeholder="Kodepos" value="<?php echo $_GET['kode_pos']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Negara</label>
+                                                <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Negara<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="country" type="text" class="form-control" id="exampleInputUsername2" placeholder="Negara" value="<?php echo $_GET['country']; ?>" />
+                                                    <input name="country" type="text" class="form-control" id="exampleInputUsername2" placeholder="Negara" value="<?php echo $_GET['country']; ?>" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
