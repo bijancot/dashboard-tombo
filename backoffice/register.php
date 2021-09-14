@@ -69,6 +69,25 @@ if (isset($_POST['button'])) {
     $g9 = $row['g8'];
     $g10 = $row['g9'];
 
+    // UPLOAD FOTO KTP
+    $ekstensi_diperbolehkan    = array('png', 'jpg', 'jpeg');
+    $nama = $_FILES['fotoktp']['name'];
+    $x = explode('.', $nama);
+    $ekstensi = strtolower(end($x));
+    $ukuran    = $_FILES['fotoktp']['size'];
+    $file_tmp = $_FILES['fotoktp']['tmp_name'];
+
+    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+        if ($ukuran < 1044070) {
+            move_uploaded_file($file_tmp, 'img/foto-ktp/' . $nama);
+            $fotoktp = 'img/foto-ktp/' . $nama;
+        } else {
+            echo 'UKURAN FILE TERLALU BESAR';
+        }
+    } else {
+        echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN';
+    }
+
     $sql_upline = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$upline'");
     $total_upline = mysqli_num_rows($sql_upline);
     if ($total_upline == 0) {
@@ -80,10 +99,21 @@ if (isset($_POST['button'])) {
     if ($total_username !== 0) {
         echo "<script type='text/javascript'>document.location.href = 'register?error=Username Sudah Digunakan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
     } else {
+        // CEK APAKAH UPLINE ADA DI DB
+        $upline = mysql_real_escape_string($upline); // escape string before passing it to query.
+        $cek_upline = mysql_query("SELECT userid FROM mebers WHERE userid='" . $upline . "'");
+
+        // JIKA ADA 
+        if($cek_upline){
+            $teks_upline = "Terdapat USER ID nya";
+        }else{
+            $teks_upline = "Tidak ada USER ID nya";
+        }
+
         $insert = mysqli_query($koneksi, "INSERT INTO mebers 
-(sponsor, upline, g2, g3, g4, g5, g6, g7, g8, g9, g10, userid, name, hphone, email, ktp, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, passw, timer)
+(sponsor, upline, g2, g3, g4, g5, g6, g7, g8, g9, g10, userid, name, hphone, email, fotoktp, ktp, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, passw, timer)
 VALUES
-('$username', '$upline', '$g2', '$g3', '$g4', '$g5', '$g6', '$g7', '$g8', '$g9', '$g10', '$userid', '$name', '$hphone', '$email', '$ktp', '$address', '$kecamatan', '$kota', '$propinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$unik_password', now())") or die(mysqli_error());
+('$username', '$upline', '$g2', '$g3', '$g4', '$g5', '$g6', '$g7', '$g8', '$g9', '$g10', '$userid', '$name', '$hphone', '$email', '$fotoktp', '$ktp', '$address', '$kecamatan', '$kota', '$propinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$unik_password', now())") or die(mysqli_error());
 
         //Kirim Email
 
@@ -145,6 +175,13 @@ if ($sum_register > 0) {
                         <i class="ik ik-file-text bg-blue"></i>
                         <div class="d-inline">
                             <h5>Register Mitra</h5>
+                            <b>
+                                <?php 
+                                if (isset($teks_upline)){ 
+                                echo $teks_upline;
+                                }
+                                ?>
+                            </b>
                         </div>
                     </div>
                 </div>
@@ -216,7 +253,8 @@ if ($sum_register > 0) {
                                         <?php
                                         $no = 0;
                                         while ($data = mysqli_fetch_array($tampil)) {
-                                            $no++; ?>
+                                            $no++;
+                                        ?>
 
                                             <tbody>
                                                 <tr>
@@ -248,10 +286,134 @@ if ($sum_register > 0) {
                                                     </td>
                                                     <td>
                                                         <center>
-                                                        <button class="btn btn-info" name="button" type="button">Detail</button>    
-                                                        <button class="btn btn-warning" name="button" type="button">Edit</button></center>
+                                                            <button class="btn btn-info" name="register-detail" type="button" data-toggle="modal" data-target="#detail-registerModal">Detail</button>
+                                                            <button class="btn btn-warning" name="register-edit" type="button" data-toggle="modal" data-target="#edit-registerModal<?php echo $data['id']; ?>">Edit</a>
+                                                        </center>
                                                     </td>
                                                 </tr>
+
+                                                <!-- Modal Detail -->
+                                                <div class="modal fade" id="detail-registerModal" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Detail Data</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-4">Username</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['userid']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Nama</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['name']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Nomor HP</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['hphone']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Email</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['email']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">KTP</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['ktp']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Alamat</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['address']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Kecamatan</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kecamatan']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Kota / Kabupaten</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kota']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Provinsi</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['propinsi']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Kode Pos</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kode_pos']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Negara</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['country']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Bank</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['bank']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Rekening</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['rekening']; ?></div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-4">Account Name</div>
+                                                                    <div class="col-6 text-left text-bold"><?php echo $data['atasnama']; ?></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <!-- Modal Detail -->
+                                                <div class="modal fade" id="edit-registerModal<?php echo $data['id']; ?>" role="dialog">
+                                                    <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Edit Data</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <form method="post" action="register-edit.php">
+                                                                <div class="modal-body">
+                                                                    Memberikan ID Link untuk :
+                                                                    <div class="row">
+                                                                        <div class="col-4">Nama</div>
+                                                                        <div class="col-6 text-left text-bold"><?php echo $data['name']; ?></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-4">Nomor HP</div>
+                                                                        <div class="col-6 text-left text-bold"><?php echo $data['hphone']; ?></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-4">KTP</div>
+                                                                        <div class="col-6 text-left text-bold"><?php echo $data['ktp']; ?></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-4">Email</div>
+                                                                        <div class="col-6 text-left text-bold"><?php echo $data['email']; ?></div>
+                                                                    </div>
+                                                                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                                                    <div class="row">
+                                                                        <div class="col-4">ID Link</div>
+                                                                        <div class="col-6 text-left text-bold"><input name="upline" type="text" class="form-control" placeholder="ID Link" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-warning" name="btn-register-edit" type="submit">Edit</a>
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                             <?php
                                         }
                                             ?>
@@ -270,7 +432,7 @@ if ($sum_register > 0) {
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <form class="forms-sample" action="register" method="post">
+                                        <form class="forms-sample" action="register" method="post" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Freelance</label>
                                                 <div class="col-sm-9">
@@ -311,6 +473,12 @@ if ($sum_register > 0) {
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">KTP</label>
                                                 <div class="col-sm-9">
                                                     <input name="ktp" type="number" class="form-control" id="exampleInputUsername2" placeholder="nik" value="<?php echo $_GET['ktp']; ?>" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="foto-KTP" class="col-sm-3 col-form-label">Foto KTP</label>
+                                                <div class="col-sm-9">
+                                                    <input name="fotoktp" type="file" class="form-control-file" id="foto-KTP" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -407,7 +575,6 @@ if ($sum_register > 0) {
 
 </div>
 </div>
-
 <?php
 include 'footer.php';
 ?>
