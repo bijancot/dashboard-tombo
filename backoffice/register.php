@@ -421,7 +421,7 @@ if ($sum_register > 0) {
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="forms-sample" action="register" method="post" enctype="multipart/form-data">
+                                        <form class="forms-sample" action="register.php" method="post" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Freelance</label>
                                                 <div class="col-sm-9">
