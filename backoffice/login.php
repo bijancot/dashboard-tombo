@@ -4,133 +4,148 @@ include('fungsi.php');
 
 session_start(); // Menciptakan session
 
-if(cek_login($mysqli) == true){
-	header('location: dashboard');
-	exit();	
+if (cek_login($mysqli) == true) {
+    header('location: dashboard');
+    exit();
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-	if(isset($_POST['username']) and isset($_POST['password'])){
-		$username = $_POST['username'];
-		$password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['username']) and isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
 
- $secret = '6LekPFYUAAAAANn9cgc_t4JbULtGV_E_rkyi_zIn';
- $user_ip = $_SERVER['REMOTE_ADDR'];
+        $secret = '6LekPFYUAAAAANn9cgc_t4JbULtGV_E_rkyi_zIn';
+        $user_ip = $_SERVER['REMOTE_ADDR'];
 
-		if(login($username, $password, $mysqli) == true){
+        if (login($username, $password, $mysqli) == true) {
 
-        $lastlogin = gmdate("Y-m-d H:i:s", gmmktime(gmdate("H")+7));
-        $dbq1 = "INSERT INTO login_session SET
+            $lastlogin = gmdate("Y-m-d H:i:s", gmmktime(gmdate("H") + 7));
+            $dbq1 = "INSERT INTO login_session SET
             username = '$username',
             string = '$secret',
             lastlogin = '$lastlogin'";
-        $res = mysqli_query($koneksi,$dbq1);
+            $res = mysqli_query($koneksi, $dbq1);
 
-			// Berhasil login
-			header('location: dashboard.php');
-			exit();
-		}else{
-			// Gagal login
-			header('location: login.php');
-			exit();	
-		}
-	}
+            // Berhasil login
+            header('location: dashboard.php');
+            exit();
+        } else {
+
+            $_SESSION["error"] = "Username atau Password Salah";
+
+            // Gagal login
+            header('location: login.php');
+            exit();
+        }
+    }
 }
 
 
 ?>
-<!doctype html>
-<html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Login | TomboatiTour.com</title>
-        <meta name="description" content="">
-        <meta name="keywords" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+<!DOCTYPE html>
+<html lang="en">
 
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-        
-        <link rel="stylesheet" href="plugins/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="plugins/ionicons/dist/css/ionicons.min.css">
-        <link rel="stylesheet" href="plugins/icon-kit/dist/css/iconkit.min.css">
-        <link rel="stylesheet" href="plugins/perfect-scrollbar/css/perfect-scrollbar.css">
-        <link rel="stylesheet" href="dist/css/theme.min.css">
-        <script src="src/js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content />
+    <meta name="author" content />
+    <title>Login | Tombo Ati</title>
+    <link href="https://tomboati.bgskr-project.my.id/assets/css/styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png" />
+    <style>
+        .bg-login {
+            background-color: transparent;
+            background: url('https://tomboati.bgskr-project.my.id/assets/img/bg-green-idfitri.svg') no-repeat center center fixed;
+            height: 100%;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+        }
 
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        .center {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
 
-        <div class="auth-wrapper">
-            <div class="container-fluid h-100">
-                <div class="row flex-row h-100 bg-white">
-                    <div class="col-xl-8 col-lg-6 col-md-5 p-0 d-md-block d-lg-block d-sm-none d-none">
-                        <div class="lavalite-bg" style="background-image: url('img/auth/login-bg.jpg')">
-                            <div class="lavalite-overlay"></div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
-                        <div class="authentication-form mx-auto">
-                            <div class="logo-centered">
-                                <a href="dashboard.php"><img src="logo.png" alt="" width="50%"></a>
-                            </div>
-                            <h3>Selamat Datang di Backoffice</h3>
-                            <p><b>TomboatiTour.com</b></p>
-                            <form  action="" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Username" name="username" required="" value="">
-                                    <i class="ik ik-user"></i>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" value="">
-                                    <i class="ik ik-lock"></i>
-                                </div>
-                                <div class="row">
-                                    <div class="col text-left">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
-                                            <span class="custom-control-label">&nbsp;Remember Me</span>
-                                        </label>
+        .col-lg-13 {
+            flex: 0 0 400px;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-login">
+    <div id="layoutAuthentication">
+        <div id="layoutAuthentication_content">
+            <main>
+                <div class="container">
+                    <div class="center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-13">
+                                <!-- Basic login form-->
+                                <div class="card shadow-lg border-0 rounded-lg ">
+                                    <div class="card-header justify-content-center">
+                                        <div class="strong form-group d-flex align-items-center justify-content-center mt-4 mb-0">
+                                            <img style="width:12%" src="https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png">
+                                            TomboAti
+                                        </div>
+                                        <h3 class="font-weight-light my-4 text-md-center">Login</h3>
+                                        <?php
+                                        if (isset($_SESSION["error"])) {
+                                            $error = $_SESSION["error"];
+                                            echo "<center><span>$error</span></center>";
+                                        }
+                                        ?>
                                     </div>
-                                    <div class="col text-right">
-                                        <a href="forgot-password.html">Forgot Password ?</a>
+                                    <div class="card-body">
+                                        <!-- Login form-->
+                                        <form action="" method="POST">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="email">Email</label>
+                                                <input type="text" class="form-control py-4" name="username" placeholder="Masukkan Username" required />
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="password">Password</label>
+                                                <input type="password" class="form-control py-4" name="password" placeholder="Masukan Password" required />
+                                            </div>
+                                            <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
+                                                <a class="small"></a>
+                                                <input type="submit" class="btn btn-primary " value="Login" />
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                <div class="sign-btn text-center">
-                                    <button class="btn btn-theme">LOGIN</button>
-                                </div>
-                            </form>
-                            <div class="register">
-                                <p>Belum menjadi Member? <a href="register.html"><b>SILAHKAN REGISTRASI DISINI</b></a></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
-        
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script>window.jQuery || document.write('<script src="src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-        <script src="plugins/popper.js/dist/umd/popper.min.js"></script>
-        <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js"></script>
-        <script src="plugins/screenfull/dist/screenfull.js"></script>
-        <script src="dist/js/theme.js"></script>
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
-    </body>
+        <div id="layoutAuthentication_footer">
+            <footer class="footer mt-auto footer-dark ">
+                <div class="container-fluid">
+                    <div class="form-group d-flex align-items-center justify-content-center mt-5 mb-0">
+                        <div class="row ">
+                            <div class="col-md-50 small">Copyright &#xA9; Tombo Ati</div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+</body>
+
 </html>
+
+<?php
+unset($_SESSION["error"]);
+?>
