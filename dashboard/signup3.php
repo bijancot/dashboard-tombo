@@ -18,7 +18,7 @@ VALUES
 $userkey='kr14vq';
 $passkey='kr14vq';
 $message='
-lifeforwin.co.id 
+Tombo Ati 
 Sdr ' . $nama . ' terimakasih Anda telah registrasi. Silahkan akses halaman https://lifeforwin.co.id/backoffice/info.php?username= ' . $email . ' untuk memengetahui cara upgrade membership.
 ';
 // $url = 'https://reguler.zenziva.net/apps/smsapi.php';

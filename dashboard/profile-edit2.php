@@ -21,7 +21,9 @@ $row = mysqli_fetch_assoc($sql);
 
 include 'header.php';
 ?>
-
+<head>
+  <title>Tombo Ati | Edit Profile  </title>
+</head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
                 <!-- Content Header (Page header) -->

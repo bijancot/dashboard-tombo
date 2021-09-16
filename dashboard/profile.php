@@ -3,7 +3,9 @@ session_start();
 include 'header.php';
 ?>
 
-
+<head>
+  <title>Tombo Ati | Profile  </title>
+</head>
 
 
 

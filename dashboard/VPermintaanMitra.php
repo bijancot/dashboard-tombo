@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <title>Tombo Ati | Permintaan Mitra</title>
-    <link rel="stylesheet" href="modalstyle.css">
-</head>
 <?php
 session_start();
 include 'header.php';
 include 'config2.php';
 ?>
+
+<head>
+    <title>Tombo Ati | Permintaan Mitra</title>
+    <link rel="stylesheet" href="modalstyle.css">
+</head>
+
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -33,7 +30,7 @@ include 'config2.php';
             <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> Permintaan Mitra[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i> Permintaan Mitra[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -65,7 +62,7 @@ include 'config2.php';
 
 
                             ?>
-                            <form action="VSearchPenggunaBaru.php" method="get">
+                            <form action="VSearchPermintaanMitra.php" method="get">
                                 <label></label>
                                 <input type="text" name="cari">
                                 <input type="submit" value="Search">
@@ -150,7 +147,7 @@ include 'config2.php';
                                         </td>
                                         <td>
                                             <left>
-                                                <font color="blue"><b><?php echo $data['sponsor']; ?>
+                                                <font color="blue"><b><?php echo $data['sponsor']; ?></font><br><?php echo $rowsponsor['name']; ?></center>
                                         </td>
                                         <td>
                                             <center>
@@ -169,41 +166,49 @@ include 'config2.php';
                         </div>
 
                         <!-- modal verifikasi -->
-                        <div id="modalVerif<?= $data['id'] ?>" class="modal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Verifikasi Permintaan Mitra </h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="">Apakah anda yakin ingin memverifikasi permintaan mitra dengan username <b> <?php echo $data['userid']; ?></b> ?</div>
-                                </div>
-                                <div class="modal-footer">
-                                    <form action="verifMitra.php" method="post">
-                                        <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                        <input type="hidden" name="email" value="<?php echo $data['email']; ?>">
-                                        <input type="hidden" name="name" value="<?php echo $data['name']; ?>">
-                                        <input type="hidden" name="userid" value="<?php echo $data['userid']; ?>">
-                                        <input type="hidden" name="passw" value="<?php echo $data['passw']; ?>">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</button>
-                                    </form>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                        <div class="modal fade" id="modalVerif<?= $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="exampleModalLabel">Verifikasi Permintaan Mitra</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p> Apakah anda yakin ingin memverifikasi permintaan mitra dengan username <b> <?php echo $data['userid']; ?></b> ?</p>
+                                    </div>
+                                    <div class="modal-footer m-b-10">
+                                        <form action="verifMitra.php" method="post">
+                                            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                            <input type="hidden" name="email" value="<?php echo $data['email']; ?>">
+                                            <input type="hidden" name="name" value="<?php echo $data['name']; ?>">
+                                            <input type="hidden" name="userid" value="<?php echo $data['userid']; ?>">
+                                            <input type="hidden" name="passw" value="<?php echo $data['passw']; ?>">
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</button>
+                                        </form>
+                                        <button type="button" class="btn btn-danger m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end modal  -->
-                        <!-- modal detail -->
-                        <div id="myModal" class="modal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Detail Permintaan Mitra</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="fetched-data"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                        <!-- modal detail  -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModal">Detail Permintaan Mitra</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="fetched-data"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

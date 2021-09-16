@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!DOCTYPE html>
 <html lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>LifeForWin.co.id - Login</title>
+	<title>Tombo Ati | Login</title>
 	<meta name="robots" content="noindex" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -98,7 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" action="" method="post">
 					<span class="login100-form-logo">
-						<img src="images/logosvarga.pngxx" width="70">
+						<img src="images/logosvarga.png" width="70">
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">

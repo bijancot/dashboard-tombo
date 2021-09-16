@@ -36,6 +36,9 @@ $error = $_GET['error'];
 
 
 ?>
+<head>
+  <title>Tombo Ati | Edit Profile</title>
+</head>
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

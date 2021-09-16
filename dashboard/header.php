@@ -96,9 +96,9 @@
 
     $query_set = mysqli_query($koneksi, "SELECT * FROM set_bonus");
     $data_set  = mysqli_fetch_assoc($query_set);
-    
+
     //notifikasi
-    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='USER' AND is_seen_notifikasi = 0");    
+    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='USER' AND is_seen_notifikasi = 0");
     $get_rows_paket_user = mysqli_num_rows($get_all_data_register_paket_user);
 
     date_default_timezone_set('Asia/Jakarta')
@@ -147,8 +147,10 @@
      </style>
      <meta charset="UTF-8">
      <meta name="robots" content="noindex" />
-     <title>Tombo Ati</title>
+     <!-- <title>Tombo Ati</title> -->
+     <link rel="icon" href="https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png" type="image/x-icon" />
      <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
      <link href="dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
      <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
      <link href="//code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -242,32 +244,32 @@
              </a>
              <div class="navbar-right">
                  <ul class="nav navbar-nav">
-                     
+
                      <li class="dropdown user user-menu">
                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                              <i class="glyphicon glyphicon-bell"></i>
-                             <span class="badge badge-danger bg-danger "><?php echo $get_rows_paket_user?></span>
+                             <span class="badge badge-danger bg-danger "><?php echo $get_rows_paket_user ?></span>
                              <span> <i class="caret"></i></span>
                          </a>
                          <ul class="dropdown-menu text-white notif myDropDown">
                              <!-- User image -->
                              <li class="user-header bg-light-blue">
-                                 <?php 
-                                    if($get_rows_paket_user == 0){
-                                 ?>
-                                 <a class="badge badge-white bg-white">
-                                     <div class="text-bold fs-14">
-                                         Tidak Ada Pemberitahuan
-                                     </div>
-                                 </a>
-                                 <?php }else{?>
-                                 <a class="badge badge-white bg-white" href="">
-                                     <div class="dropdown-notifications-item-content">
-                                         <div class="text-left text-bold fs-14">User Baru</div>
-                                         <div class="text-left fs-12">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>
-                                     </div>
-                                 </a>
-                                 <?php }?>
+                                 <?php
+                                    if ($get_rows_paket_user == 0) {
+                                    ?>
+                                     <a class="badge badge-white bg-white">
+                                         <div class="text-bold fs-14">
+                                             Tidak Ada Pemberitahuan
+                                         </div>
+                                     </a>
+                                 <?php } else { ?>
+                                     <a class="badge badge-white bg-white" href="">
+                                         <div class="dropdown-notifications-item-content">
+                                             <div class="text-left text-bold fs-14">User Baru</div>
+                                             <div class="text-left fs-12">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>
+                                         </div>
+                                     </a>
+                                 <?php } ?>
                              </li>
                          </ul>
                      </li>
