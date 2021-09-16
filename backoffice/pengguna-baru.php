@@ -19,7 +19,7 @@ include 'header.php';
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <nav class="breadcrumb-container" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -27,7 +27,7 @@ include 'header.php';
                             </li>
                         </ol>
                     </nav>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -51,7 +51,7 @@ include 'header.php';
                                 $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
                                 ?>
 
-                                <table class="table" border="0">
+                                <table class="table table-hover " border="0">
                                     <thead>
                                         <tr>
                                             <th>
@@ -108,7 +108,7 @@ include 'header.php';
                                                     <center><?php echo $data['address']; ?></center>
                                                 </td>
                                                 <td>
-                                                    <center><?php echo $username; ?></center>
+                                                    <center><?php echo $data['sponsor']; ?></center>
                                                 </td>
                                                 <td>
                                                     <right><?php echo $data['hphone']; ?><br><?php echo $data['right']; ?></right>

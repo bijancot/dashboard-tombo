@@ -70,24 +70,23 @@ if (isset($_POST['button'])) {
     $g9 = $row['g8'];
     $g10 = $row['g9'];
 
-    // msg
-    $msg = "";
+    // Pengecekan Upline
     $sql_upline = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$upline'");
     $total_upline = mysqli_num_rows($sql_upline);
+
+    // Pengecekan Username
+    $sql_username = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$userid'");
+    $total_username = mysqli_num_rows($sql_username);
+
     if ($total_upline == 0) {
         echo '<script type="text/javascript">alert("Username Upline Tidak Ditemukan");</script>';
         echo "<script type='text/javascript'>document.location.href = 'register?error=Username Upline tidak Ditemukan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
-        
-    }
-
-    $sql_username = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid='$userid'");
-    $total_username = mysqli_num_rows($sql_username);
-    if ($total_username !== 0) {
+    }else if($total_username !== 0){
         echo '<script type="text/javascript">alert("Username Sudah Digunakan");</script>';
         echo "<script type='text/javascript'>document.location.href = 'register?error=Username Sudah Digunakan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
     } else {
         // UPLOAD FOTO KTP
-        $ekstensi_diperbolehkan    = array('PNG', 'JPG', 'JPEG','png', 'jpg', 'jpeg');
+        $ekstensi_diperbolehkan    = array('PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg');
         $nama = $_FILES['fotoktp']['name'];
         $temp = explode('.', $nama);
         $ekstensi = strtolower(end($temp));
@@ -174,7 +173,7 @@ if ($sum_register > 0) {
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <!-- <div class="col-lg-4">
                     <nav class="breadcrumb-container" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -182,7 +181,7 @@ if ($sum_register > 0) {
                             </li>
                         </ol>
                     </nav>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -203,11 +202,11 @@ if ($sum_register > 0) {
                             <div class="card-body p-0 table-border-style">
                                 <div class="card-body ">
                                     <?php
-                                    $query1 = "select * from mebers where sponsor ='$username' AND paket = 'MITRA' AND upline=''";
+                                    $query1 = "select * from mebers where sponsor ='$username' AND paket = 'MITRA' AND upline IS NULL";
                                     $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
                                     ?>
 
-                                    <table class="table" border="0">
+                                    <table class="table table-hover" border="0">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -275,14 +274,14 @@ if ($sum_register > 0) {
                                                     </td>
                                                     <td>
                                                         <center>
-                                                            <button class="btn btn-info" name="register-detail" type="button" data-toggle="modal" data-target="#detail-registerModal">Detail</button>
+                                                            <button class="btn btn-info" name="register-detail" type="button" data-toggle="modal" data-target="#detail-registerModal<?php echo $data['id']; ?>">Detail</button>
                                                             <button class="btn btn-warning" name="register-edit" type="button" data-toggle="modal" data-target="#edit-registerModal<?php echo $data['id']; ?>">Edit</a>
                                                         </center>
                                                     </td>
                                                 </tr>
 
                                                 <!-- Modal Detail -->
-                                                <div class="modal fade" id="detail-registerModal" role="dialog">
+                                                <div class="modal fade" id="detail-registerModal<?php echo $data['id']; ?>" role="dialog">
                                                     <div class="modal-dialog">
 
                                                         <!-- Modal content-->
@@ -292,61 +291,81 @@ if ($sum_register > 0) {
                                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Username</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['userid']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['userid']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Nama</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['name']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['name']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Nomor HP</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['hphone']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['hphone']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Email</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['email']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['email']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">KTP</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['ktp']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['ktp']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Alamat</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['address']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['address']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Kecamatan</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kecamatan']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['kecamatan']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Kota / Kabupaten</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kota']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['kota']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Provinsi</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['propinsi']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['propinsi']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Kode Pos</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['kode_pos']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['kode_pos']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Negara</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['country']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['country']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Bank</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['bank']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['bank']; ?></div>
                                                                 </div>
-                                                                <div class="row">
+                                                                <div class="row mb-2">
                                                                     <div class="col-4">Rekening</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['rekening']; ?></div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['rekening']; ?></div>
+                                                                </div>
+                                                                <div class="row mb-2">
+                                                                    <div class="col-4">Account Name</div>
+                                                                    <div class="col-1 text-left">:</div>
+                                                                    <div class="col-7 text-left text-bold"><?php echo $data['atasnama']; ?></div>
+                                                                </div>
+                                                                <div class="row mb-2">
+                                                                    <div class="col">Foto KTP</div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col-4">Account Name</div>
-                                                                    <div class="col-6 text-left text-bold"><?php echo $data['atasnama']; ?></div>
+                                                                    <div class="col"><img src="https://dash-tombo.bgskr-project.my.id/backoffice/<?php echo $data['fotoktp']; ?>" style="width: 100px; height: 100px;"></div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -358,7 +377,7 @@ if ($sum_register > 0) {
                                                 </div>
 
 
-                                                <!-- Modal Detail -->
+                                                <!-- Modal Edit -->
                                                 <div class="modal fade" id="edit-registerModal<?php echo $data['id']; ?>" role="dialog">
                                                     <div class="modal-dialog">
 
@@ -370,27 +389,32 @@ if ($sum_register > 0) {
                                                             </div>
                                                             <form method="post" action="register-edit.php">
                                                                 <div class="modal-body">
-                                                                    Memberikan ID Link untuk :
-                                                                    <div class="row">
+                                                                    <p>Memberikan ID Link untuk :</p>
+                                                                    <div class="row mb-2">
                                                                         <div class="col-4">Nama</div>
-                                                                        <div class="col-6 text-left text-bold"><?php echo $data['name']; ?></div>
+                                                                        <div class="col-1 text-left">:</div>
+                                                                        <div class="col-7 text-left text-bold"><?php echo $data['name']; ?></div>
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="row mb-2">
                                                                         <div class="col-4">Nomor HP</div>
-                                                                        <div class="col-6 text-left text-bold"><?php echo $data['hphone']; ?></div>
+                                                                        <div class="col-1 text-left">:</div>
+                                                                        <div class="col-7 text-left text-bold"><?php echo $data['hphone']; ?></div>
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="row mb-2">
                                                                         <div class="col-4">KTP</div>
-                                                                        <div class="col-6 text-left text-bold"><?php echo $data['ktp']; ?></div>
+                                                                        <div class="col-1 text-left">:</div>
+                                                                        <div class="col-7 text-left text-bold"><?php echo $data['ktp']; ?></div>
                                                                     </div>
-                                                                    <div class="row">
+                                                                    <div class="row mb-2">
                                                                         <div class="col-4">Email</div>
-                                                                        <div class="col-6 text-left text-bold"><?php echo $data['email']; ?></div>
+                                                                        <div class="col-1 text-left">:</div>
+                                                                        <div class="col-7 text-left text-bold"><?php echo $data['email']; ?></div>
                                                                     </div>
                                                                     <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                                                    <div class="row">
+                                                                    <div class="row mb-2">
                                                                         <div class="col-4">ID Link</div>
-                                                                        <div class="col-6 text-left text-bold"><input name="upline" type="text" class="form-control" placeholder="ID Link" />
+                                                                        <div class="col-1 text-left">:</div>
+                                                                        <div class="col-7 text-left text-bold"><input name="upline" type="text" class="form-control" placeholder="ID Link" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
