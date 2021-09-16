@@ -6,6 +6,9 @@ include 'header.php';
                     $query1="select * from products ORDER BY id DESC";
                     $hasil=mysqli_query($koneksi, $query1) or die(mysqli_error());
 ?>
+<head>
+  <title>Tombo Ati | Product List</title>
+</head>
 
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

@@ -16,7 +16,9 @@ include 'header.php';
             $data  = mysqli_fetch_array($query);
             ?>
 
-
+<head>
+  <title>Tombo Ati | Bonus Send </title>
+</head>
 
 <!-- col-lg-12--> 
 

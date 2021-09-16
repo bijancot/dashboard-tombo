@@ -35,8 +35,8 @@ $userid = $_POST['userid'];
 $passw = $_POST['passw'];
 
 $from_name = "Admin Tombo Ati";
-$user_email = "anisarindu95@gmail.com";
-$pass_email = "rinduanisa95";
+$user_email = "adm.tomboati@gmail.com";
+$pass_email = "TomboAti123";
 
 $email_penerima = $email;
 $penerima_nama = $name;

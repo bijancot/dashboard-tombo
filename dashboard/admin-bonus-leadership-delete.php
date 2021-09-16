@@ -6,7 +6,9 @@ include('fungsi.php');
     $hasil = mysqli_query($koneksi, $query1) or die(mysqli_error());
     $total_baris = mysqli_num_rows($hasil);
 ?>
-
+<head>
+  <title>Tombo Ati | Bonus Leadership Delete </title>
+</head>
 
                   <table id="example" class="table table-hover table-bordered">
 

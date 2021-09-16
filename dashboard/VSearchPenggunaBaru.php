@@ -3,166 +3,237 @@ session_start();
 include 'header.php';
 ?>
 
-            <!-- Right side column. Contains the navbar and content of the page -->
-            <aside class="right-side">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
+<head>
+  <title>Tombo Ati | Cari Pengguna Baru</title>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="modalstyle.css">
+</head>
 
-                </section>
+<!-- Right side column. Contains the navbar and content of the page -->
+<aside class="right-side">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
 
-                <!-- Main content -->
-                <section class="content">
+  </section>
 
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                    
-              </div>
-           <!-- /.row -->
-                    <!-- Main row -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> Pengguna Baru [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3> 
-                        </div>
-                        <div class="panel-body">
-<div class="table-responsive">
+  <!-- Main content -->
+  <section class="content">
 
-<?php
-if(isset($_GET['username-src']))
-{
-    $username_src = $_GET['src1'];
-}
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
 
-//index awal data yang ingin ditampilkan
-$default_index = 0;
+    </div>
+    <!-- /.row -->
+    <!-- Main row -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user"></i> Pengguna Baru [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
 
-//batasan menampilkan data
-$default_batas = 20;
+              <?php
+              if (isset($_GET['username-src'])) {
+                $username_src = $_GET['src1'];
+              }
 
-//jika terdapat nilai batas di URL, gunakan untuk mengganti nilai default $default_batas
-if(isset($_GET['batas']))
-{
-    $default_batas = $_GET['batas'];
-}
+              //index awal data yang ingin ditampilkan
+              $default_index = 0;
 
-//jika terdapat nilai halaman di URL, gunakan untuk mengganti nilai dafault dari $default_index
-if(isset($_GET['halaman']))
-{
-    $default_index = ($_GET['halaman']-1) * $default_batas;
-}
+              //batasan menampilkan data
+              $default_batas = 20;
 
-if(isset($_GET['cari'])){
-	$cari = $_GET['cari'];
-	echo "<b>Hasil pencarian : ".$cari."</b>";
-}
+              //jika terdapat nilai batas di URL, gunakan untuk mengganti nilai default $default_batas
+              if (isset($_GET['batas'])) {
+                $default_batas = $_GET['batas'];
+              }
 
+              //jika terdapat nilai halaman di URL, gunakan untuk mengganti nilai dafault dari $default_index
+              if (isset($_GET['halaman'])) {
+                $default_index = ($_GET['halaman'] - 1) * $default_batas;
+              }
 
-    $query1 = "SELECT * FROM mebers WHERE paket = 'USER' AND hphone like '%".$cari."%' ORDER BY timer DESC limit $default_index, $default_batas";
-    $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
-    $total_baris = mysqli_num_rows($tampil);
+              if (isset($_GET['cari'])) {
+                $cari = $_GET['cari'];
+                echo "<b>Hasil pencarian : " . $cari . "</b>";
+              }
 
 
-?>
-<form action="admin-all-member-search.php" method="get">
-	<label></label>
-	<input type="text" name="cari">
-	<input type="submit" value="Search">
-</form>
+              $query1 = "SELECT * FROM mebers WHERE paket = 'USER' AND hphone like '%" . $cari . "%' ORDER BY timer DESC limit $default_index, $default_batas";
+              $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
+              $total_baris = mysqli_num_rows($tampil);
 
-                  <table id="example" class="table table-hover table-bordered">
-                  <thead>
-                      <tr>
-                        <th><center>No. </center></th>
-                        <th><center>Nomor HP</i></center></th>
-                        <th><center>Referral </i></center></th>
-                        <th><center>Register Date </center></th>
-                      </tr>
-                  </thead>
-                     <?php 
-                     $no=0;
-                     while($data=mysqli_fetch_array($tampil))
-                    { $no++; 
 
-$sqlsponsor = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid = '$data[sponsor]' ");
-$rowsponsor = mysqli_fetch_assoc($sqlsponsor);
-?>
-                    <tbody>
-                    <tr>
-                    <td><center><?php echo $no; ?>.</center></td>
-                    <td><center><font color="blue"><b><?php echo $data['hphone'];?>
-                    <td><center><font color="blue"><b><?php echo $data['sponsor'];?>
-                   <td><center><br><font color="blue"><b><?php echo $data['timer']; ?></b></font></center></td>
-</div>
-                 <?php   
-    $html_paging = "<li><a href='?halaman=".$nomor_paging."&batas=".$default_batas."'>".$nomor_paging."</a></li>";
-
-              } 
-
-  
               ?>
-                   </tbody>
-                   </table>
+              <form action="vSearchPengguna.php" method="get">
+                <label></label>
+                <input type="text" name="cari">
+                <input type="submit" value="Search">
+              </form>
 
-            <form method="get">
-              <div class="form-group row">
-                <div  class="col-sm-3">
-                  <input  class="form-control" name="batas" value='<?php echo $default_batas?>'/>
+              <table id="example" class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      <center>No. </center>
+                    </th>
+                    <th>
+                      <center>Nomor HP</i></center>
+                    </th>
+                    <th>
+                      <center>Referral </i></center>
+                    </th>
+                    <th>
+                      <center>Register Date </center>
+                    </th>
+                    <th>
+                      <center>
+                        Aksi
+                      </center>
+                    </th>
+                  </tr>
+                </thead>
+                <?php
+                $no = 0;
+                while ($data = mysqli_fetch_array($tampil)) {
+                  $no++;
+
+                  $sqlsponsor = mysqli_query($koneksi, "SELECT * FROM mebers WHERE userid = '$data[sponsor]' ");
+                  $rowsponsor = mysqli_fetch_assoc($sqlsponsor);
+                ?>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <center><?php echo $no; ?>.</center>
+                      </td>
+                      <td>
+                        <center>
+                          <font color="blue"><b><?php echo $data['hphone']; ?>
+                      <td>
+                        <left>
+                          <font color="blue"><b><?php echo $data['sponsor']; ?></font><br><?php echo $rowsponsor['name']; ?></center>
+                      </td>
+                      <td>
+                        <center><br>
+                          <font color="blue"><b><?php echo $data['timer']; ?></b></font>
+                        </center>
+                      </td>
+                      <td>
+                        <center>
+                          <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                        </center>
+                      </td>
+            </div>
+          <?php
+                  $html_paging = "<li><a href='?halaman=" . $nomor_paging . "&batas=" . $default_batas . "'>" . $nomor_paging . "</a></li>";
+                }
+
+
+          ?>
+          </tbody>
+          </table>
+
+          <!-- modal detail -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title" id="myModal">Detail Pengguna Baru</h4>
                 </div>
-                <div class="col-md-3">
-                  <button class="btn btn-default btn-block" type="submit">BARIS</button>
+                <div class="modal-body">
+                  <div class="fetched-data"></div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
                 </div>
               </div>
-            </form>
-<center>
+            </div>
+          </div>
+          <!-- end modal -->
+
+          <form method="get">
+            <div class="form-group row">
+              <div class="col-sm-3">
+                <input class="form-control" name="batas" value='<?php echo $default_batas ?>' />
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-default btn-block" type="submit">BARIS</button>
+              </div>
+            </div>
+          </form>
+          <center>
 
 
-<?php
+            <?php
 
-$halaman = @$_GET['halaman'];
-if(empty($halaman)){
- $posisi  = 0;
- $halaman = 1;
-}
-else{ 
-  $posisi  = ($halaman-1) * $default_batas; 
-}
-
+            $halaman = @$_GET['halaman'];
+            if (empty($halaman)) {
+              $posisi  = 0;
+              $halaman = 1;
+            } else {
+              $posisi  = ($halaman - 1) * $default_batas;
+            }
 
 
-$query2 = mysqli_query($koneksi, "select * from mebers WHERE paket = 'USER'");
-$jmldata = mysqli_num_rows($query2);
-$jmlhalaman = ceil($jmldata/$default_batas);
-$hal1 = $_GET['halaman']-1;
-$hal2 = $_GET['halaman']+1;
-if ($batas!='') {$batas2 = $_GET['batas'];} else {$batas2 = $default_batas;}
- echo " 
+
+            $query2 = mysqli_query($koneksi, "select * from mebers WHERE paket = 'USER'");
+            $jmldata = mysqli_num_rows($query2);
+            $jmlhalaman = ceil($jmldata / $default_batas);
+            $hal1 = $_GET['halaman'] - 1;
+            $hal2 = $_GET['halaman'] + 1;
+            if ($batas != '') {
+              $batas2 = $_GET['batas'];
+            } else {
+              $batas2 = $default_batas;
+            }
+            echo " 
 <ul class=\"pagination\">
 <li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal1&batas=$batas2\">Previous</a></li>
 </ul>";
 
-for($i=1;$i<=$jmlhalaman;$i++)
+            for ($i = 1; $i <= $jmlhalaman; $i++)
 
 
-if ($i != $halaman){
+              if ($i != $halaman) {
 
- echo " 
+                echo " 
 <ul class=\"pagination\">
 <li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li>
 </ul>";
-}
-else{ 
- echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li></ul>"; 
-}
- echo " 
+              } else {
+                echo " <ul class=\"pagination\"><li class=\"page-item active\"><a href=\"VPenggunaBaru.php?halaman=$i&batas=$batas2\">$i</a></li></ul>";
+              }
+            echo " 
 <ul class=\"pagination\">
 <li class=\"page-item\"><a href=\"VPenggunaBaru.php?halaman=$hal2&batas=$batas2\">Next</a></li>
 </ul>";
 
-echo "<p>Total Record : <b>$jmldata</b> Pengguna Baru</p>";
-?>
-                  <!-- </div>-->
-              </div> 
-              </div>
-            </div><!-- col-lg-12--> 
-<?php include 'footer.php'; ?>
+            echo "<p>Total Record : <b>$jmldata</b> Pengguna Baru</p>";
+            ?>
+            <!-- </div>-->
+          </div>
+        </div>
+      </div><!-- col-lg-12-->
+      <script type="text/javascript">
+        $(document).ready(function() {
+          $('#myModal').on('show.bs.modal', function(e) {
+            var rowid = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+              type: 'post',
+              url: 'detailPenggunaBaru.php',
+              data: 'rowid=' + rowid,
+              success: function(data) {
+                $('.fetched-data').html(data); //menampilkan data ke dalam modal
+              }
+            });
+          });
+        });
+      </script>
+      <?php include 'footer.php'; ?>

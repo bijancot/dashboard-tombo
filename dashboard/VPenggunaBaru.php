@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <title>Tombo Ati | Pengguna Baru</title>
-    <link rel="stylesheet" href="modalstyle.css">
-</head>
 <?php
 session_start();
 include 'header.php';
 ?>
+
+<head>
+    <title>Tombo Ati | Pengguna Baru</title>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="modalstyle.css">
+</head>
+
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -32,7 +31,7 @@ include 'header.php';
             <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user"></i> Pengguna Baru[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i> Pengguna Baru[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -111,8 +110,9 @@ include 'header.php';
                                             <center>
                                                 <font color="blue"><b><?php echo $data['hphone']; ?>
                                         <td>
-                                            <center>
-                                                <font color="blue"><b><?php echo $data['sponsor']; ?>
+                                            <left>
+                                                <font color="blue"><b><?php echo $data['sponsor']; ?></font><br><?php echo $rowsponsor['name']; ?></center>
+                                        </td>
                                         <td>
                                             <center>
                                                 <font color="blue"><b><?php echo $data['timer']; ?></b></font>
@@ -134,17 +134,21 @@ include 'header.php';
                         </tbody>
                         </table>
                         <!-- modal detail -->
-                        <div id="myModal" class="modal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Detail Pengguna Baru</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="fetched-data"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Keluar</button>
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" id="myModal">Detail Pengguna Baru</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="fetched-data"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -210,7 +214,6 @@ include 'header.php';
                     </div>
                 </div>
             </div><!-- col-lg-12-->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('#myModal').on('show.bs.modal', function(e) {
@@ -227,6 +230,5 @@ include 'header.php';
                     });
                 });
             </script>
-             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-           
+
             <?php include 'footer.php'; ?>

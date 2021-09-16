@@ -22,9 +22,9 @@ $row = mysqli_fetch_assoc($sql);
 include 'header.php';
 ?>
 
-
-
-
+<head>
+  <title>Tombo Ati | Profil Mitra </title>
+</head>
 
 
             <!-- Right side column. Contains the navbar and content of the page -->

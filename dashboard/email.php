@@ -16,8 +16,8 @@ require_once "vendor/phpmailer/src/POP3.php";
 require_once "vendor/phpmailer/src/SMTP.php";
 
 $from_name = "Admin Tombo Ati";
-$user_email = "anisarindu95@gmail.com";
-$pass_email = "rinduanisa95";
+$user_email = "adm.tomboati@gmail.com";
+$pass_email = "TomboAti123";
 
 $email_penerima = "deblenk.dh@gmail.com";
 $penerima_nama = "Dedy";
@@ -65,7 +65,7 @@ try {
     <br><br>
     Berikut link untuk menuju ke halaman landing page referral anda. 
     <br>
-    https://dash-tombo.bgskr-project.my.id/backoffice/$userid
+    https://dash-tombo.bgskr-project.my.id/backoffice/
     
     <br>
     Terima Kasih
