@@ -108,94 +108,85 @@ function registerMitra_post()
         }
     }
 
+    $idUserRegister = $_GET['idUserRegister'];
     $ktp            = $_POST['ktp'];
     $email          = $_POST['email'];
-    $name           = $_POST['name'];
-    $nomorHP        = $_POST['nomorHP'];
-    $address        = $_POST['address'];
     $username       = $_POST['username'];
-    $kecamatan      = $_POST['kecamatan'];
-    $kota           = $_POST['kota'];
-    $provinsi       = $_POST['provinsi'];
-    $kode_pos       = $_POST['kode_pos'];
-    $country        = $_POST['country'];
     $bank           = $_POST['bank'];
     $rekening       = $_POST['rekening'];
     $atasnama       = $_POST['atasnama'];
     $cabang         = $_POST['cabang'];
-    $referral       = $_POST['referral'];
     $createdAt      = date('Y-m-d H:i:s');
-    $idUserRegister = null;
-
-    $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE hphone ='" . $nomorHP . "'");
-    $get_rows = mysqli_num_rows($get_all_data_register);
     
-    if($username != '' &&  $name != '' && $nomorHP != '' && $bank != '' && $cabang != '' && $atasnama != '' && $rekening != '' && $email != '' && $kota != '' && $kecamatan != '' && $provinsi != '' && $kode_pos != '' && $address != '' && $country != ''){
-        if ($get_rows == null) {
+    if($idUserRegister != '' &&  $ktp != '' && $email != '' && $username != '' && $bank != '' && $rekening != '' && $atasnama != '' && $cabang != '' ){ 
+        $get_data_email                     = $connect->query("SELECT * FROM mebers WHERE email = '".$email."' ");   
+        $get_data_username                  = $connect->query("SELECT * FROM mebers WHERE userid = '".$username."' "); 
 
-            $get_data_email                     = $connect->query("SELECT * FROM mebers WHERE email = '".$email."' "); 
-            $get_data_user_id                   = $connect->query("SELECT * FROM mebers WHERE userid = '".$username."' "); 
-            $get_referral_from_data_register    = $connect->query("SELECT * FROM mebers WHERE userid ='".$referral."'");    
-            
-            $get_rows_email                     = mysqli_num_rows($get_data_email); 
-            $get_rows_user_id                   = mysqli_num_rows($get_data_user_id); 
-            $get_rows_referral                  = mysqli_num_rows($get_referral_from_data_register);
-            
-            if($get_rows_email == null){
-                if($get_rows_user_id == null){
-                    
-                    //if referral tersedia
-                    if($get_rows_referral != null){
-                            //db dashboard tombo
-                            mysqli_query($connect, "INSERT INTO mebers(paket,userid, ktp , email, name, sponsor, hphone, fotoktp, photo, bukti_bayar, address, kecamatan, kota, propinsi, kode_pos, country, bank, rekening, atasnama, cabang, timer) VALUES('BARU','$username','$ktp', '$email' , '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar', '$address', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt')");
+        $get_rows_email                     = mysqli_num_rows($get_data_email); 
+        $get_rows_username                  = mysqli_num_rows($get_data_username); 
+        
+        if($get_rows_email == null){
+            if($get_rows_username == null){
+                //db dashboard tombo
+
+                mysqli_query($connect, "UPDATE mebers SET paket='BARU', ktp='$ktp', email='$email', userid='$username', bank='$bank', rekening='$rekening', atasnama='$atasnama', cabang='$cabang' , bukti_bayar='$file_bukti_bayar', photo='$file_foto_profil', fotoktp='$file_foto_ktp', timer='$createdAt' WHERE id='$idUserRegister' ");
                             
-                            //get_data_after_insert_db_dashboard_tombo
-                            $get_data_after_insert_db_dashboard_tombo = $connect->query("SELECT * FROM mebers WHERE userid ='".$username."' "); 
-                            
-                            $get_id_from_data_after_insert = null;
-                            while($row = mysqli_fetch_array($get_data_after_insert_db_dashboard_tombo)){
-                                $get_id_from_data_after_insert = $row['id'];
-                            }
+                // //db tomboati
+                mysqli_query($connect2, "UPDATE USER_REGISTER SET STATUS_USER='BARU', NOMORKTP='$ktp', EMAIL='$email', USERNAME='$username', BANK='$bank', REKENING='$rekening', ATASNAMA='$atasnama', CABANG='$cabang', BUKTIBAYAR='$file_bukti_bayar', FOTO='$file_foto_profil', FILEKTP='$file_foto_ktp', UPDATED_AT='$createdAt' WHERE IDUSERREGISTER='$idUserRegister' ");
 
-                            //db tomboati
-                            mysqli_query($connect2, "INSERT INTO USER_REGISTER(IDUSERREGISTER, NOMORKTP, EMAIL, NAMALENGKAP, KODEREFERRAL, NOMORHP, FILEKTP, FOTO, BUKTIBAYAR, ALAMAT, USERNAME, KECAMATAN, KOTA, PROVINSI, KODEPOS, NEGARA, BANK, REKENING, ATASNAMA, CABANG, CREATED_AT, STATUS_USER) VALUES('$get_id_from_data_after_insert','$ktp', '$email', '$name', '$referral', '$nomorHP','$file_foto_ktp','$file_foto_profil','$file_bukti_bayar','$address', '$username', '$kecamatan', '$kota', '$provinsi', '$kode_pos', '$country', '$bank', '$rekening', '$atasnama', '$cabang','$createdAt', 'BARU')");
-
-                            $getID    = mysqli_query($connect2,"SELECT * FROM USER_REGISTER WHERE NOMORKTP = '".$ktp."'");
-
-                            $idUserRegister = $getID->fetch_array(MYSQLI_BOTH);
-
-                            mysqli_query($connect2, "INSERT INTO CHAT_ROOM SET IDUSERREGISTER ='".$idUserRegister['IDUSERREGISTER']."'");
-
-                            $response = array(
-                                'error'     => false,
-                                'message'   => 'Sukses Register'
-                            );
-
-                    }else{
-                        $response=array(
-                            'error'     => true,
-                            'message'   =>'Referral tidak tersedia'
-                        );
-                    }
-                }else{
-                    $response = array(
-                        'error'     => true,
-                        'message'   => 'Username sudah terdaftar sebelumnya'
-                    );
-                }
+                $response = array(
+                    'error'     => false,
+                    'message'   => 'Sukses Register'
+                );
             }else{
                 $response = array(
                     'error'     => true,
-                    'message'   => 'Email sudah terdaftar sebelumnya'
+                    'message'   => 'Username sudah terdaftar sebelumnya'
                 );
             }
-            
-        } else {
+        }else{
             $response = array(
                 'error'     => true,
-                'message'   => 'No HP sudah terdaftar sebelumnya'
+                'message'   => 'Email sudah terdaftar sebelumnya'
             );
         }
+    }else{
+        $response = array(
+            'error'     => true,
+            'message'   => 'Terdapat data kosong'
+        );
+    }
+    
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function registerDataDiri_post()
+{
+    global $connect, $connect2;
+
+    $response       = [];
+
+    $idUserRegister = $_GET['idUserRegister'];
+    $nama           = $_POST['nama'];
+    $provinsi       = $_POST['provinsi'];
+    $kota           = $_POST['kota'];
+    $kecamatan      = $_POST['kecamatan'];
+    $address        = $_POST['address'];
+    $kodePos        = $_POST['kodePos'];
+
+    if($idUserRegister != '' &&  $nama != '' && $provinsi != '' && $kota != '' && $kecamatan != '' && $address != '' && $kodePos != '' ){ 
+        mysqli_query($connect, "UPDATE mebers SET name='$nama', propinsi='$provinsi', kota='$kota', kecamatan='$kecamatan', address='$address', kode_pos='$kodePos' WHERE id='$idUserRegister' ");
+                    
+        // //db tomboati
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET NAMALENGKAP='$nama', PROVINSI='$provinsi', KOTA='$kota', KECAMATAN='$kecamatan', ALAMAT='$address', KODEPOS='$kodePos' WHERE IDUSERREGISTER='$idUserRegister' ");
+
+        $response = array(
+            'error'     => false,
+            'message'   => 'Sukses Update Profil'
+        );
+            
     }else{
         $response = array(
             'error'     => true,
