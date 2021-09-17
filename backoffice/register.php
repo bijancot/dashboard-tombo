@@ -120,7 +120,7 @@ Username  : $username
 Password : $unik_password
 Transaction Password : $unik_transaksi
 Email : $email
-Mobile Phone  : $hp
+Mobile Phone  : $hphone
 
 Login to member area :
 http://TomboAtiTour.com/dashboard/login.php.
@@ -254,7 +254,7 @@ if ($sum_register > 0) {
                                                     </td>
                                                     <td>
                                                         <left>
-                                                            <a href="JavaScript:newPopup('<?php echo $data[photo]; ?>');"><img src="<?php echo $data[photo]; ?>" class="img-circle" alt="User Image" style="border: 2px solid #3C8DBC;" width="50" height="50" /></a> <?php echo $data['userid']; ?>
+                                                            <img src="gambar_customer/users.png" class="img-circle" alt="User Image" style="border: 2px solid #3C8DBC;" width="50" height="50" /> <?php echo $data['userid']; ?>
                                                         </left>
                                                     </td>
                                                     <td>

@@ -95,7 +95,7 @@ include 'header.php';
                                                 </td>
                                                 <td>
                                                     <left>
-                                                        <a href="JavaScript:newPopup('<?php echo $data[photo]; ?>');"><img src="<?php echo $data[photo]; ?>" class="img-circle" alt="User Image" style="border: 2px solid #3C8DBC;" width="50" height="50" /></a> <?php echo $data['userid']; ?>
+                                                       <img src="<?php echo $data[photo]; ?>" class="img-circle" alt="User Image" style="border: 2px solid #3C8DBC;" width="50" height="50" /> <?php echo $data['userid']; ?>
                                                     </left>
                                                 </td>
                                                 <td>
