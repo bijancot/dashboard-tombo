@@ -6,7 +6,7 @@ include 'config2.php';
 
 <head>
     <title>Tombo Ati | Permintaan Mitra</title>
-    <link rel="stylesheet" href="modalstyle.css">
+    <!-- <link rel="stylesheet" href="modalstyle.css"> -->
 </head>
 
 
@@ -82,7 +82,7 @@ include 'config2.php';
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
                                 <strong> Berhasil !</strong>
                                 <br>
-                                Permintaan mitra berhasil.
+                                Verifikasi Permintaan Mitra.
                                 </div>';
                             }
                             ?>
@@ -110,7 +110,7 @@ include 'config2.php';
                                         <th>
                                             <center>Register Date </center>
                                         </th>
-                                        <th>
+                                        <th width="17%">
                                             <center>Aksi</center>
                                         </th>
                                     </tr>
@@ -157,8 +157,8 @@ include 'config2.php';
                                         <td>
                                             <center>
                                                 <!-- <a href="admin-profile-edit.php?userid=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</a> -->
-                                                <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm' data-toggle='modal'><i class='fa fa-check m-r-4'></i>Verifikasi</a>
-                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                                                <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm m-l-5 m-t-5' data-toggle='modal'><i class='fa fa-check m-r-5'></i>Verifikasi</a>
+                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
                                             </center>
 
                                         </td>
@@ -184,7 +184,6 @@ include 'config2.php';
                                             <input type="hidden" name="email" value="<?php echo $data['email']; ?>">
                                             <input type="hidden" name="name" value="<?php echo $data['name']; ?>">
                                             <input type="hidden" name="userid" value="<?php echo $data['userid']; ?>">
-                                            <input type="hidden" name="passw" value="<?php echo $data['passw']; ?>">
                                             <button type="submit" class="btn btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</button>
                                         </form>
                                         <button type="button" class="btn btn-danger m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
