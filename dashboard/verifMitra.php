@@ -1,23 +1,28 @@
 <?php
-$servername = "dash-tombo.bgskr-project.my.id";
-$username = "dash_tombo";
-$password = "1sampaitombo";
-$dbname = "dash_tombo";
+include 'config.php';
+include 'config2.php';
 
-// membuat koneksi
-$koneksi = new mysqli($servername, $username, $password, $dbname);
-
-// melakukan pengecekan koneksi
-if ($koneksi->connect_error) {
-    die("Connection failed: " . $koneksi->connect_error);
+function randomPassword($panjang)
+{
+    $karakter= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+    $string = '';
+    for ($i = 0; $i < $panjang; $i++) {
+  $pos = rand(0, strlen($karakter)-1);
+  $string .= $karakter{$pos};
+    }
+    return $string;
 }
 
+//cara panggil random
+$password = randomPassword(8);
+$enc_password = md5($password);
+
+//Update Mitra dan insert password
 $id = $_POST['id'];
-mysqli_query($koneksi, "UPDATE mebers SET paket='MITRA' WHERE id='$id'");
-header('location: VPermintaanMitra.php?output=berhasil');
+mysqli_query($koneksi, "UPDATE mebers SET paket='MITRA', passw='$password' WHERE id='$id'");
+mysqli_query($koneksi2, "UPDATE USER_REGISTER SET STATUS_USER='MITRA', PASSWORD='$password' WHERE IDUSERREGISTER='$id'");
 
 //Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -32,7 +37,6 @@ require_once "vendor/phpmailer/src/SMTP.php";
 $email = $_POST['email'];
 $name = $_POST['name'];
 $userid = $_POST['userid'];
-$passw = $_POST['passw'];
 
 $from_name = "Admin Tombo Ati";
 $user_email = "adm.tomboati@gmail.com";
@@ -41,7 +45,6 @@ $pass_email = "TomboAti123";
 $email_penerima = $email;
 $penerima_nama = $name;
 
-//Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
 try {
@@ -53,20 +56,20 @@ try {
             'allow_self_signed' => true
         )
     );
-    $mail->SMTPDebug = true;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = $user_email;                     //SMTP username
-    $mail->Password   = $pass_email;                               //SMTP password
-    $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->SMTPDebug = true;                   
+    $mail->isSMTP();                                        
+    $mail->Host       = 'smtp.gmail.com';                    
+    $mail->SMTPAuth   = true;                                  
+    $mail->Username   = $user_email;                   
+    $mail->Password   = $pass_email;                         
+    $mail->SMTPSecure = 'ssl';         
+    $mail->Port       = 465;                                 
 
     //Recipients
     $mail->setFrom($user_email, $from_name);
     $mail->addAddress($email_penerima, $penerima_nama);     //Add a recipient
     $mail->addReplyTo($user_email, 'Information');
-    // $mail->addAddress('ellen@example.com');               //Name is optional
+    // $mail->addAddress('ellen@example.com');              
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
@@ -74,28 +77,36 @@ try {
     // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    $body = "Yth. Bapak/Ibu $name.
-    <br><br>
-    Selamat permintaan anda untuk menjadi mitra telah disetujui. Berikut data diri akun anda : <br> 
-    Username = $userid
+    $body = "
+    <head>
+    <style>
+      p {color:black;}      
+    </style>
+  </head>
+
+    <body style='color:black;'>
+    <p>Yth. Bapak/Ibu $name.</p>
+    <p>Selamat permintaan Anda untuk menjadi mitra telah disetujui. Berikut data diri akun Anda : </p>
     <br>
-    Password = $passw
-    <br><br>
-    Berikut link untuk menuju ke halaman referral anda. 
+    <p>Username = <b>$userid</b> </p>
+    <p>Password = <b>$password</b> </p>
     <br>
+    <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
     https://dash-tombo.bgskr-project.my.id/backoffice/
-    
     <br>
-    Terima Kasih
     <br>
-    Admin Tombo Ati
-    <br><br>
-    
-    <b>PENTING!</b>
+    <p>Terima Kasih</p>
+    <p>Admin Tombo Ati</p>
+    <p>&copy; " . (int)date('Y') . " <strong>Tombo Ati</strong> All rights reserved</p>
+    </body>
+
+    <footer>
+    <p><b>PENTING!</b></p>
     <p>Informasi yang disampaikan melalui e-mail ini hanya diperuntukkan bagi pihak penerima dan bersifat rahasia, jangan berikan informasi apapun kepada pihak lain demi keamanan akun Anda</p>
-                ";
+    </footer>        
+    ";
     //content
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->isHTML(true);
     $mail->Subject = 'Verifikasi Permintaan Mitra';
     $mail->Body    = $body;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
@@ -108,4 +119,5 @@ try {
     echo $msg_gagal;
 }
 
-$koneksi->close();
+header('location: VPermintaanMitra.php?output=berhasil');
+

@@ -7,7 +7,7 @@ include 'header.php';
     <title>Tombo Ati | Cari Permintaan Mitra</title>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="modalstyle.css">
+    <!-- <link rel="stylesheet" href="modalstyle.css"> -->
 </head>
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -95,7 +95,7 @@ include 'header.php';
                                         <th>
                                             <center>Register Date </center>
                                         </th>
-                                        <th>
+                                        <th width="17%">
                                             <center>Aksi</center>
                                         </th>
                                     </tr>
@@ -140,8 +140,8 @@ include 'header.php';
                                             <td>
                                                 <center>
                                                     <!-- <a href="admin-profile-edit.php?userid=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</a> -->
-                                                    <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm' data-toggle='modal'><i class='fa fa-check m-r-4'></i>Verifikasi</a>
-                                                    <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                                                    <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm m-l-5 m-t-5' data-toggle='modal'><i class='fa fa-check m-r-5'></i>Verifikasi</a>
+                                                    <?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
                                                 </center>
 
                                             </td>

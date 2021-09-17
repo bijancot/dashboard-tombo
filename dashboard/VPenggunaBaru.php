@@ -7,7 +7,7 @@ include 'header.php';
     <title>Tombo Ati | Pengguna Baru</title>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="modalstyle.css">
+    <!-- <link rel="stylesheet" href="modalstyle.css"> -->
 </head>
 
 
@@ -120,7 +120,7 @@ include 'header.php';
                                         </td>
                                         <td>
                                             <center>
-                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-4'></i>Detail</a>"; ?>
+                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
                                             </center>
                                         </td>
                                     </tr>

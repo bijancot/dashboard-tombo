@@ -1,9 +1,13 @@
 <?php
-define("HOST", "tomboati.bgskr-project.my.id");
-define("USER", "tomboati");
-define("PASSWORD", "1sampaitombo");
-define("DATABASE", "tomboati");
 
-$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-$koneksi = new mysqli(HOST, USER, PASSWORD, DATABASE);
+$hostname = "tomboati.bgskr-project.my.id";
+$database = "tomboati";
+$username = "tomboati";
+$password = "1sampaitombo";
+$koneksi2 =  mysqli_connect($hostname, $username, $password, $database);
+
+if (!$koneksi2) {
+    die("Koneksi Tidak Berhasil: " . mysqli_connect_error());
+}
+
 ?>
