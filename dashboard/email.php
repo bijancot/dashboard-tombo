@@ -1,3 +1,4 @@
+
 <?php
 $email = "deblenk.dh@gmail.com";
 $name = "dede";
@@ -22,6 +23,20 @@ $pass_email = "TomboAti123";
 $email_penerima = "deblenk.dh@gmail.com";
 $penerima_nama = "Dedy";
 
+function randomPassword($panjang)
+{
+    $karakter= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
+    $string = '';
+    for ($i = 0; $i < $panjang; $i++) {
+  $pos = rand(0, strlen($karakter)-1);
+  $string .= $karakter{$pos};
+    }
+    return $string;
+}
+
+//cara panggil random
+$password = randomPassword(8);
+
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
 
@@ -43,12 +58,11 @@ try {
     $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
     $mail->Port       = 465;  
     //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    
     //Recipients
     $mail->setFrom($user_email, $from_name);
     $mail->addAddress($email_penerima, $penerima_nama);     //Add a recipient
     $mail->addReplyTo($user_email, 'Information');
-    // $mail->addAddress('ellen@example.com');               //Name is optional
+        // $mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addCC('cc@example.com');
     // $mail->addBCC('bcc@example.com');
 
@@ -56,28 +70,37 @@ try {
     // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
-    $body = "Yth. Bapak/Ibu $name.
-    <br><br>
-    Selamat permintaan anda untuk menjadi mitra telah disetujui. Berikut data diri akun anda : <br> 
-    Username = $userid
+    $body = "
+    <head>
+    <style>
+      p {color:black;}      
+    </style>
+  </head>
+
+    <body style='color:black;'>
+    <p>Yth. Bapak/Ibu $name.</p>
+    <p>Selamat permintaan Anda untuk menjadi mitra telah disetujui. Berikut data diri akun Anda : </p>
     <br>
-    Password = $passw
-    <br><br>
-    Berikut link untuk menuju ke halaman landing page referral anda. 
+    <p>Username = <b>$userid</b> </p>
+    <p>Password = <b>$password</b> </p>
     <br>
+    <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
     https://dash-tombo.bgskr-project.my.id/backoffice/
     
-    <br>
-    Terima Kasih
-    <br>
-    Admin Tombo Ati
     <br><br>
-    
-    <b>PENTING!</b>
+    <p>Terima Kasih</p>
+    <p>Admin Tombo Ati</p>
+    <p>&copy; " . (int)date('Y') . " <strong>Tombo Ati</strong> All rights reserved</p>
+    </body>
+
+    <footer>
+    <p><b>PENTING!</b></p>
     <p>Informasi yang disampaikan melalui e-mail ini hanya diperuntukkan bagi pihak penerima dan bersifat rahasia, jangan berikan informasi apapun kepada pihak lain demi keamanan akun Anda</p>
-                ";
+    </footer>        
+    ";
+
     //content
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->isHTML(true);                                //Set email format to HTML
     $mail->Subject = 'Verifikasi Permintaan Mitra';
     $mail->Body    = $body;
     // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
