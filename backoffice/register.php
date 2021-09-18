@@ -157,6 +157,9 @@ if ($sum_register > 0) {
     $status = '<a href="point-add"><button class="btn btn-success">Saldo Point Register Tidak Cukup</button></a>';
 }
 
+mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND sponsor='$row[userid]' AND paket='MITRA'");
+                
+
 ?>
 </div>
 </div>
