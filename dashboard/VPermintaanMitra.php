@@ -56,6 +56,9 @@ include 'config2.php';
                                 $default_index = ($_GET['halaman'] - 1) * $default_batas;
                             }
 
+                            //update notif
+                            mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi='1' WHERE paket='BARU'");
+                
                             $query1 = "SELECT * FROM mebers WHERE paket='BARU' ORDER BY timer DESC limit $default_index, $default_batas";
                             $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
                             $total_baris = mysqli_num_rows($tampil);

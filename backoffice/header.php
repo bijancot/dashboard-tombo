@@ -62,8 +62,9 @@
     $sum = $bonus_sponsor_total + $bonus_titik_total - $wd_total;
     $sum_register = $point_total - $total_ref;
 
+    echo 'UserIDMu'.$row['userid'];
     //notifikasi
-    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='USER' AND is_seen_notifikasi = 0");    
+    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE sponsor='$row[userid]' AND paket='MITRA' AND is_seen_notifikasi_mitra = 0");    
     $get_rows_paket_user = mysqli_num_rows($get_all_data_register_paket_user);
 
     date_default_timezone_set('Asia/Jakarta')
@@ -292,10 +293,10 @@
                                     <p> Tidak Ada Pemberitahuan</p>
                                  </a>
                                  <?php }else{?>
-                                 <a class="dropdown-item notification-dropdown badge text-left" href="https://localhost/dashboard-tombo/backoffice/register.php">
+                                 <a class="dropdown-item notification-dropdown badge text-left" href="https://dash-tombo.bgskr-project.my.id/backoffice/register.php">
                                      <div class="dropdown-notifications-item-content">
-                                         <p class="dropdown-item-content-text notification-dropdown lg">User Baru</h3>
-                                         <div class="dropdown-item-content-details notification-dropdown">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>
+                                         <p class="dropdown-item-content-text notification-dropdown lg">Mitra Baru</h3>
+                                         <div class="dropdown-item-content-details notification-dropdown">Terdapat <?php echo $get_rows_paket_user ?> Mitra Baru</div>
                                      </div>
                                  </a>
                                  <?php }?>

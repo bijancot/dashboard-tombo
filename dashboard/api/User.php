@@ -175,12 +175,13 @@ function registerDataDiri_post()
     $kecamatan      = $_POST['kecamatan'];
     $address        = $_POST['address'];
     $kodePos        = $_POST['kodePos'];
+    $country        = $_POST['country'];
 
     if($idUserRegister != '' &&  $nama != '' && $provinsi != '' && $kota != '' && $kecamatan != '' && $address != '' && $kodePos != '' ){ 
-        mysqli_query($connect, "UPDATE mebers SET name='$nama', propinsi='$provinsi', kota='$kota', kecamatan='$kecamatan', address='$address', kode_pos='$kodePos' WHERE id='$idUserRegister' ");
+        mysqli_query($connect, "UPDATE mebers SET country='$country', name='$nama', propinsi='$provinsi', kota='$kota', kecamatan='$kecamatan', address='$address', kode_pos='$kodePos' WHERE id='$idUserRegister' ");
                     
         // //db tomboati
-        mysqli_query($connect2, "UPDATE USER_REGISTER SET NAMALENGKAP='$nama', PROVINSI='$provinsi', KOTA='$kota', KECAMATAN='$kecamatan', ALAMAT='$address', KODEPOS='$kodePos' WHERE IDUSERREGISTER='$idUserRegister' ");
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET NEGARA='$country', NAMALENGKAP='$nama', PROVINSI='$provinsi', KOTA='$kota', KECAMATAN='$kecamatan', ALAMAT='$address', KODEPOS='$kodePos' WHERE IDUSERREGISTER='$idUserRegister' ");
 
         $response = array(
             'error'     => false,
@@ -203,26 +204,25 @@ function login_post()
 {
     global $connect, $connect2;
     $response       = [];
-    $email          = $_POST['email'];
+    $username       = $_POST['username'];
     $password       = $_POST['password'];
     $user_token     = $_POST['token'];
 
 
     $data = [];
 
-    $get_all_data_register = $connect2->query("SELECT * FROM USER_REGISTER JOIN CHAT_ROOM ON CHAT_ROOM.IDUSERREGISTER = USER_REGISTER.IDUSERREGISTER WHERE EMAIL ='" . $email . "' AND PASSWORD='" . $password . "'");
+    $get_all_data_register = $connect->query("SELECT * FROM mebers WHERE userid ='" . $username . "' AND passw='" . $password . "' AND paket='MITRA' ");
     $get_rows = mysqli_num_rows($get_all_data_register);
 
 
     if ($get_rows > 0) {
-        mysqli_query($connect, "UPDATE mebers SET usertoken='" . $user_token . "' WHERE email='" . $email . "'");
+        mysqli_query($connect, "UPDATE mebers SET usertoken='" . $user_token . "' WHERE userid='" . $username . "'");
 
-        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='" . $user_token . "' WHERE EMAIL='" . $email . "'");
+        mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='" . $user_token . "' WHERE USERNAME='" . $username . "'");
 
-        $get_data_by_email = mysqli_query($connect2, "SELECT * FROM USER_REGISTER  WHERE EMAIL ='" . $email . "' AND PASSWORD='" . $password . "'");
-        $get_rows = mysqli_num_rows($get_data_by_email);
-
-        while ($row = mysqli_fetch_object($get_data_by_email)) {
+        $get_data_by_username = mysqli_query($connect2, "SELECT * FROM USER_REGISTER JOIN CHAT_ROOM ON CHAT_ROOM.IDUSERREGISTER = USER_REGISTER.IDUSERREGISTER WHERE USERNAME ='" . $username . "' AND PASSWORD='" . $password . "'");
+         
+        while ($row = mysqli_fetch_object($get_data_by_username)) {
             $data[] = $row;
         }
         $response = array(
@@ -237,6 +237,51 @@ function login_post()
             
         );
     }
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function ganti_password(){
+    global $connect, $connect2;
+    $response           = [];
+    $idUserRegister     = $_GET['idUserRegister'];
+    $oldPassword        = $_POST['oldPassword'];
+    $newPassword        = $_POST['newPassword'];
+    $repeatPassword     = $_POST['repeatPassword'];
+
+    $get_data_mebers = $connect->query("SELECT * FROM mebers WHERE id = '$idUserRegister' "); 
+                
+    $get_old_password = null;
+    while($row = mysqli_fetch_array($get_data_mebers)){
+        $get_old_password = $row['passw'];
+    }
+
+    if($oldPassword == $get_old_password){
+        if($newPassword == $repeatPassword){
+            mysqli_query($connect, "UPDATE mebers SET passw='" . $newPassword . "' WHERE id='" . $idUserRegister . "'");
+
+            mysqli_query($connect2, "UPDATE USER_REGISTER SET PASSOWORD='" . $newPassword . "' WHERE IDUSERREGISTER='" . $idUserRegister . "'");
+            
+            $response = array(
+                'error'     => false,
+                'message'   => 'Sukses ganti password'
+                
+            );
+        }else{
+            $response = array(
+                'error'     => true,
+                'message'   => 'Pastikan konfirmasi password dengan password baru sama'
+                
+            );
+        }
+    }else{
+        $response = array(
+            'error'     => true,
+            'message'   => 'Password tidak tersedia'
+            
+        );
+    }
+
     header('Content-Type: application/json');
     echo json_encode($response);
 }
