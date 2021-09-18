@@ -98,7 +98,7 @@
     $data_set  = mysqli_fetch_assoc($query_set);
 
     //notifikasi
-    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='USER' AND is_seen_notifikasi = 0");
+    $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE paket='BARU' AND is_seen_notifikasi = 0");
     $get_rows_paket_user = mysqli_num_rows($get_all_data_register_paket_user);
 
     date_default_timezone_set('Asia/Jakarta')
@@ -263,10 +263,10 @@
                                          </div>
                                      </a>
                                  <?php } else { ?>
-                                     <a class="badge badge-white bg-white" href="">
+                                     <a class="badge badge-white bg-white" href="https://dash-tombo.bgskr-project.my.id/dashboard/VPermintaanMitra.php">
                                          <div class="dropdown-notifications-item-content">
-                                             <div class="text-left text-bold fs-14">User Baru</div>
-                                             <div class="text-left fs-12">Terdapat <?php echo $get_rows_paket_user ?> User Baru</div>
+                                             <div class="text-left text-bold fs-14">Permintaan Mitra Baru</div>
+                                             <div class="text-left fs-12">Terdapat <?php echo $get_rows_paket_user ?> Permintaan Mitra Baru</div>
                                          </div>
                                      </a>
                                  <?php } ?>
