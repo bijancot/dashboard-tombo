@@ -5,9 +5,8 @@ include 'header.php';
 
 <head>
   <title>Tombo Ati | Mitra</title>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <!-- <link rel="stylesheet" href="modalstyle.css"> -->
+  <link rel="stylesheet" href="modalstyle.css">
 </head>
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -148,7 +147,7 @@ include 'header.php';
                       </td>
                       <td>
                         <left><a href="admin-profile-edit.php?userid=<?php echo $data['userid']; ?>" class="btn btn-sm btn-warning m-l-5 m-t-5"><i class="fa fa-arrow-circle-right m-r-5"></i>Edit</a></left>
-                          <right><?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5 '></i>Detail</a>"; ?></right>
+                        <right><?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5 '></i>Detail</a>"; ?></right>
                       </td>
                     </tr>
             </div>
@@ -245,6 +244,20 @@ include 'header.php';
         </div>
       </div><!-- col-lg-12-->
       <script type="text/javascript">
+        function closeModal() {
+          $('.modal-backdrop').hide();
+          $('body').removeClass('modal-open');
+          $('#myModal').modal('hide');
+          $('#<%=hfImg.ClientID%>').val("");
+        }
+        $(function() {
+          $(document.body).on('show.bs.modal', function() {
+            $(window.document).find('html').addClass('modal-open');
+          });
+          $(document.body).on('hide.bs.modal', function() {
+            $(window.document).find('html').removeClass('modal-open');
+          });
+        });
         $(document).ready(function() {
           $('#myModal').on('show.bs.modal', function(e) {
             var rowid = $(e.relatedTarget).data('id');

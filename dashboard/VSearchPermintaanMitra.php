@@ -5,9 +5,8 @@ include 'header.php';
 
 <head>
     <title>Tombo Ati | Cari Permintaan Mitra</title>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <!-- <link rel="stylesheet" href="modalstyle.css"> -->
+    <link rel="stylesheet" href="modalstyle.css">
 </head>
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -30,7 +29,7 @@ include 'header.php';
             <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i>Permintaan Mitra</h3>
+                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i>Permintaan Mitra[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -95,7 +94,7 @@ include 'header.php';
                                         <th>
                                             <center>Register Date </center>
                                         </th>
-                                        <th width="17%">
+                                        <th width="18%">
                                             <center>Aksi</center>
                                         </th>
                                     </tr>
@@ -270,6 +269,20 @@ include 'header.php';
                 </div>
             </div><!-- col-lg-12-->
             <script type="text/javascript">
+                function closeModal() {
+                    $('.modal-backdrop').hide();
+                    $('body').removeClass('modal-open');
+                    $('#myModal').modal('hide');
+                    $('#<%=hfImg.ClientID%>').val("");
+                }
+                $(function() {
+                    $(document.body).on('show.bs.modal', function() {
+                        $(window.document).find('html').addClass('modal-open');
+                    });
+                    $(document.body).on('hide.bs.modal', function() {
+                        $(window.document).find('html').removeClass('modal-open');
+                    });
+                });
                 $(document).ready(function() {
                     $('#myModal').on('show.bs.modal', function(e) {
                         var rowid = $(e.relatedTarget).data('id');

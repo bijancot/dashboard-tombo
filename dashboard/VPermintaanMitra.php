@@ -6,7 +6,8 @@ include 'config2.php';
 
 <head>
     <title>Tombo Ati | Permintaan Mitra</title>
-    <!-- <link rel="stylesheet" href="modalstyle.css"> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="modalstyle.css">
 </head>
 
 
@@ -58,7 +59,7 @@ include 'config2.php';
 
                             //update notif
                             mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi='1' WHERE paket='BARU'");
-                
+
                             $query1 = "SELECT * FROM mebers WHERE paket='BARU' ORDER BY timer DESC limit $default_index, $default_batas";
                             $tampil = mysqli_query($koneksi, $query1) or die(mysqli_error());
                             $total_baris = mysqli_num_rows($tampil);
@@ -113,7 +114,7 @@ include 'config2.php';
                                         <th>
                                             <center>Register Date </center>
                                         </th>
-                                        <th width="17%">
+                                        <th width="18%">
                                             <center>Aksi</center>
                                         </th>
                                     </tr>
@@ -286,8 +287,21 @@ include 'config2.php';
                     </div>
                 </div>
             </div><!-- col-lg-12-->
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
             <script type="text/javascript">
+                function closeModal() {
+                    $('.modal-backdrop').hide();
+                    $('body').removeClass('modal-open');
+                    $('#myModal').modal('hide');
+                    $('#<%=hfImg.ClientID%>').val("");
+                }
+                $(function() {
+                    $(document.body).on('show.bs.modal', function() {
+                        $(window.document).find('html').addClass('modal-open');
+                    });
+                    $(document.body).on('hide.bs.modal', function() {
+                        $(window.document).find('html').removeClass('modal-open');
+                    });
+                });
                 $(document).ready(function() {
                     $('#myModal').on('show.bs.modal', function(e) {
                         var rowid = $(e.relatedTarget).data('id');
@@ -307,6 +321,5 @@ include 'config2.php';
                     $("#flash-msg").delay(5000).fadeOut("slow");
                 });
             </script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
             <?php include 'footer.php'; ?>
