@@ -22,6 +22,8 @@ $id = $_POST['id'];
 mysqli_query($koneksi, "UPDATE mebers SET paket='MITRA', passw='$password' WHERE id='$id'");
 mysqli_query($koneksi2, "UPDATE USER_REGISTER SET STATUS_USER='MITRA', PASSWORD='$password' WHERE IDUSERREGISTER='$id'");
 
+
+header('location: VPermintaanMitra.php?output=berhasil');
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -58,7 +60,7 @@ try {
     );
     $mail->SMTPDebug = true;                   
     $mail->isSMTP();                                        
-    $mail->Host       = 'smtp.gmail.com';                    
+    $mail->Host       = 'ssl://smtp.googlemail.com';                    
     $mail->SMTPAuth   = true;                                  
     $mail->Username   = $user_email;                   
     $mail->Password   = $pass_email;                         
@@ -119,5 +121,4 @@ try {
     echo $msg_gagal;
 }
 
-header('location: VPermintaanMitra.php?output=berhasil');
 
