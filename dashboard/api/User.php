@@ -36,7 +36,7 @@ function registerMitra_post()
 
                 if ($fileSize < 2000000) {
                     move_uploaded_file($tempPath, $upload_path . $file_foto_ktp);
-                    $file_foto_ktp_db = 'https://dash-tombo.bgskr-project.my.id/dashboard/upload/users/'.$fotoktp;
+                    $file_foto_ktp_db = 'https://dash-tombo.bgskr-project.my.id/dashboard/upload/users/'.$file_foto_ktp;
                 } else {
                     $errorMSG = json_encode(array("message" => "File KTP maksimal 2MB", "status" => false));
                     echo $errorMSG;
