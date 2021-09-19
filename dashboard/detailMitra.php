@@ -1,16 +1,6 @@
 <?php
-$servername = "dash-tombo.bgskr-project.my.id";
-$username = "dash_tombo";
-$password = "1sampaitombo";
-$dbname = "dash_tombo";
-
-// membuat koneksi
-$koneksi = new mysqli($servername, $username, $password, $dbname);
-
-// melakukan pengecekan koneksi
-if ($koneksi->connect_error) {
-    die("Connection failed: " . $koneksi->connect_error);
-}
+  include('config.php');
+  include('fungsi.php');
 
 if ($_POST['rowid']) {
     $id = $_POST['rowid'];
@@ -102,19 +92,18 @@ if ($_POST['rowid']) {
             <tr>
                 <td>Bukti Bayar</td>
                 <td>:</td>
-                <td><?="<img src='upload/users/".$baris['bukti_bayar']."'style='width:200px; height:100px;'>"?></td>
-
+                <td><img src="<?php echo $base_url.$baris['bukti_bayar'];  ?>" style="width: 200px; height: 100px;"></td>
             </tr>
             <tr>
                 <td>Foto Profil</td>
                 <td>:</td>
-                <td><?="<img src='upload/users/".$baris['photo']."'style='width:200px; height:100px;'>"?></td>
+                <td><img src="<?php echo $base_url.$baris['photo'];  ?>" style="width: 200px; height: 100px;"></td>
             </tr>
             <tr>
                 <td>Foto KTP</td>
                 <td>:</td>
-                <td><?="<img src='upload/users/".$baris['fotoktp']."'style='width:200px; height:100px;'>"?></td>            
-            </tr>
+                <td><img src="<?php echo $base_url.$baris['fotoktp'];  ?>" style="width: 200px; height: 100px;"></td>
+             </tr>
         </table>
 <?php
 
