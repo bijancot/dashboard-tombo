@@ -36,6 +36,7 @@ function registerMitra_post()
 
                 if ($fileSize < 2000000) {
                     move_uploaded_file($tempPath, $upload_path . $file_foto_ktp);
+                    $file_foto_ktp_db = 'https://dash-tombo.bgskr-project.my.id/dashboard/upload/users/'.$fotoktp;
                 } else {
                     $errorMSG = json_encode(array("message" => "File KTP maksimal 2MB", "status" => false));
                     echo $errorMSG;
@@ -66,6 +67,7 @@ function registerMitra_post()
 
             if ($fileSize < 2000000) {
                 move_uploaded_file($tempPath, $upload_path . $file_foto_profil);
+                $file_foto_profil_db = 'https://dash-tombo.bgskr-project.my.id/dashboard/upload/users/'.$file_foto_profil;
             } else {
                 $errorMSG = json_encode(array("message" => "File Foto Profil maksimal 2MB", "status" => false));
                 echo $errorMSG;
@@ -97,6 +99,7 @@ function registerMitra_post()
 
             if ($fileSize < 2000000) {
                 move_uploaded_file($tempPath, $upload_path . $file_bukti_bayar);
+                $file_bukti_bayar_db = 'https://dash-tombo.bgskr-project.my.id/dashboard/upload/users/'.$file_bukti_bayar;
             } else {
                 $errorMSG = json_encode(array("message" => "File Bukti Bayar maksimal 2MB", "status" => false));
                 echo $errorMSG;
@@ -129,10 +132,10 @@ function registerMitra_post()
             if($get_rows_username == null){
                 //db dashboard tombo
 
-                mysqli_query($connect, "UPDATE mebers SET paket='BARU', ktp='$ktp', email='$email', userid='$username', bank='$bank', rekening='$rekening', atasnama='$atasnama', cabang='$cabang' , bukti_bayar='$file_bukti_bayar', photo='$file_foto_profil', fotoktp='$file_foto_ktp', timer='$createdAt' WHERE id='$idUserRegister' ");
+                mysqli_query($connect, "UPDATE mebers SET paket='BARU', ktp='$ktp', email='$email', userid='$username', bank='$bank', rekening='$rekening', atasnama='$atasnama', cabang='$cabang' , bukti_bayar='$file_bukti_bayar_db', photo='$file_foto_profil_db', fotoktp='$file_foto_ktp_db', timer='$createdAt' WHERE id='$idUserRegister' ");
                             
                 // //db tomboati
-                mysqli_query($connect2, "UPDATE USER_REGISTER SET STATUS_USER='BARU', NOMORKTP='$ktp', EMAIL='$email', USERNAME='$username', BANK='$bank', REKENING='$rekening', ATASNAMA='$atasnama', CABANG='$cabang', BUKTIBAYAR='$file_bukti_bayar', FOTO='$file_foto_profil', FILEKTP='$file_foto_ktp', UPDATED_AT='$createdAt' WHERE IDUSERREGISTER='$idUserRegister' ");
+                mysqli_query($connect2, "UPDATE USER_REGISTER SET STATUS_USER='BARU', NOMORKTP='$ktp', EMAIL='$email', USERNAME='$username', BANK='$bank', REKENING='$rekening', ATASNAMA='$atasnama', CABANG='$cabang', BUKTIBAYAR='$file_bukti_bayar_db', FOTO='$file_foto_profil_db', FILEKTP='$file_foto_ktp_db', UPDATED_AT='$createdAt' WHERE IDUSERREGISTER='$idUserRegister' ");
 
                 $response = array(
                     'error'     => false,
