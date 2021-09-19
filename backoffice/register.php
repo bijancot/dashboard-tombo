@@ -275,8 +275,8 @@ VALUES
               <p>Username = <b>$userid</b> </p>
               <p>Password = <b>$unik_password</b> </p>
               <p>&nbsp;</p>
-              <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
-              <a href='$base_urlindex.php'>$base_url</a>
+              <p>Berikut link untuk menuju ke halaman landing page. Login menggunakan Username dan Password anda</p> 
+              <a href='$base_url'>$base_url</a>
               
               <p>&nbsp;</p>
               <p>Terima Kasih, </p>
@@ -638,7 +638,7 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username<span class="text-danger">*</span></label>
                                                 <div class="col-sm-9">
-                                                    <input name="userid" type="text" class="form-control" id="exampleInputUsername2" placeholder="Username" value="<?php echo $_GET['userid']; ?>" required />
+                                                    <input name="userid" type="text" class="form-control" id="userid" placeholder="Username" value="<?php echo $_GET['userid']; ?>" required />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -769,3 +769,13 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
 <?php
 include 'footer.php';
 ?>
+<script>
+     $(function() {
+        $('#userid').on('keypress', function(e) {
+            if (e.which == 32){
+                console.log('Space Detected');
+                return false;
+            }
+        });
+});
+</script>

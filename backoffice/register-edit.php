@@ -25,8 +25,11 @@ if ($total_upline == 0) {
 } else {
     // update data ke database
     if (mysqli_query($koneksi, "update mebers set upline='$upline' where id='$id'")) {
-        echo "BERHASIL";
+        // echo "BERHASIL";
 
+        echo '<script type="text/javascript">alert("Pendaftaran Mitra Berhasil");</script>';
+        echo "<script type='text/javascript'>document.location.href = 'register';</script>";
+    
         // kirim email
         
         //Load Composer's autoloader
@@ -130,8 +133,8 @@ if ($total_upline == 0) {
               <p>Username = <b>$userid</b> </p>
               <p>Password = <b>$unik_password</b> </p>
               <p>&nbsp;</p>
-              <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
-              <a href='$base_urlindex.php'>$base_url</a>
+              <p>Berikut link untuk menuju ke halaman landing page. Login menggunakan Username dan Password anda</p> 
+              <a href='$base_url'>$base_url</a>
               
               <p>&nbsp;</p>
               <p>Terima Kasih, </p>
@@ -165,8 +168,9 @@ if ($total_upline == 0) {
             echo $msg_gagal;
         }
         
-        // mengalihkan halaman kembali ke index.php
-        header("location:register.php");
+        
+        // header("Location: register.php?error=SUCCESS");
+        
     } else {
         echo "GAGAL";
     }
