@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Pin Tranfer Confirm </title>
+  <title>Pin Tranfer Confirm | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

@@ -40,7 +40,7 @@ $username_member = $_GET['userid'];
 
 ?>
 <head>
-  <title>Tombo Ati | Testimonial Edit</title>
+  <title>Testimonial Edit | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

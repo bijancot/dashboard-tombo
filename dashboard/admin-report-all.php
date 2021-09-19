@@ -3,7 +3,7 @@ session_start();
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Report All</title>
+  <title>Report All | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

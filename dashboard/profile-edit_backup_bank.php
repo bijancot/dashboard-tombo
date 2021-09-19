@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($sql);
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Edit Profile Bank </title>
+  <title>Edit Profile Bank | Tombo Ati </title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

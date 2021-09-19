@@ -119,7 +119,9 @@ include 'header.php';
 
 
 ?>
-
+<head>
+  <title>Pin Order Process CC | Tombo Ati </title>
+</head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
                 <!-- Content Header (Page header) -->

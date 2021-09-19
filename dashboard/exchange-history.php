@@ -2,7 +2,9 @@
 session_start();
 include 'header.php';
 ?>
-
+<head>
+  <title>Exchange History | Tombo Ati </title>
+</head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
                 <!-- Content Header (Page header) -->

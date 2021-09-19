@@ -3,7 +3,7 @@ session_start();
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Bonus</title>
+  <title> Bonus Leadership| Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

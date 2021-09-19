@@ -40,7 +40,7 @@ $username_member = $_GET['username'];
 
 ?>
 <head>
-  <title>Tombo Ati | Edit Profil</title>
+  <title>Edit Profil | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

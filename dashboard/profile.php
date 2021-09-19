@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 <head>
-  <title>Tombo Ati | Profile  </title>
+  <title>Profile | Tombo Ati</title>
 </head>
 
 

@@ -3,7 +3,7 @@ session_start();
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Profil Security</title>
+  <title>Profil Security | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

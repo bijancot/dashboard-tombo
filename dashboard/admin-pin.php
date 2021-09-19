@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 <head>
-  <title>Tombo Ati | Pin</title>
+  <title>Pin | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

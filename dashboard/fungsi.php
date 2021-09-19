@@ -80,7 +80,7 @@ if (!function_exists('base_url')) {
 		} else $base_url = 'http://localhost/';
 		if ($parse) {
 			$base_url = parse_url($base_url);
-			if (isset($base_url['path'])) if ($base_url['path'] == '/') if ($base_url['path'] == '/') $base_url['path'] = '';
+			if (isset($base_url['path'])) if ($base_url['path'] == '/')  $base_url['path'] = '';
 		}
 		return $base_url;
 	}

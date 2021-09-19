@@ -7,7 +7,7 @@ include 'header.php';
                     $hasil=mysqli_query($koneksi, $query1) or die(mysqli_error());
 ?>
 <head>
-  <title>Tombo Ati | Product List</title>
+  <title>Product List | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

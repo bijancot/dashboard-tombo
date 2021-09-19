@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Pin Order Process BRI </title>
+  <title>Pin Order Process BRI | Tombo Ati </title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

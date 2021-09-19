@@ -23,7 +23,7 @@ include 'header.php';
 ?>
 
 <head>
-  <title>Tombo Ati | Profil Mitra </title>
+  <title> Profil Mitra | Tombo Ati </title>
 </head>
 
 

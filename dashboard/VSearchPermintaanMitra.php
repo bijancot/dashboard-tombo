@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 <head>
-    <title>Tombo Ati | Cari Permintaan Mitra</title>
+    <title> Cari Permintaan Mitra | Tombo Ati</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="modalstyle.css">
 </head>

@@ -19,7 +19,7 @@ include 'header.php';
 ?>
 
 <head>
-  <title>Tombo Ati | Pin Order</title>
+  <title>Pin Order | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

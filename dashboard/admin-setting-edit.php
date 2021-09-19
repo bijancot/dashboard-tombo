@@ -6,7 +6,7 @@ $error = $_GET['error'];
 $username_member = $_GET['username'];
 ?>
 <head>
-  <title>Tombo Ati | Edit  Profile</title>
+  <title>Edit Profile | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

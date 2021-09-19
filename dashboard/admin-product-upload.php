@@ -40,7 +40,7 @@ $code = $_GET['code'];
 
 ?>
 <head>
-  <title>Tombo Ati | Product Upload</title>
+  <title>Product Upload | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->
