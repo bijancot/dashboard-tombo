@@ -134,7 +134,7 @@ try {
       <p>Username = <b>$userid</b> </p>
       <p>Password = <b>$password</b> </p>
       <p>&nbsp;</p>
-      <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
+      <p>Berikut link untuk menuju ke halaman landing page. Login menggunakan Username dan Password anda</p> 
       https://dash-tombo.bgskr-project.my.id/backoffice/
       
       <p>&nbsp;</p>
