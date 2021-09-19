@@ -263,7 +263,7 @@ function ganti_password(){
         if($newPassword == $repeatPassword){
             mysqli_query($connect, "UPDATE mebers SET passw='" . $newPassword . "' WHERE id='" . $idUserRegister . "'");
 
-            mysqli_query($connect2, "UPDATE USER_REGISTER SET PASSOWORD='" . $newPassword . "' WHERE IDUSERREGISTER='" . $idUserRegister . "'");
+            mysqli_query($connect2, "UPDATE USER_REGISTER SET PASSWORD='" . $newPassword . "' WHERE IDUSERREGISTER='" . $idUserRegister . "'");
             
             $response = array(
                 'error'     => false,
