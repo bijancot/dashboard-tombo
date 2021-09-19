@@ -1,4 +1,9 @@
 <?php
+//Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 session_start();
 include 'header.php';
 
@@ -27,9 +32,25 @@ $upline = $_GET['upline'];
 
 if (isset($_POST['button'])) {
 
-    function acak2($panjang)
+    // function acak2($panjang)
+    // {
+    //     $karakter = '0123456789';
+    //     $string = '';
+    //     for ($i = 0; $i < $panjang; $i++) {
+    //         $pos = rand(0, strlen($karakter) - 1);
+    //         $string .= $karakter{
+    //             $pos};
+    //     }
+    //     return $string;
+    // }
+
+    // $unik_password = acak2(8);
+    // $unik_transaksi = acak2(4);
+    // $enc_password = md5($unik_password);
+
+    function randomPassword($panjang)
     {
-        $karakter = '0123456789';
+        $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789';
         $string = '';
         for ($i = 0; $i < $panjang; $i++) {
             $pos = rand(0, strlen($karakter) - 1);
@@ -38,8 +59,10 @@ if (isset($_POST['button'])) {
         }
         return $string;
     }
-    $unik_password = acak2(8);
-    $unik_transaksi = acak2(4);
+
+    //cara panggil random
+    $unik_password = randomPassword(8);
+    $unik_transaksi = randomPassword(4);
     $enc_password = md5($unik_password);
 
     $id = $_POST['id'];
@@ -81,10 +104,12 @@ if (isset($_POST['button'])) {
     if ($total_upline == 0) {
         echo '<script type="text/javascript">alert("Username Upline Tidak Ditemukan");</script>';
         echo "<script type='text/javascript'>document.location.href = 'register?error=Username Upline tidak Ditemukan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
-    }else if($total_username !== 0){
+    } else if ($total_username !== 0) {
         echo '<script type="text/javascript">alert("Username Sudah Digunakan");</script>';
         echo "<script type='text/javascript'>document.location.href = 'register?error=Username Sudah Digunakan&name=$name&userid=$userid&email=$email&hphone=$hphone&ktp=$ktp&fotoktp=$fotoktp&address=$address&kecamatan=$kecamatan&kota=$kota&propinsi=$propinsi&kode_pos=$kode_pos&country=$country&bank=$bank&rekening=$rekening&atasnama=$atasnama&upline=$upline';</script>";
     } else {
+        
+        echo "MASUK DEK";
         // UPLOAD FOTO KTP
         $ekstensi_diperbolehkan    = array('PNG', 'JPG', 'JPEG', 'png', 'jpg', 'jpeg');
         $nama = $_FILES['fotoktp']['name'];
@@ -112,53 +137,198 @@ VALUES
 
         //Kirim Email
 
-        $newuser_msg = " 
-$name, welcome to TomboAtiTour.com
+        //         $newuser_msg = " 
+        // $name, welcome to TomboAtiTour.com
 
-Your Account :
-Username  : $username
-Password : $unik_password
-Transaction Password : $unik_transaksi
-Email : $email
-Mobile Phone  : $hphone
+        // Your Account :
+        // Username  : $username
+        // Password : $unik_password
+        // Transaction Password : $unik_transaksi
+        // Email : $email
+        // Mobile Phone  : $hphone
 
-Login to member area :
-http://TomboAtiTour.com/dashboard/login.php.
+        // Login to member area :
+        // http://TomboAtiTour.com/dashboard/login.php.
 
-----------------------------
-Webmaster
-TomboAtiTour.com
-admin@TomboAtiTour.com
+        // ----------------------------
+        // Webmaster
+        // TomboAtiTour.com
+        // admin@TomboAtiTour.com
 
-";
+        // ";
 
-        $admin_varian = "admin@TomboAtiTour.com";
-        $admin_em = "TomboAtiTour.com <admin@TomboAtiTour.com>";
-        $pastitle = "Welcome to TomboAtiTour.com";
-        $pastitle2 = "New Member TomboAtiTour.com";
+        //         $admin_varian = "admin@TomboAtiTour.com";
+        //         $admin_em = "TomboAtiTour.com <admin@TomboAtiTour.com>";
+        //         $pastitle = "Welcome to TomboAtiTour.com";
+        //         $pastitle2 = "New Member TomboAtiTour.com";
 
-        $headers = "From: $admin_em\r\n";
-        $headers .= "Reply-To: $admin_em\r\n";
-        $headers .= "X-Priority: 1\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion();
+        //         $headers = "From: $admin_em\r\n";
+        //         $headers .= "Reply-To: $admin_em\r\n";
+        //         $headers .= "X-Priority: 1\r\n";
+        //         $headers .= "X-Mailer: PHP/" . phpversion();
 
         //           mail($email, $pastitle, $newuser_msg, $headers);
         //            mail($admin_varian, $pastitle2, $newuser_msg, $headers);
 
+        //Load Composer's autoloader
+        require_once "plugins/phpmailer/src/PHPMailer.php";
+        require_once "plugins/phpmailer/src/Exception.php";
+        require_once "plugins/phpmailer/src/OAuth.php";
+        require_once "plugins/phpmailer/src/POP3.php";
+        require_once "plugins/phpmailer/src/SMTP.php";
 
+        // $email = $_POST['email'];
+        // $name = $_POST['name'];
+        // $userid = $_POST['userid'];
 
-        header("Location: register.php?error=SUCCESS");
+        $from_name = "Admin Tombo Ati";
+        $user_email = "adm.tomboati@gmail.com";
+        $pass_email = "TomboAti123";
+
+        $email_penerima = $email;
+        $penerima_nama = $name;
+
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            $mail->SMTPDebug = true;
+            $mail->isSMTP();
+            $mail->Host       = 'ssl://smtp.googlemail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $user_email;
+            $mail->Password   = $pass_email;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom($user_email, $from_name);
+            $mail->addAddress($email_penerima, $penerima_nama);     //Add a recipient
+            $mail->addReplyTo($user_email, 'Information');
+            // $mail->addAddress('ellen@example.com');              
+            // $mail->addCC('cc@example.com');
+            // $mail->addBCC('bcc@example.com');
+
+            //Attachments
+            // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+            // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+            $body = "
+          <html>
+            <head>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+            <meta charset='utf-8' />
+              <style type='text/css'>
+              html{ height:100%; }
+              body{ min-height:100%;  padding:0; margin:0; position:relative; }
+              p {
+                color:black;
+              }
+              footer{ 
+                  position:absolute; 
+                  bottom:0; 
+                  width:100%; 
+                  height:200px; 
+              }
+        
+              article{
+                  width: 100%; 
+                  color: #000; 
+              }
+        
+              header{ 
+                  background:#ecf0f1; 
+                  text-align: center;
+                  padding: 20px;
+              }
+        
+              footer{ 
+                  border-top: 1px solid #abb7b7; 
+              }
+        
+              .content-footer{
+                  padding: 5px 7px;
+              }
+        
+              .content-penting{
+                  color: #6c7a89;
+              }
+            </style>
+          </head>
+          
+          <body>
+            <header>
+              <img width='100px;' src='https://tomboati.bgskr-project.my.id/assets/img/logo_tomboati.png'>
+            </header>
+        
+            <article>
+              <p>Yth. Bapak/Ibu $name.</p>
+              <p>Selamat permintaan Anda untuk menjadi mitra telah disetujui. Berikut data diri akun Anda : </p>
+              <p>&nbsp;</p>
+              <p>Username = <b>$userid</b> </p>
+              <p>Password = <b>$unik_password</b> </p>
+              <p>&nbsp;</p>
+              <p>Berikut link untuk menuju ke halaman landing page referral Anda.</p> 
+              <a href='$base_urlindex.php'>$base_url</a>
+              
+              <p>&nbsp;</p>
+              <p>Terima Kasih, </p>
+              <p>&nbsp;</p>
+              <p>Admin Tombo Ati</p>
+              </article>
+            <footer>
+              <div class='content-footer'>
+                  <p>&copy; 2021 <strong>Tombo Ati</strong> All rights reserved</p>
+                  <hr>
+                  <div class='content-penting'>
+                      PENTING!
+                      Informasi yang disampaikan melalui e-mail ini hanya diperuntukkan bagi pihak penerima dan bersifat rahasia, jangan berikan informasi apapun kepada pihak lain demi keamanan akun Anda
+                  </div>
+              </div>
+            </footer>
+          </body>     
+        </html>
+            ";
+            //content
+            $mail->isHTML(true);
+            $mail->Subject = 'Verifikasi Permintaan Mitra';
+            $mail->Body    = $body;
+            // $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+            $mail->send();
+            $msg_success = 'Email telah terkirim';
+            echo $msg_success;
+        } catch (Exception $e) {
+            $msg_gagal = "Gagal mengirim email. Mailer Error: {$mail->ErrorInfo}";
+            echo $msg_gagal;
+        }
+
+        $_GET = array(); // lets pretend nothing was posted
+        $_POST = array(); // lets pretend nothing was posted
+
+        echo '<script type="text/javascript">alert("Pendaftaran Mitra Berhasil");</script>';
+        
+        // header("Location: register.php?error=SUCCESS");
+        echo "<script type='text/javascript'>document.location.href = 'register?error=SUCCESS';</script>";
+    
     }
 }
 
 if ($sum_register > 0) {
-    $status = '<button class="btn btn-success" name="button" type="submit">Next</button>';
+    $status = '<button class="btn btn-success" name="button" type="submit">Next</button> <input type="reset" class="btn btn-danger" name="reset" value="Reset">';
 } else {
     $status = '<a href="point-add"><button class="btn btn-success">Saldo Point Register Tidak Cukup</button></a>';
 }
 
 mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND sponsor='$row[userid]' AND paket='MITRA'");
-                
+
 
 ?>
 </div>
@@ -368,7 +538,7 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
                                                                     <div class="col">Foto KTP</div>
                                                                 </div>
                                                                 <div class="row">
-                                                                    <div class="col"><img src="https://dash-tombo.bgskr-project.my.id/backoffice/<?php echo $data['fotoktp']; ?>" style="width: 200px; height: 70px;"></div>
+                                                                    <div class="col"><img src="<?php echo $base_url.$data['fotoktp']; ?>" style="width: 200px; height: 70px;"></div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -414,6 +584,10 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
                                                                         <div class="col-7 text-left text-bold"><?php echo $data['email']; ?></div>
                                                                     </div>
                                                                     <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                                                    <input type="hidden" name="userid" value="<?php echo $data['userid']; ?>">
+                                                                    <input type="hidden" name="name" value="<?php echo $data['name']; ?>">
+                                                                    <input type="hidden" name="email" value="<?php echo $data['email']; ?>">
+                                                                    <input type="hidden" name="passw" value="<?php echo $data['passw']; ?>">
                                                                     <div class="row py-2">
                                                                         <div class="col-4">ID Link</div>
                                                                         <div class="col-1 text-left">:</div>
@@ -422,8 +596,8 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button class="btn btn-warning" name="btn-register-edit" type="submit">Edit</a>
-                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <button class="btn btn-warning" name="btn-register-edit" type="submit">Perbarui</a>
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -448,7 +622,7 @@ mysqli_query($koneksi, "UPDATE mebers SET is_seen_notifikasi_mitra='1' AND spons
 
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form class="forms-sample" action="register.php" method="post" enctype="multipart/form-data">
+                                        <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
                                             <div class="form-group row">
                                                 <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Freelance</label>
                                                 <div class="col-sm-9">
