@@ -12,6 +12,7 @@
         $nomorHP        = $_POST['nomorHP'];
         $referral       = $_POST['referral'];
         $user_token     = $_POST['token'];
+        $createdAt      = date('Y-m-d H:i:s');
 
         $data_dash_tombo = [];
         $data_tomboati = [];
@@ -29,7 +30,7 @@
             //if referral tersedia
             if($get_rows_referral != null){
                 //db dashboard tombo
-                mysqli_query($connect, "INSERT INTO mebers(paket, hphone, sponsor) VALUES('USER', '$nomorHP', '$referral')");
+                mysqli_query($connect, "INSERT INTO mebers(paket, hphone, sponsor, timer) VALUES('USER', '$nomorHP', '$referral', '$createdAt')");
 
                 //get_data_after_insert_db_dashboard_tombo
                 $get_data_after_insert_db_dashboard_tombo = $connect->query("SELECT * FROM mebers WHERE paket = 'USER' AND hphone ='".$nomorHP."' AND sponsor = '".$referral."' "); 
@@ -40,7 +41,7 @@
                 }
                 
                 //db tomboati
-                mysqli_query($connect2, "INSERT INTO USER_REGISTER(STATUS_USER, IDUSERREGISTER, NOMORHP,KODEREFERRAL) VALUES('USER', '$get_id_from_data_after_insert','$nomorHP','$referral')");
+                mysqli_query($connect2, "INSERT INTO USER_REGISTER(STATUS_USER, IDUSERREGISTER, NOMORHP,KODEREFERRAL, CREATED_AT) VALUES('USER', '$get_id_from_data_after_insert','$nomorHP','$referral', '$createdAt')");
                 
                 //update_user_token_db_tombo
                 mysqli_query($connect2, "UPDATE USER_REGISTER SET USERTOKEN='$user_token' WHERE IDUSERREGISTER=".$get_id_from_data_after_insert."");
