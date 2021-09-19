@@ -7,7 +7,7 @@ if
 ($total_left > '3' AND $total_right > '3' AND $total_left < '30' AND $total_right < '30') {$reward="Kualifikasi Gratis Umrah";}
 ?>
 <head>
-  <title>Tombo Ati | Reward</title>
+  <title>Bonus Reward | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

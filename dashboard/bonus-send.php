@@ -17,7 +17,7 @@ include 'header.php';
             ?>
 
 <head>
-  <title>Tombo Ati | Bonus Send </title>
+  <title>Bonus Send | Tombo Ati </title>
 </head>
 
 <!-- col-lg-12--> 

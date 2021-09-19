@@ -5,7 +5,7 @@ include 'config2.php';
 ?>
 
 <head>
-    <title>Tombo Ati | Permintaan Mitra</title>
+    <title>Permintaan Mitra | Tombo Ati</title>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="modalstyle.css">
 </head>

@@ -41,7 +41,7 @@ $username_member = $_GET['userid'];
 ?>
 
 <head>
-  <title>Tombo Ati | Edit Product</title>
+  <title>Edit Product | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

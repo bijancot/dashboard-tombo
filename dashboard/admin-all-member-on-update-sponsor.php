@@ -4,7 +4,7 @@ include 'header.php';
 ?>
 
 <head>
-  <title>Tombo Ati | Mitra On Update Sponsor </title>
+  <title>Mitra On Update Sponsor | Tombo Ati </title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

@@ -3,7 +3,7 @@ session_start();
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | History Plan</title>
+  <title>History Plan | Tombo Ati</title>
 </head>
 
             <!-- Right side column. Contains the navbar and content of the page -->

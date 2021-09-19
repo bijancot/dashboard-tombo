@@ -13,7 +13,7 @@ $button='<input value="saldo tidak cukup" class="btn btn-sm btn-warning" />';
 
 ?>
 <head>
-  <title>Tombo Ati | Withdrawal </title>
+  <title> Withdrawal | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

@@ -7,7 +7,7 @@ include('fungsi.php');
     $total_baris = mysqli_num_rows($hasil);
 ?>
 <head>
-  <title>Tombo Ati | Bonus Leadership Delete </title>
+  <title>Bonus Leadership Delete | Tombo Ati </title>
 </head>
 
                   <table id="example" class="table table-hover table-bordered">

@@ -3,7 +3,7 @@ session_start();
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Mitra On Update Tanggal</title>
+  <title>Mitra On Update Tanggal | Tombo Ati</title>
 <meta http-equiv="refresh" content="5">
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->

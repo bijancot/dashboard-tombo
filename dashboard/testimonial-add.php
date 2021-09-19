@@ -17,7 +17,7 @@
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Add Testimonial</title>
+  <title>Add Testimonial | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

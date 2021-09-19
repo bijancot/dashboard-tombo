@@ -37,7 +37,7 @@ header('location: index.php?error=UPGRADE MEMBERSHIP SUKSES');
 
 ?>
 <head>
-  <title>Tombo Ati | Upgrade Silver</title>
+  <title>Upgrade Silver | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

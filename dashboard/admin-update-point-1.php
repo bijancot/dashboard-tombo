@@ -39,7 +39,7 @@ $error = $_GET['error'];
 
 ?>
 <head>
-  <title>Tombo Ati | Update Point</title>
+  <title>Update Point | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">

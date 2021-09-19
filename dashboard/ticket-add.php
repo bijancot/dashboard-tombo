@@ -2,7 +2,7 @@
 include 'header.php';
 ?>
 <head>
-  <title>Tombo Ati | Ticket Add</title>
+  <title>Ticket Add | Tombo Ati</title>
 </head>
             <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
