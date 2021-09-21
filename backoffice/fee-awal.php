@@ -40,7 +40,7 @@ include 'header.php';
                                     </div>
                                     <div class="card-body p-0 table-border-style">
                                         <div class="table-responsive">
-                    <?php
+                                        <?php
 $urutan = $_GET['urutan'];
                     $query1="select * from bonus_sponsor where userid='$row[userid]' order by id $urutan ";
                     $tampil1=mysqli_query($koneksi, "select * from bonus_sponsor where userid='$row[userid]' ");
@@ -74,7 +74,7 @@ $urutan = $_GET['urutan'];
 $tampil_nama=mysqli_query($koneksi, "select * from mebers where userid='$data[bonusfrom]' ");
 $data_nama=mysqli_fetch_array($tampil_nama);
 
-$pph = $data['nilai_bonus'] * 0.05;
+// $pph = $data['nilai_bonus'] * 0.05;
 ?>
 
                                                 <tbody>

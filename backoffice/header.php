@@ -32,37 +32,69 @@
     $rowsum_deposit = mysqli_fetch_row($res_deposit);
     $sum_deposit = $rowsum_deposit[0];
 
-    $query_total = mysqli_query($koneksi, "SELECT SUM(bonus) as 'bonus_total_sponsor' FROM bonus_sponsor WHERE userid='$row[userid]' ");
-    $query_total2 = mysqli_fetch_array($query_total);
-    $bonus_sponsor_total = $query_total2['bonus_total_sponsor'];
+    // YANG LAMA
+    // $query_total = mysqli_query($koneksi, "SELECT SUM(bonus) as 'bonus_total_sponsor' FROM bonus_sponsor WHERE userid='$row[userid]' ");
+    // $query_total2 = mysqli_fetch_array($query_total);
+    // $bonus_sponsor_total = $query_total2['bonus_total_sponsor'];
 
-    $query_titik = mysqli_query($koneksi, "SELECT SUM(bonus) as 'bonus_total_titik' FROM bonus_titik WHERE userid='$row[userid]' ");
-    $querytitik = mysqli_fetch_array($query_titik);
-    $bonus_titik_total = $querytitik['bonus_total_titik'];
+    // $query_titik = mysqli_query($koneksi, "SELECT SUM(bonus) as 'bonus_total_titik' FROM bonus_titik WHERE userid='$row[userid]' ");
+    // $querytitik = mysqli_fetch_array($query_titik);
+    // $bonus_titik_total = $querytitik['bonus_total_titik'];
 
-    $query_point = mysqli_query($koneksi, "SELECT SUM(point) as 'bonus_total_point' FROM bonus_titik WHERE userid='$row[userid]' ");
-    $querypoint = mysqli_fetch_array($query_point);
-    $bonus_point_total = $querypoint['bonus_total_point'];
+    // $query_point = mysqli_query($koneksi, "SELECT SUM(point) as 'bonus_total_point' FROM bonus_titik WHERE userid='$row[userid]' ");
+    // $querypoint = mysqli_fetch_array($query_point);
+    // $bonus_point_total = $querypoint['bonus_total_point'];
 
-    $query_point = mysqli_query($koneksi, "SELECT SUM(jumlah) as 'total_point' FROM hm2_pending_deposits WHERE status='processed' AND type='point' AND user_id='$row[id]' ");
-    $query_total2 = mysqli_fetch_array($query_point);
-    $point_total = $query_total2['total_point'];
+    // $query_point = mysqli_query($koneksi, "SELECT SUM(jumlah) as 'total_point' FROM hm2_pending_deposits WHERE status='processed' AND type='point' AND user_id='$row[id]' ");
+    // $query_total2 = mysqli_fetch_array($query_point);
+    // $point_total = $query_total2['total_point'];
 
-    $query_wd = mysqli_query($koneksi, "SELECT SUM(amount) as 'total_wd' FROM hm2_history WHERE user_id='$row[id]' ");
-    $query_wd2 = mysqli_fetch_array($query_wd);
-    $wd_total = $query_wd2['total_wd'];
+    // $query_wd = mysqli_query($koneksi, "SELECT SUM(amount) as 'total_wd' FROM hm2_history WHERE user_id='$row[id]' ");
+    // $query_wd2 = mysqli_fetch_array($query_wd);
+    // $wd_total = $query_wd2['total_wd'];
 
-    $tampil_ref = mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' ");
-    $total_ref = mysqli_num_rows($tampil_ref);
+    // $tampil_ref = mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' ");
+    // $total_ref = mysqli_num_rows($tampil_ref);
 
-    $tampil_ref_reseller = mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' AND paket='RESELLER'");
-    $total_ref_reseller = mysqli_num_rows($tampil_ref_reseller);
+    // $tampil_ref_reseller = mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' AND paket='RESELLER'");
+    // $total_ref_reseller = mysqli_num_rows($tampil_ref_reseller);
 
+    // $sum = $bonus_sponsor_total + $bonus_titik_total - $wd_total;
+    // $sum_register = $point_total - $total_ref;
 
-    $sum = $bonus_sponsor_total + $bonus_titik_total - $wd_total;
-    $sum_register = $point_total - $total_ref;
-
-    echo 'UserIDMu'.$row['userid'];
+    $tampil_deposit=mysqli_query($koneksi, "select * FROM hm2_pending_deposits WHERE user_id='$row[id]' AND type='upgrade' ");
+    $total_deposit=mysqli_num_rows($tampil_deposit);
+    
+    $query_total = mysqli_query($koneksi,"SELECT SUM(bonus) as 'bonus_total_sponsor' FROM bonus_sponsor WHERE userid='$row[userid]' ");
+    $query_total2=mysqli_fetch_array($query_total);
+    $bonus_sponsor_total=$query_total2['bonus_total_sponsor'];
+    
+    $query_titik = mysqli_query($koneksi,"SELECT SUM(bonus) as 'bonus_total_titik' FROM bonus_titik WHERE userid='$row[userid]' ");
+    $querytitik=mysqli_fetch_array($query_titik);
+    $bonus_titik_total=$querytitik['bonus_total_titik'];
+    
+    $query_point = mysqli_query($koneksi,"SELECT SUM(point) as 'bonus_total_point' FROM bonus_titik WHERE userid='$row[userid]' ");
+    $querypoint=mysqli_fetch_array($query_point);
+    $bonus_point_total=$querypoint['bonus_total_point'];
+    
+    $query_point = mysqli_query($koneksi,"SELECT SUM(jumlah) as 'total_point' FROM hm2_pending_deposits WHERE status='processed' AND type='point' AND user_id='$row[id]' ");
+    $query_total2=mysqli_fetch_array($query_point);
+    $point_total=$query_total2['total_point'];
+    
+    $query_wd = mysqli_query($koneksi,"SELECT SUM(amount) as 'total_wd' FROM hm2_history WHERE user_id='$row[id]' ");
+    $query_wd2=mysqli_fetch_array($query_wd);
+    $wd_total=$query_wd2['total_wd'];
+    
+    $tampil_ref=mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' ");
+    $total_ref=mysqli_num_rows($tampil_ref);
+    
+    $tampil_ref_reseller=mysqli_query($koneksi, "select * from mebers where sponsor='$row[userid]' AND paket='RESELLER'");
+    $total_ref_reseller=mysqli_num_rows($tampil_ref_reseller);
+    
+    $sum=$bonus_sponsor_total+$bonus_titik_total-$wd_total;
+    $sum_register=$point_total-$total_ref;
+    
+    // echo 'UserIDMu'.$row['userid'];
     //notifikasi
     $get_all_data_register_paket_user = mysqli_query($koneksi, "SELECT * FROM mebers WHERE sponsor='$row[userid]' AND paket='MITRA' AND is_seen_notifikasi_mitra = 0");    
     $get_rows_paket_user = mysqli_num_rows($get_all_data_register_paket_user);
@@ -380,7 +412,7 @@
                                  <a href="javascript:void(0)"><i class="ik ik-users"></i><span>Hadiah</span></a>
                                  <div class="submenu-content">
                                      <a href="hadiah-point.php" class="menu-item">Hadiah Poin</a>
-                                     <a href="g2.php" class="menu-item">Hadiah Wisata</a>
+                                     <a href="hadiah-wisata.php" class="menu-item">Hadiah Wisata</a>
                                  </div>
                              </div>
 
@@ -389,8 +421,11 @@
                              <div class="nav-item has-sub">
                                  <a href="#"><i class="">Rp.</i><span>Topup</span></a>
                                  <div class="submenu-content">
-                                     <a href="upgrade-process.php" class="menu-item">Topup</a>
-                                     <a href="topup-history.php" class="menu-item">History</a>
+<?php
+if ($total_deposit==0){$menu_popup="<a href=\"upgrade-process.php\" class=\"menu-item\">Topup</a>";}
+echo $menu_popup;
+?>
+<a href="topup-history.php" class="menu-item">History</a>
                                  </div>
                              </div>
 

@@ -36,15 +36,21 @@ include 'header.php';
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header d-block">
-                                        <h3>Fee Akhir</h3>
+                                        <h3>Hadiah Wisata</h3>
                                     </div>
                                     <div class="card-body p-0 table-border-style">
                                         <div class="table-responsive">
-                                        <?php
+                    <?php
 $urutan = $_GET['urutan'];
-                    $query1="select * from mebers WHERE sponsor='$row[userid]' AND paket='RESELLER' order by id $urutan ";
-                    $dept2=mysqli_num_rows($query1);
-                    $dept_sponsor=$dept2*1100000;
+                    $query1="select * from bonus_titik where userid='$row[userid]' AND level<='6' order by id $urutan ";
+                    $tampil1=mysqli_query($koneksi, "select * from bonus_titik WHERE userid='$row[userid]' AND level<='6' ");
+                    $dept2=mysqli_num_rows($tampil1);
+                    $dept_sponsor=$dept2*100000;
+                   
+        $query_total = mysqli_query($koneksi,"SELECT SUM(bonus) as 'bonus_total' FROM bonus_titik WHERE userid='$row[userid]' AND level<='6' ");
+        $query_total2=mysqli_fetch_array($query_total);
+        $bonus_titik_total=$query_total2['bonus_total'];
+
                     $tampil=mysqli_query($koneksi, $query1) or die(mysqli_error());
                     ?>
 
@@ -55,47 +61,41 @@ $urutan = $_GET['urutan'];
                         <th><center>Tanggal </i></center></th>
                         <th><center>Username</center></th>
                         <th><center>Nama Jamaah</center></th>
-                        <th><center>Klaim </center></th>
-                        <th><center>Fee Akhir </center></th>
+                        <th><center>Membership </center></th>
+                        <th><center>Level </center></th>
                         <th><center>Status </center></th>
-
                                                     </tr>
                                                 </thead>
                      <?php 
                      $no=0;
                      while($data=mysqli_fetch_array($tampil))
                     { $no++; 
-                        
-                        if ($data['klaim'] == '0'){
-                            $status_klaim='<a href="#" class="btn btn-sm btn-warning">FREE</a> <a href="#" class="btn btn-sm btn-success">FEE</a>';
-                            
-                        }
-                        else if ($data['klaim'] == '1' ){
-                            $status_klaim='<a href="#" class="btn btn-sm btn-success">FEE</a>';
-                        }
+
+$tampil_nama=mysqli_query($koneksi, "select * from mebers where userid='$data[bonusfrom]' ");
+$data_nama=mysqli_fetch_array($tampil_nama);
 ?>
 
                                                 <tbody>
                                                     <tr>
                     <td><left><?php echo $no; ?>.</left></td>
                     <td><center><?php echo $data['timer'];?></center></td>
-                    <td><left><?php echo $data['userid'];?></left></td>
-                    <td><left><?php echo $data['name'];?></left></td>
-                    <td><left><?php echo $status_klaim;?></left></td>
-                    <td align='right'>Rp. <?php echo number_format(1100000,0,",",".");?></td>
+                    <td><left><?php echo $data['bonusfrom'];?></left></td>
+                    <td><left><?php echo $data_nama['name'];?></left></td>
+                    <td align='right'><?php echo $data_nama['paket'];?></td>
+                    <td align='right'><?php echo $data['level'];?></td>
 
 
 <?php
-                            if ($data['status'] == 'ON'){
+                            if ($data['paid'] == '0'){
 								$statusnya='<a href="#" class="btn btn-sm btn-warning">On Process</a>';
 								
 							}
-                            else if ($data['status'] == 'OFF' ){
+                            else if ($data['paid'] == '1' ){
 								$statusnya='<a href="#" class="btn btn-sm btn-success">Process</a>';
 							}
 ?>
-                    <td><center><?php echo $statusnya;?></center></td>
 
+                    <td><center><?php echo $statusnya;?></center></td>
 
                                                     </tr>
                  <?php   
