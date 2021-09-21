@@ -29,5 +29,5 @@ $resupdate=mysqli_query($koneksi,$savehistorylogin);
 session_start();
 session_destroy();
 
-header('location:login');
+header('location:login.php');
 ?>

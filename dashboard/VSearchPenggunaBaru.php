@@ -122,7 +122,7 @@ include 'header.php';
                       </td>
                       <td>
                         <center>
-                          <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
+                          <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye mr-3'></i>Detail</a>"; ?>
                         </center>
                       </td>
             </div>
@@ -149,7 +149,7 @@ include 'header.php';
                   <div class="fetched-data"></div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                  <button type="button" class="btn btn-primary mb-4" data-dismiss="modal"><i class="fa fa-times mr-3"></i>Tutup</button>
                 </div>
               </div>
             </div>

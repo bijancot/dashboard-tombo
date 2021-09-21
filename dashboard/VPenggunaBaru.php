@@ -9,7 +9,6 @@ include 'header.php';
     <link rel="stylesheet" href="modalstyle.css">
 </head>
 
-
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
     <!-- Content Header (Page header) -->
@@ -30,7 +29,7 @@ include 'header.php';
             <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i> Pengguna Baru[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+                        <h3 class="panel-title"><i class="fa fa-user mr-3"></i> Pengguna Baru[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -119,7 +118,7 @@ include 'header.php';
                                         </td>
                                         <td>
                                             <center>
-                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
+                                                <?php echo "<a href='#myModal' class='btn btn-info btn-sm' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye mr-3'></i>Detail</a>"; ?>
                                             </center>
                                         </td>
                                     </tr>
@@ -146,7 +145,7 @@ include 'header.php';
                                         <div class="fetched-data"></div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                        <button type="button" class="btn btn-primary mb-4" data-dismiss="modal"><i class="fa fa-times mr-3"></i>Tutup</button>
                                     </div>
                                 </div>
                             </div>
