@@ -136,7 +136,7 @@ try {
     </article>
     <footer>
     <div class='content-footer'>
-        <p>&copy; 2021 <strong>Tombo Ati</strong> All rights reserved</p>
+        <p>&copy; " . (int)date('Y') . " <strong>Tombo Ati</strong> All rights reserved</p>
         <hr>
         <div class='content-penting'>
             PENTING!
