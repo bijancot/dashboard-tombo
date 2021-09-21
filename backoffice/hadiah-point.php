@@ -42,12 +42,12 @@ include 'header.php';
                                         <div class="table-responsive">
                     <?php
 $urutan = $_GET['urutan'];
-                    $query1="select * from bonus_titik where userid='$row[userid]' order by id $urutan ";
-                    $tampil1=mysqli_query($koneksi, "select * from bonus_titik where userid='$row[userid]' ");
+                    $query1="select * from bonus_titik where userid='$row[userid]'  AND level='1' order by id $urutan ";
+                    $tampil1=mysqli_query($koneksi, "select * from bonus_titik where userid='$row[userid]' AND level='1' ");
                     $dept2=mysqli_num_rows($tampil1);
                     $dept_sponsor=$dept2*100000;
                    
-        $query_total = mysqli_query($koneksi,"SELECT SUM(bonus) as 'bonus_total' FROM bonus_titik WHERE userid='$row[userid]' ");
+        $query_total = mysqli_query($koneksi,"SELECT SUM(bonus) as 'bonus_total' FROM bonus_titik WHERE userid='$row[userid]' AND level='1' ");
         $query_total2=mysqli_fetch_array($query_total);
         $bonus_titik_total=$query_total2['bonus_total'];
 

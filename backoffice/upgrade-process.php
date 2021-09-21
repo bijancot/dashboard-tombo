@@ -2,8 +2,15 @@
 session_start();
 include('header.php');
 
-            $query = mysqli_query($koneksi, "SELECT * FROM hm2_pending_deposits WHERE code='$_GET[code]'");
+            // $query = mysqli_query($koneksi, "SELECT * FROM hm2_pending_deposits WHERE code='$_GET[code]'");
+            // $data  = mysqli_fetch_array($query);
+            $query = mysqli_query($koneksi, "SELECT * FROM hm2_pending_deposits WHERE type='upgrade' AND user_id='$id' ");
             $data  = mysqli_fetch_array($query);
+            $total_data=mysqli_num_rows($query);
+if ($total_data!==0){
+echo "<script type='text/javascript'>document.location.href = 'topup-history.php';</script>";
+;}
+
             ?>
                         </div>
                     </div>
@@ -16,15 +23,15 @@ include('header.php');
                                     <div class="page-header-title">
                                         <i class="ik ik-edit bg-blue"></i>
                                         <div class="d-inline">
-                                            <h5>TOPUP PROCESS</h5>
-                                        </div>
+                                            <h5>TOPUP PROCESS <?php echo $total_data; ?> <?php echo $id; ?></h5>
+                                       </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <nav class="breadcrumb-container" aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <a href="index"><i class="ik ik-home"></i></a>
+                                                <!-- <a href="index"><i class="ik ik-home"></i></a> -->
                                             </li>
                                         </ol>
                                     </nav>
