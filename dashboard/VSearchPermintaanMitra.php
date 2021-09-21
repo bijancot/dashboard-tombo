@@ -29,7 +29,7 @@ include 'header.php';
             <div class="col-lg-12">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-user m-r-5"></i>Permintaan Mitra[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+                        <h3 class="panel-title"><i class="fa fa-user mr-3"></i>Permintaan Mitra[<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -138,9 +138,9 @@ include 'header.php';
                                             </td>
                                             <td>
                                                 <center>
-                                                    <!-- <a href="admin-profile-edit.php?userid=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</a> -->
-                                                    <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm m-l-5 m-t-5' data-toggle='modal'><i class='fa fa-check m-r-5'></i>Verifikasi</a>
-                                                    <?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5'></i>Detail</a>"; ?>
+                                                    <!-- <a href="admin-profile-edit.php?userid=<?php echo $data['id']; ?>" class="btn btn-sm btn-primary"><i class="fa fa-check mr-3"></i>Verifikasi</a> -->
+                                                    <a href='#modalVerif<?= $data['id'] ?>' class='btn btn-primary btn-sm m-l-5 m-t-5' data-toggle='modal'><i class='fa fa-check mr-3'></i>Verifikasi</a>
+                                                    <?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye mr-3'></i>Detail</a>"; ?>
                                                 </center>
 
                                             </td>
@@ -159,16 +159,16 @@ include 'header.php';
                                     <div class="modal-body">
                                         <p> Apakah anda yakin ingin memverifikasi permintaan mitra dengan username <b> <?php echo $data['userid']; ?></b> ?</p>
                                     </div>
-                                    <div class="modal-footer m-b-10">
+                                    <div class="modal-footer mb-4">
                                         <form action="verifMitra.php" method="post">
                                             <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
                                             <input type="hidden" name="email" value="<?php echo $data['email']; ?>">
                                             <input type="hidden" name="name" value="<?php echo $data['name']; ?>">
                                             <input type="hidden" name="userid" value="<?php echo $data['userid']; ?>">
                                             <input type="hidden" name="passw" value="<?php echo $data['passw']; ?>">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check m-r-4"></i>Verifikasi</button>
+                                            <button type="submit" class="btn btn-primary"><i class="fa fa-check mr-3"></i>Verifikasi</button>
                                         </form>
-                                        <button type="button" class="btn btn-danger m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times mr-3"></i>Tutup</button>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +196,7 @@ include 'header.php';
                                     <div class="fetched-data"></div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                                    <button type="button" class="btn btn-primary mb-4" data-dismiss="modal"><i class="fa fa-times mr-3"></i>Tutup</button>
                                 </div>
                             </div>
                         </div>

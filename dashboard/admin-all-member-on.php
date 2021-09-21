@@ -29,7 +29,7 @@ include 'header.php';
       <div class="col-lg-12">
         <div class="panel panel-success">
           <div class="panel-heading">
-            <h3 class="panel-title"><i class="fa fa-user m-r-5"></i>Mitra [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
+            <h3 class="panel-title"><i class="fa fa-user mr-3"></i>Mitra [<a href="excel/export_excel_members.php">Export to Excel</a>]</h3>
           </div>
           <div class="panel-body">
             <div class="table-responsive">
@@ -146,8 +146,8 @@ include 'header.php';
                           </center>
                       </td>
                       <td>
-                        <left><a href="admin-profile-edit.php?userid=<?php echo $data['userid']; ?>" class="btn btn-sm btn-warning m-l-5 m-t-5"><i class="fa fa-arrow-circle-right m-r-5"></i>Edit</a></left>
-                        <right><?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye m-r-5 '></i>Detail</a>"; ?></right>
+                        <left><a href="admin-profile-edit.php?userid=<?php echo $data['userid']; ?>" class="btn btn-sm btn-warning m-l-5 m-t-5"><i class="fa fa-arrow-circle-right mr-3"></i>Edit</a></left>
+                        <right><?php echo "<a href='#myModal' class='btn btn-info btn-sm m-l-5 m-t-5' id='myBtn' data-toggle='modal' data-id=" . $data['id'] . "><i class='fa fa-eye mr-3 '></i>Detail</a>"; ?></right>
                       </td>
                     </tr>
             </div>
@@ -173,7 +173,7 @@ include 'header.php';
                   <div class="fetched-data"></div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary m-b-10" data-dismiss="modal"><i class="fa fa-times m-r-4"></i>Tutup</button>
+                  <button type="button" class="btn btn-primary mb-4" data-dismiss="modal"><i class="fa fa-times mr-3"></i>Tutup</button>
                 </div>
               </div>
             </div>
